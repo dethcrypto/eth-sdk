@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        node: ['14.2']
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Cache YARN dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.OS }}-${{ matrix.node }}-yarn-cache-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.OS }}-${{ matrix.node }}-yarn-cache-
+
+      - run: yarn --no-progress --non-interactive --frozen-lockfile
+      - run: yarn lint
+      - run: yarn format
+      - run: yarn build
+      - run: yarn test
+      - run: yarn typecheck
+# Few tips github actions
+# - name: Setup SSH debug session
+#   uses: mxschmitt/action-tmate@v2
+

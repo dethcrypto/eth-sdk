@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "lib": ["ES2018"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "ES2018",
+    "composite": true,
+    "incremental": true
+  },
+  "files": [],
+  "references": [{ "path": "./packages/cli/tsconfig.build.json" }]
+}
