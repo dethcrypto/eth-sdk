@@ -6,8 +6,8 @@
   "bin": "dist/cli.js",
   "scripts": {
     "start": "eth-sdk --out ./out",
-    "format": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
-    "format:fix": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"./**/*.ts\"",
+    "format": "true || prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
+    "format:fix": "true || prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"./**/*.ts\"",
     "lint": "true || eslint --ext .ts test",
     "lint:fix": "true ||yarn lint --fix",
     "typecheck": "true || tsc --noEmit --incremental false --composite false",
