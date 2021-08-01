@@ -1,1 +1,1 @@
-# eth-sdk
+./packages/client/README.md
