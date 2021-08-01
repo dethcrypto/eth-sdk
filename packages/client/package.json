@@ -4,6 +4,11 @@
   "license": "MIT",
   "main": "./index.js",
   "types": "./index.d.ts",
+  "files": [
+    "./index.js",
+    "./index.d.ts",
+    "./types/**/*"
+  ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "start": "ts-node -T ./src/index.ts",
