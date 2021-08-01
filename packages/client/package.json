@@ -12,7 +12,7 @@
     "lint": "true",
     "lint:fix": "true",
     "typecheck": "true",
-    "clean": "",
+    "clean": "true",
     "test": "true",
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   }

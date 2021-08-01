@@ -11,7 +11,7 @@
     "lint": "true || eslint --ext .ts test",
     "lint:fix": "true ||yarn lint --fix",
     "typecheck": "true || tsc --noEmit --incremental false --composite false",
-    "clean": "rm -rf dist && rm -f tsconfig.build.tsbuildinfo",
+    "clean": "rm -rf eth-sdk out",
     "test": "true || mocha --config ../../.mocharc.js",
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   },
