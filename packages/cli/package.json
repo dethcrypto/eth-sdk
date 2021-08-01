@@ -1,5 +1,5 @@
 {
-  "name": "@eth-sdk/cli",
+  "name": "@eth-dx/sdk-cli",
   "version": "0.1.0",
   "license": "MIT",
   "bin": {

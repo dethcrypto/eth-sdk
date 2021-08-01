@@ -9,7 +9,7 @@ import { generateClient } from './client'
 import { realFs } from './helpers/fs'
 import { parseArgs } from './parseArgs'
 import { loadSdkDefinition } from './sdk-def/loadSdkDef'
-const d = debug('@eth-sdk/cli:cli')
+const d = debug('@eth-dx/sdk-cli:cli')
 
 export async function main() {
   const cwd = process.cwd()

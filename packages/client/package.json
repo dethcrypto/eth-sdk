@@ -1,5 +1,5 @@
 {
-  "name": "@eth-sdk/client",
+  "name": "@eth-dx/sdk-client",
   "version": "0.1.0",
   "license": "MIT",
   "main": "./index.js",

@@ -5,7 +5,7 @@ import { Fs, realFs } from '../helpers/fs'
 import { SdkDefinition } from '../sdk-def'
 import { generateIndex } from './generateIndex'
 import { generateTypes } from './generateTypes'
-const d = debug('@eth-sdk/client:client')
+const d = debug('@eth-dx/sdk-client:client')
 
 export async function generateTsClient(sdkDef: SdkDefinition, abisRoot: string, outputRoot: string, fs: Fs = realFs) {
   d(`Generating ts client to ${outputRoot}`)
