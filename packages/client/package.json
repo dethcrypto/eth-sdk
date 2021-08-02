@@ -1,13 +1,13 @@
 {
   "name": "@eth-dx/sdk-client",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "license": "MIT",
   "main": "./index.js",
   "types": "./index.d.ts",
   "files": [
-    "./index.js",
-    "./index.d.ts",
-    "./types/**/*"
+    "index.js",
+    "index.d.ts",
+    "types/**/*"
   ],
   "scripts": {
     "start": "ts-node -T ./src/index.ts",
