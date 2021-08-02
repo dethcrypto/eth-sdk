@@ -1,12 +1,13 @@
 {
   "name": "@eth-dx/sdk-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "bin": {
     "eth-sdk": "dist/cli.js"
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "static/**/*"
   ],
   "scripts": {
     "format": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
