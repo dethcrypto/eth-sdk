@@ -2,7 +2,7 @@ import { Command } from 'commander'
 import { isAbsolute, join } from 'path'
 
 export const DEFAULT_CONFIG_PATH = './eth-sdk'
-export const DEFAULT_OUTPUT_PACKAGE_PATH = './node_modules/.eth-sdk/client'
+export const DEFAULT_OUTPUT_PACKAGE_PATH = './node_modules/.eth-dx/sdk-client'
 
 export function parseArgs({ argv, cwd }: { argv: string[]; cwd: string }): Args {
   const program = new Command()

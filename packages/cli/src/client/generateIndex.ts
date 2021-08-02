@@ -5,7 +5,7 @@ import { normalizeName } from 'typechain'
 
 import { Fs, realFs } from '../helpers/fs'
 import { NestedAddresses, SdkDefinition } from '../sdk-def/types'
-const d = debug('@eth-sdk/client:client')
+const d = debug('@eth-dx/sdk-client:client')
 
 export async function generateIndex(def: SdkDefinition, outputPath: string, fs: Fs = realFs) {
   d('Generating index file')
