@@ -1,1 +1,1 @@
-export * from '.eth-sdk/client'
+export * from '.eth-dx/sdk-client'
