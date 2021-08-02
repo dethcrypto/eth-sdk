@@ -1,6 +1,6 @@
 {
   "name": "@eth-dx/sdk-cli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "bin": {
     "eth-sdk": "dist/cli.js"
