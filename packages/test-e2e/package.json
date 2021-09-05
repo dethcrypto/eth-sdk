@@ -1,0 +1,22 @@
+{
+  "name": "test-e2e",
+  "private": "true",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn eth-sdk -o src/sdk",
+    "format": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
+    "format:fix": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"./**/*.ts\"",
+    "lint": "true || eslint --ext .ts src",
+    "lint:fix": "true || yarn lint --fix",
+    "typecheck": "tsc --noEmit --incremental false --composite false",
+    "clean": "rm -rf eth-sdk out",
+    "test": "true || mocha --config ../../.mocharc.js",
+    "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
+  },
+  "dependencies": {
+    "@eth-dx/sdk-cli": "*",
+    "@eth-dx/sdk-client": "0.1.3",
+    "ethers": "^5.4.6"
+  }
+}
