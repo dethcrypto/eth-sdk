@@ -1,6 +1,5 @@
-import { Provider } from '@ethersproject/providers'
 import { Signer } from 'ethers'
-
+import { Provider } from '@ethersproject/providers'
 import type { Dai, DaiInterface } from '../Dai'
 export declare class Dai__factory {
   static readonly abi: (

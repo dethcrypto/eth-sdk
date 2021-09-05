@@ -1,6 +1,5 @@
-import { Provider } from '@ethersproject/providers'
 import { Signer } from 'ethers'
-
+import { Provider } from '@ethersproject/providers'
 import type { Uniswap, UniswapInterface } from '../Uniswap'
 export declare class Uniswap__factory {
   static readonly abi: (

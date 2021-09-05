@@ -1,6 +1,5 @@
-import { Provider } from '@ethersproject/providers'
 import { Signer } from 'ethers'
-
+import { Provider } from '@ethersproject/providers'
 import type { Mkr, MkrInterface } from '../Mkr'
 export declare class Mkr__factory {
   static readonly abi: (
