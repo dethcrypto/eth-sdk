@@ -1,5 +1,7 @@
 // ensure NODE_ENV
 process.env.NODE_ENV = 'test'
+// load .env
+require('dotenv').config()
 
 // if tsconfig.test.json exists in cwd prefer it
 const { existsSync } = require('fs')
@@ -20,4 +22,5 @@ module.exports = {
   extension: ['ts'],
   watchExtensions: ['ts'],
   spec: ['test/**/*.test.ts'],
+  timeout: 5000,
 }

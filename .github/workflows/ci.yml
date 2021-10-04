@@ -34,6 +34,8 @@ jobs:
       - run: yarn format
       - run: yarn build
       - run: yarn test
+        env:
+          E2E_RPC: ${{ secrets.E2E_RPC }}
       - run: yarn typecheck
 # Few tips github actions
 # - name: Setup SSH debug session

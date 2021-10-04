@@ -5,7 +5,7 @@ const fs_1 = require("fs");
 const path_1 = require("path");
 const ethers_1 = require("ethers");
 function getContract(address, abiPath, defaultSigner) {
-    const abi = JSON.parse(fs_1.readFileSync(path_1.join(__dirname, '../../../eth-sdk/abis/' + abiPath + '.json'), 'utf-8'));
+    const abi = JSON.parse(fs_1.readFileSync(path_1.join(__dirname, '../../eth-sdk/abis', abiPath + '.json'), 'utf-8'));
     return new ethers_1.Contract(address, abi, defaultSigner);
 }
 exports.getContract = getContract;

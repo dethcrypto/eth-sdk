@@ -2,3 +2,4 @@ node_modules
 .vscode
 package.json
 **/dist/**
+packages/test-e2e/test/sdk
