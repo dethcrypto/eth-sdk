@@ -37,6 +37,8 @@ jobs:
         env:
           E2E_RPC: ${{ secrets.E2E_RPC }}
       - run: yarn typecheck
+      - run: ./scripts/no-git-changes.sh # ensure that committed types are up to date
+
 # Few tips github actions
 # - name: Setup SSH debug session
 #   uses: mxschmitt/action-tmate@v2

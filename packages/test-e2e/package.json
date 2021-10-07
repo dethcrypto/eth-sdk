@@ -16,12 +16,9 @@
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   },
   "dependencies": {
-    "@dethcrypto/eth-sdk": "*",
     "earljs": "^0.1.10",
     "ethers": "^5.4.6",
-    "ts-essentials": "^9.0.0"
-  },
-  "devDependencies": {
+    "ts-essentials": "^9.0.0",
     "ts-node": "^10.2.1"
   }
 }
