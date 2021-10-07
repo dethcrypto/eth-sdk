@@ -3,13 +3,14 @@
 import chalk from 'chalk'
 import debug from 'debug'
 import ora from 'ora'
+import { relative } from 'path'
 
 import { gatherABIs } from './abi-management'
 import { generateClient } from './client'
 import { realFs } from './helpers/fs'
 import { parseArgs } from './parseArgs'
 import { loadSdkDefinition } from './sdk-def/loadSdkDef'
-const d = debug('@eth-dx/sdk-cli:cli')
+const d = debug('@dethcrypto/eth-sdk:cli')
 
 export async function main() {
   const cwd = process.cwd()
@@ -24,6 +25,7 @@ export async function main() {
 
   await spin(gatherABIs(sdkDef, args.workingDirPath, fs), 'Getting ABIs')
   await spin(generateClient(sdkDef, args.workingDirPath, args.outputRootPath), 'Generating client')
+  console.log(`SDK generated to: ./${relative(cwd, args.outputRootPath)}`)
 }
 
 async function spin<T>(promise: Promise<T>, name: string): Promise<T> {

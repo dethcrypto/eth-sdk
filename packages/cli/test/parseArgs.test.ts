@@ -4,26 +4,26 @@ import { parseArgs } from '../src/parseArgs'
 
 describe('cli > parseArgs', () => {
   it('parses all optional args', () => {
-    const argv = ['', '', ...'-p sdk -o @eth-dx/sdk-client'.split(' ')]
+    const argv = ['', '', ...'-p sdk -o @dethcrypto/eth-sdk-client'.split(' ')]
     const cwd = '/root'
 
     const args = parseArgs({ argv, cwd })
 
     expect(args).toEqual({
       workingDirPath: '/root/sdk',
-      outputRootPath: '/root/@eth-dx/sdk-client',
+      outputRootPath: '/root/@dethcrypto/eth-sdk-client',
     })
   })
 
   it('parses correctly absolute paths', () => {
-    const argv = ['', '', ...'-p /home/user1/sdk -o /home/@eth-dx/sdk-client '.split(' ')]
+    const argv = ['', '', ...'-p /home/user1/sdk -o /home/@dethcrypto/eth-sdk-client '.split(' ')]
     const cwd = '/root'
 
     const args = parseArgs({ argv, cwd })
 
     expect(args).toEqual({
       workingDirPath: '/home/user1/sdk',
-      outputRootPath: '/home/@eth-dx/sdk-client',
+      outputRootPath: '/home/@dethcrypto/eth-sdk-client',
     })
   })
 

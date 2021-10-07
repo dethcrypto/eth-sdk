@@ -7,7 +7,7 @@ import { SdkDefinition } from '../sdk-def'
 import { Address } from '../sdk-def'
 import { getABIFromEtherscan } from './getAbiFromEtherscan'
 import { GetAbi } from './types'
-const d = debug('@eth-dx/sdk/cli:abi')
+const d = debug('@dethcrypto/eth-sdk:abi')
 
 export async function gatherABIs(def: SdkDefinition, outputRoot: string, fs: Fs, getAbi: GetAbi = getABIFromEtherscan) {
   await traverseSdkDefinition(def, async (network: string, key: string[], address: Address) => {
