@@ -10,7 +10,7 @@
     "lint": "eslint --ext .ts test",
     "lint:fix": "yarn lint --fix",
     "typecheck": "tsc --noEmit --incremental false --composite false",
-    "clean": "rm -rf eth-sdk out",
+    "clean": "rm -rf eth-sdk/abis out",
     "test": "yarn generate-sdk && yarn test:e2e",
     "test:e2e": "mocha --config ../../.mocharc.js",
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
