@@ -4,7 +4,7 @@ import { basename, join } from 'path'
 import * as tsc from 'typescript'
 
 import { Fs } from '../helpers/fs'
-const d = debug('@eth-dx/sdk-client:client')
+const d = debug('@dethcrypto/eth-sdk-cli:client')
 
 export function transpileClient(clientPath: string, outputPath: string, fs: Fs): void {
   d(`Transpiling client from ${clientPath} to ${outputPath}`)

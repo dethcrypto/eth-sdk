@@ -5,7 +5,7 @@ import { Fs, realFs } from '../helpers/fs'
 import { SdkDefinition } from '../sdk-def'
 import { generateIndex } from './generateIndex'
 import { generateTypes } from './generateTypes'
-const d = debug('@eth-dx/sdk-client:client')
+const d = debug('@dethcrypto/eth-sdk-cli:client')
 
 export async function generateTsClient(
   sdkDef: SdkDefinition,

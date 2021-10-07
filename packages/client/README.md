@@ -1,1 +1,1 @@
-# @eth-dx/sdk-client
+# @dethcrypto/eth-sdk-client
