@@ -1,3 +1,3 @@
-var ethSdk = require('.eth-dx/sdk-client')
+var ethSdk = require('.dethcrypto/eth-sdk-client')
 
 module.exports = ethSdk

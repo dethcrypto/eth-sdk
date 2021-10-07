@@ -35,7 +35,7 @@ describe('cli > parseArgs', () => {
 
     expect(args).toEqual({
       workingDirPath: '/root/eth-sdk',
-      outputRootPath: '/root/node_modules/.eth-dx/sdk-client',
+      outputRootPath: '/root/node_modules/.dethcrypto/eth-sdk-client',
     })
   })
 })

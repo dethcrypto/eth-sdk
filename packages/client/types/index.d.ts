@@ -1,1 +1,1 @@
-export type * from '.eth-dx/sdk-client/types'
+export type * from '.dethcrypto/eth-sdk-client/types'

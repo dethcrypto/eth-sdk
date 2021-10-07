@@ -1,5 +1,5 @@
 {
-  "name": ".eth-dx/sdk-client",
+  "name": ".dethcrypto/eth-sdk-client",
   "main": "index.js",
   "types": "index.d.ts"
 }
