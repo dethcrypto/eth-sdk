@@ -9,7 +9,7 @@ function getContract(address, abiPath, defaultSigner) {
     return new ethers_1.Contract(address, abi, defaultSigner);
 }
 exports.getContract = getContract;
-async function getMainnetSdk(defaultSigner) {
+function getMainnetSdk(defaultSigner) {
     return {
         "tokens": {
             "dai": getContract('0x6B175474E89094C44Da98b954EedeAC495271d0F', 'mainnet/tokens/dai', defaultSigner),

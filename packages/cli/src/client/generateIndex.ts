@@ -42,7 +42,7 @@ function generateNetworkSdk(rawNetwork: string, sdkDef: SdkDefinition): string {
 
   return `
 export type ${network}Sdk = Awaited<ReturnType<typeof get${network}Sdk>>
-export async function get${network}Sdk(defaultSigner: Signer) {
+export function get${network}Sdk(defaultSigner: Signer) {
   return ${generateBody(nestedAddresses, [rawNetwork], true)}
 }
 `
