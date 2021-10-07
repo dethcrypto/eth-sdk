@@ -11,7 +11,7 @@ describe('sdk', () => {
     const provider = new ethers.providers.JsonRpcProvider(process.env.E2E_RPC)
     const signer = ethers.Wallet.createRandom().connect(provider)
 
-    const sdk = await getMainnetSdk(signer)
+    const sdk = getMainnetSdk(signer)
 
     expect((await sdk.tokens.dai.totalSupply()).toString()).not.toEqual('0')
     expect((await sdk.tokens.mkr.totalSupply()).toString()).not.toEqual('0')
