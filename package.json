@@ -26,6 +26,7 @@
     "@types/node": "^14.14.10",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
+    "dotenv": "^10.0.0",
     "earljs": "^0.1.10",
     "eslint": "^7.29.0",
     "eslint-config-typestrict": "^1.0.1",

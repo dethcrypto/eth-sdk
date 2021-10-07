@@ -5,3 +5,4 @@ yarn-error.log
 *.tsbuildinfo
 packages/tests/eth-sdk
 packages/tests/out
+.env

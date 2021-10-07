@@ -1,0 +1,5 @@
+{
+  "name": ".eth-dx/sdk-client",
+  "main": "index.js",
+  "types": "index.d.ts"
+}

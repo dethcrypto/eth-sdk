@@ -7,7 +7,12 @@ import { Fs, realFs } from '../helpers/fs'
 import { NestedAddresses, SdkDefinition } from '../sdk-def/types'
 const d = debug('@eth-dx/sdk-client:client')
 
-export async function generateIndex(def: SdkDefinition, outputPath: string, fs: Fs = realFs) {
+export async function generateIndex(
+  def: SdkDefinition,
+  outputPath: string,
+  outputToAbiRelativePath: string,
+  fs: Fs = realFs,
+) {
   d('Generating index file')
   const indexPath = join(outputPath, './index.ts')
 
@@ -20,7 +25,7 @@ import { Signer, Contract } from 'ethers'
 import * as types from './types'
 
 export function getContract<T>(address: string, abiPath: string, defaultSigner: Signer): T {
-  const abi = JSON.parse(readFileSync(join(__dirname, '../../../eth-sdk/abis/' + abiPath + '.json'), 'utf-8'))
+  const abi = JSON.parse(readFileSync(join(__dirname, '${outputToAbiRelativePath}', abiPath + '.json'), 'utf-8'))
   return new Contract(address, abi, defaultSigner) as any
 }
 

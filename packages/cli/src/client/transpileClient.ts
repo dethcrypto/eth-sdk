@@ -26,7 +26,7 @@ export function transpileClient(clientPath: string, outputPath: string, fs: Fs):
 
   // we need to manually copy d.ts files b/c tsc won't do it
   // https://stackoverflow.com/questions/56018167/typescript-does-not-copy-d-ts-files-to-build
-  const tsdFiles = glob.sync('types/**/*.ts', { cwd: clientPath, absolute: true })
+  const tsdFiles = glob.sync('types/**/*.d.ts', { cwd: clientPath, absolute: true })
   tsdFiles.map((tsdPath) => {
     const outputFilePath = join(outputPath, 'types', basename(tsdPath))
     d(`Copying ${tsdPath} to ${outputFilePath}`)
