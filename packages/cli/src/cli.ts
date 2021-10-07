@@ -3,6 +3,7 @@
 import chalk from 'chalk'
 import debug from 'debug'
 import ora from 'ora'
+import { relative } from 'path'
 
 import { gatherABIs } from './abi-management'
 import { generateClient } from './client'
@@ -24,6 +25,7 @@ export async function main() {
 
   await spin(gatherABIs(sdkDef, args.workingDirPath, fs), 'Getting ABIs')
   await spin(generateClient(sdkDef, args.workingDirPath, args.outputRootPath), 'Generating client')
+  console.log(`SDK generated to: ./${relative(cwd, args.outputRootPath)}`)
 }
 
 async function spin<T>(promise: Promise<T>, name: string): Promise<T> {
