@@ -1,0 +1,15 @@
+{
+  "name": "hardhat-project",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "eth-sdk"
+  },
+  "devDependencies": {
+    "@dethcrypto/eth-sdk": "^0.1.4",
+    "@dethcrypto/eth-sdk-client": "^0.1.4",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "ethers": "^5.4.7",
+    "hardhat": "^2.6.5",
+    "typescript": "^4.4.3"
+  }
+}
