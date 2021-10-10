@@ -5,8 +5,8 @@
     "postinstall": "eth-sdk"
   },
   "devDependencies": {
-    "@dethcrypto/eth-sdk": "^0.1.4",
-    "@dethcrypto/eth-sdk-client": "^0.1.4",
+    "@dethcrypto/eth-sdk": "file:../../packages/cli",
+    "@dethcrypto/eth-sdk-client": "file:../../packages/client",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "ethers": "^5.4.7",
     "hardhat": "^2.6.5",

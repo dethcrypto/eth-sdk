@@ -2,15 +2,11 @@
 # yarn lockfile v1
 
 
-"@dethcrypto/eth-sdk-client@^0.1.4":
+"@dethcrypto/eth-sdk-client@file:../../packages/client":
   version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@dethcrypto/eth-sdk-client/-/eth-sdk-client-0.1.4.tgz#8ce34d384b47b685f2cc86dfec2d6b48f1329ac7"
-  integrity sha512-RErHMpTLq+YBch7OMEoLMSIJIA/yRU89O42cc2hOaJ168vLTrEVDtzCB1qbZv06RKJh7VgAPIuSOfTAx8ozBjg==
 
-"@dethcrypto/eth-sdk@^0.1.4":
+"@dethcrypto/eth-sdk@file:../../packages/cli":
   version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@dethcrypto/eth-sdk/-/eth-sdk-0.1.4.tgz#50420eacea26a006d7a1b113011899fa854d5658"
-  integrity sha512-Uf1/SQnPblewp9ckYxHGMLkKAz/CUffyh366B3A0476EbxFZ47GUYg2MLKi5C/XFAsYXY+9Xzlk8czsCT4VLNA==
   dependencies:
     "@typechain/ethers-v5" "^7.0.1"
     chalk "^4.1.1"
