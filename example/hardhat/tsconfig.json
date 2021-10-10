@@ -8,8 +8,9 @@
     "target": "ES2018",
     "sourceMap": true,
     "composite": true,
-    "incremental": true
+    "incremental": true,
+    "skipLibCheck": true
   },
   "include": ["**/*.ts", "**/*.js", "**/.*.js"],
-  "exclude": ["**/node_modules"]
+  "exclude": ["node_modules"]
 }
