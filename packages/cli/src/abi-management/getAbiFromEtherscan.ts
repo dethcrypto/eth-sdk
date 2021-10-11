@@ -14,6 +14,18 @@ const networkToEndpoints = {
     apiURL: 'https://api-kovan.etherscan.io/api',
     browserURL: 'https://kovan.etherscan.io',
   },
+  ropsten: {
+    apiURL: 'https://api-ropsten.etherscan.io/api',
+    browserURL: 'https://ropsten.etherscan.io',
+  },
+  rinkeby: {
+    apiURL: 'https://api-rinkeby.etherscan.io/api',
+    browserURL: 'https://rinkeby.etherscan.io',
+  },
+  goerli: {
+    apiURL: 'https://api-goerli.etherscan.io/api',
+    browserURL: 'https://goerli.etherscan.io',
+  },
   'optimism-mainnet': {
     apiURL: 'https://api-optimistic.etherscan.io',
     browserURL: 'https://optimistic.etherscan.io/',
