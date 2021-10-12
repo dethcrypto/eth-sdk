@@ -39,6 +39,7 @@
     "ethers": "^5.3.1"
   },
   "devDependencies": {
+    "ts-essentials": "^7.0.2",
     "@types/debug": "^4.1.6",
     "@types/fs-extra": "^9.0.11",
     "@types/glob": "^7.1.3",
