@@ -16,12 +16,14 @@
     "watch": "yarn build --watch",
     "clean": "wsrun -c clean",
     "test": "wsrun -c test",
-    "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
+    "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck",
+    "release": "yarn build && yarn changeset publish"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "@changesets/cli": "^2.17.0",
     "@types/mocha": "^8.2.2",
     "@types/node": "^14.14.10",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
