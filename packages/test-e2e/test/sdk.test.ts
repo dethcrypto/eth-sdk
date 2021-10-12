@@ -1,12 +1,14 @@
+import { assert, AssertTrue, IsExact } from 'conditional-type-checks'
 import { expect } from 'earljs'
 import { ethers } from 'ethers'
-import { assert } from 'ts-essentials'
+import { assert as runtimeAssert } from 'ts-essentials'
 
-import { getMainnetSdk } from './sdk'
+import { getMainnetSdk, MainnetSdk } from './sdk'
+import { Dai, Mkr, Uniswap } from './sdk/types'
 
 describe('sdk', () => {
   it('works', async () => {
-    assert(process.env.E2E_RPC, 'E2E_RPC env missing')
+    runtimeAssert(process.env.E2E_RPC, 'E2E_RPC env missing')
 
     const provider = new ethers.providers.JsonRpcProvider(process.env.E2E_RPC)
     const signer = ethers.Wallet.createRandom().connect(provider)
@@ -15,5 +17,8 @@ describe('sdk', () => {
 
     expect((await sdk.tokens.dai.totalSupply()).toString()).not.toEqual('0')
     expect((await sdk.tokens.mkr.totalSupply()).toString()).not.toEqual('0')
+    // assert sdk shape
+    assert<AssertTrue<IsExact<MainnetSdk, typeof sdk>>>(true)
+    assert<AssertTrue<IsExact<MainnetSdk, { tokens: { dai: Dai; mkr: Mkr }; uniswap: Uniswap }>>>(true)
   })
 })
