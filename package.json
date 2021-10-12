@@ -17,6 +17,8 @@
     "clean": "wsrun -c clean",
     "test": "wsrun -c test",
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck",
+    "check-examples": "yarn ts-node ./scripts/check-examples.ts",
+    "prerelease": "yarn lint && yarn format && yarn test && yarn typecheck",
     "release": "yarn build && yarn changeset publish"
   },
   "workspaces": [
