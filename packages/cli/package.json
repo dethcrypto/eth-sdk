@@ -15,7 +15,7 @@
     "lint": "eslint --ext .ts src test",
     "lint:fix": "yarn lint --fix",
     "typecheck": "tsc --noEmit --incremental false --composite false",
-    "post-build": "chmod +x ./dist/cli.js && cp ../../README.md .",
+    "post-build": "ts-node scripts/post-build",
     "clean": "rm -rf dist && rm -f tsconfig.build.tsbuildinfo",
     "test": "mocha --config ../../.mocharc.js",
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
