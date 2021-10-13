@@ -13,11 +13,11 @@
     "start": "ts-node -T ./src/index.ts",
     "format": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
     "format:fix": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"./**/*.ts\"",
-    "lint": "true",
-    "lint:fix": "true",
-    "typecheck": "true",
-    "clean": "true",
-    "test": "true",
+    "lint": "echo ok",
+    "lint:fix": "echo ok",
+    "typecheck": "echo ok",
+    "clean": "echo ok",
+    "test": "echo ok",
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   }
 }
