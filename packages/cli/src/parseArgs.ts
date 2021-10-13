@@ -21,11 +21,8 @@ export function parseArgs({ argv, cwd }: { argv: string[]; cwd: string }): Args 
 }
 
 export function joinPaths({ path, cwd }: { path: string; cwd: string }) {
-  if (isAbsolute(path)) {
-    return path
-  } else {
-    return join(cwd, path)
-  }
+  const absolutePath = isAbsolute(path) ? path : join(cwd, path)
+  return absolutePath.replace(/\\/g, '/')
 }
 
 export interface Args {

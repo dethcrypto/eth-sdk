@@ -6,7 +6,7 @@ import { getMainnetSdk } from './sdk'
 
 describe('sdk', () => {
   it('works', async () => {
-    assert(process.env.E2E_RPC, 'E2E_RPC env missing')
+    assert(process.env.E2E_RPC, 'process.env.E2E_RPC is missing')
 
     const provider = new ethers.providers.JsonRpcProvider(process.env.E2E_RPC)
     const signer = ethers.Wallet.createRandom().connect(provider)
