@@ -70,7 +70,7 @@ async function main() {
   const mainnetProvider = ethers.getDefaultProvider('mainnet')
   const defaultSigner = ethers.Wallet.createRandom().connect(mainnetProvider)
 
-  const sdk = await getMainnetSdk(defaultSigner) // default signer will be wired with all contract instances
+  const sdk = getMainnetSdk(defaultSigner) // default signer will be wired with all contract instances
   // sdk is an object like { dai: DaiContract }
 
   const balance = sdk.dai.balanceOf(defaultSigner.address)
