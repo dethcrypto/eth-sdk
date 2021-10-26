@@ -2,6 +2,12 @@
   "name": "@dethcrypto/eth-sdk-client",
   "version": "0.1.4",
   "license": "MIT",
+  "description": "This package is required if you want `eth-sdk` to generate SDK directly to `node_modules`.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dethcrypto/eth-sdk",
+    "directory": "packages/client"
+  },
   "main": "./index.js",
   "types": "./index.d.ts",
   "files": [
