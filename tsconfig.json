@@ -10,15 +10,6 @@
     "composite": true,
     "incremental": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.mjs",
-    "**/*.cjs",
-    "**/.*.js",
-    "packages/client/index.cjs",
-    "examples/vite-react/hardhat.config.mts"
-  ],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs", "**/*.cjs", "**/.*.js"],
   "exclude": ["**/node_modules"]
 }
