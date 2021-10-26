@@ -2,6 +2,22 @@
   "name": "@dethcrypto/eth-sdk",
   "version": "0.1.6",
   "license": "MIT",
+  "description": "🛠 Generate type-safe, lightweight SDK for your Ethereum smart contracts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dethcrypto/eth-sdk",
+    "directory": "packages/cli"
+  },
+  "keywords": [
+    "ethereum",
+    "TypeScript",
+    "bindings",
+    "smartcontract",
+    "blockchain",
+    "TypeChain",
+    "codegen",
+    "sdk"
+  ],
   "bin": {
     "eth-sdk": "dist/cli.js"
   },
