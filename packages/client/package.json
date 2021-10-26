@@ -8,6 +8,16 @@
     "url": "https://github.com/dethcrypto/eth-sdk",
     "directory": "packages/client"
   },
+  "keywords": [
+    "ethereum",
+    "TypeScript",
+    "bindings",
+    "smartcontract",
+    "blockchain",
+    "TypeChain",
+    "codegen",
+    "sdk"
+  ],
   "main": "./index.js",
   "types": "./index.d.ts",
   "files": [
