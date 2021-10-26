@@ -19,7 +19,6 @@ export async function generateIndex(
   const index = `
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { Awaited } from 'ts-essentials'
 import { Signer, Contract } from 'ethers'
 
 import * as types from './types'
@@ -41,7 +40,7 @@ function generateNetworkSdk(rawNetwork: string, sdkDef: SdkDefinition): string {
   const network = startCase(rawNetwork).replace(' ', '')
 
   return `
-export type ${network}Sdk = Awaited<ReturnType<typeof get${network}Sdk>>
+export type ${network}Sdk = ReturnType<typeof get${network}Sdk>
 export function get${network}Sdk(defaultSigner: Signer) {
   return ${generateBody(nestedAddresses, [rawNetwork], true)}
 }
