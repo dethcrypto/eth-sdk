@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Cache YARN dependencies
+      - name: Cache Yarn dependencies
         uses: actions/cache@v2
         with:
           path: |
@@ -38,7 +38,7 @@ jobs:
         env:
           E2E_RPC: ${{ secrets.E2E_RPC }}
       - run: yarn typecheck
-      - run: ./scripts/no-git-changes.sh # ensure that committed types are up to date
+      - run: yarn no-git-changes
         if: runner.os == 'Linux'
 
   test-examples:
@@ -66,11 +66,7 @@ jobs:
           restore-keys: ${{ runner.OS }}-${{ matrix.node }}-yarn-cache-
 
       - run: yarn --no-progress --non-interactive --frozen-lockfile
-
+      - run: yarn build
       - run: yarn check-examples
-      - run: yarn no-git-changes # ensure that committed types are up to date
+      - run: yarn no-git-changes
         if: runner.os == 'Linux'
-# Few tips github actions
-# - name: Setup SSH debug session
-#   uses: mxschmitt/action-tmate@v2
-
