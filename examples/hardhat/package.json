@@ -1,0 +1,24 @@
+{
+  "name": "hardhat-project",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "eth-sdk",
+    "verify": "yarn format && yarn lint && yarn test && yarn typecheck",
+    "test": "hardhat run ./scripts/exploit.ts",
+    "format": "../../node_modules/.bin/prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
+    "format:fix": "../../node_modules/.bin/prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"./**/*.ts\"",
+    "lint": "../../node_modules/.bin/eslint --ext .ts scripts",
+    "lint:fix": "yarn lint --fix",
+    "typecheck": "tsc --noEmit --incremental false --composite false",
+    "clean": "rm -rf dist && rm -f tsconfig.build.tsbuildinfo",
+    "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
+  },
+  "devDependencies": {
+    "@dethcrypto/eth-sdk": "file:../../packages/cli",
+    "@dethcrypto/eth-sdk-client": "file:../../packages/client",
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "ethers": "^5.4.7",
+    "hardhat": "^2.6.5",
+    "typescript": "^4.4.3"
+  }
+}

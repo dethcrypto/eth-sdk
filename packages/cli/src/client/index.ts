@@ -16,7 +16,7 @@ export async function generateClient(
 
   const randomTmpDir = fs.tmpDir('eth-sdk')
   const abisRoot = join(workingDirPath, 'abis')
-  const outputToAbiRelativePath = relative(outputPackageRoot, abisRoot)
+  const outputToAbiRelativePath = relative(outputPackageRoot, abisRoot).replace(/\\/g, '/')
   await generateTsClient(sdkDef, abisRoot, randomTmpDir, outputToAbiRelativePath, fs)
   transpileClient(randomTmpDir, outputPackageRoot, fs)
 }

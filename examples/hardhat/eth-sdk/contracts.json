@@ -1,0 +1,12 @@
+{
+  "mainnet": {
+    "tokens": {
+      "comp": "0xc00e94cb662c3520282e6f5717214004a7f26888"
+    },
+    "compound": {
+      "comptroller": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B",
+      "comptrollerImpl": "0x374ABb8cE19A73f2c4EFAd642bda76c797f19233",
+      "treasury": "0x2775b1c75658be0f640272ccb8c72ac986009e38"
+    }
+  }
+}

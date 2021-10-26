@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: Cache YARN dependencies
+      - name: Cache Yarn dependencies
         uses: actions/cache@v2
         with:
           path: |
@@ -31,7 +31,7 @@ jobs:
       - name: Install
         run: yarn --no-progress --non-interactive --frozen-lockfile
 
-      - name: Create Release Pull Request or Publish to npm
+      - name: Create Release Pull Request or Publish to NPM
         uses: changesets/action@master
         with:
           publish: yarn release

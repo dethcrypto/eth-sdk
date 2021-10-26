@@ -8,7 +8,7 @@ import type { Dai, Mkr, Uniswap } from './sdk/types'
 
 describe('sdk', () => {
   it('works', async () => {
-    runtimeAssert(process.env.E2E_RPC, 'E2E_RPC env missing')
+    runtimeAssert(process.env.E2E_RPC, 'process.env.E2E_RPC is missing')
 
     const provider = new ethers.providers.JsonRpcProvider(process.env.E2E_RPC)
     const signer = ethers.Wallet.createRandom().connect(provider)
