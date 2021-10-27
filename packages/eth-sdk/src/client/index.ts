@@ -12,7 +12,9 @@ export async function generateClient(
   fs: Fs = realFs,
 ) {
   fs.ensureDir(outputPackageRoot)
-  fs.copy(join(__dirname, '../../static/dot-client-package.json'), join(outputPackageRoot, 'package.json'))
+
+  const staticDir = join(__dirname, '../../static')
+  fs.readDir(staticDir).forEach((file) => fs.copy(join(staticDir, file), join(outputPackageRoot, file)))
 
   const randomTmpDir = fs.tmpDir('eth-sdk')
   const abisRoot = join(workingDirPath, 'abis')

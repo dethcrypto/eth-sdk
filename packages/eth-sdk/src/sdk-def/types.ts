@@ -20,5 +20,5 @@ export type Address = Opaque<string, 'address'>
 export const AddressSchema: z.ZodType<Address> = z.string() as any
 export function makeAddress(address: string): Address {
   // @todo ensure that string is really an address
-  return address as any
+  return address as Address
 }

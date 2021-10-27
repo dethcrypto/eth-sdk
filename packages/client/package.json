@@ -19,6 +19,7 @@
     "sdk"
   ],
   "main": "./index.js",
+  "module": "./index.mjs",
   "types": "./index.d.ts",
   "sideEffects": false,
   "files": [

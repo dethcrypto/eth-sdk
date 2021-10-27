@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["src", "test"],
+  "exclude": ["dist", "node_modules", "static"],
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true

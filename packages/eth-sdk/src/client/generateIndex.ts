@@ -4,7 +4,9 @@ import { join } from 'path'
 import { normalizeName } from 'typechain'
 
 import { Fs, realFs } from '../helpers/fs'
+import { traverseSdkDefinition } from '../helpers/traverse'
 import { NestedAddresses, SdkDefinition } from '../sdk-def/types'
+
 const d = debug('@dethcrypto/eth-sdk:client')
 
 export async function generateIndex(
@@ -17,22 +19,40 @@ export async function generateIndex(
   const indexPath = join(outputPath, './index.ts')
 
   const index = `
-import { readFileSync } from 'fs'
-import { join } from 'path'
 import { Signer, Contract } from 'ethers'
 
 import * as types from './types'
 
-export function getContract<T>(address: string, abiPath: string, defaultSigner: Signer): T {
-  const abi = JSON.parse(readFileSync(join(__dirname, '${outputToAbiRelativePath}', abiPath + '.json'), 'utf-8'))
-  return new Contract(address, abi, defaultSigner) as any
+${await getAbiImports(def, outputToAbiRelativePath)}
+
+export function getContract(address: string, abi: object, defaultSigner: Signer) {
+  return new Contract(address, abi, defaultSigner)
 }
 
   ${Object.keys(def)
     .map((network) => generateNetworkSdk(network, def)) // fix path to abi here
     .join('\n\n')}
   `
+
   fs.write(indexPath, index)
+}
+
+function importedAbiIdentifier(keys: string[]): string {
+  const name = normalizeName(keys[keys.length - 1]) + 'Abi'
+  return name[0].toLowerCase() + name.slice(1)
+}
+
+async function getAbiImports(sdkDef: SdkDefinition, outputToAbiRelativePath: string) {
+  const paths: string[][] = []
+  await traverseSdkDefinition(sdkDef, (network, keys) => void paths.push([network, ...keys]))
+
+  return paths
+    .map((path) => {
+      const importPath = '../' + outputToAbiRelativePath + '/' + path.join('/') + '.json'
+
+      return `import ${importedAbiIdentifier(path)} from '${importPath}'`
+    })
+    .join('\n')
 }
 
 function generateNetworkSdk(rawNetwork: string, sdkDef: SdkDefinition): string {
@@ -53,8 +73,9 @@ function generateBody(nestedAddresses: NestedAddresses, keys: string[], topLevel
   for (const [key, addressOrNested] of Object.entries(nestedAddresses)) {
     if (typeof addressOrNested === 'string') {
       const address = addressOrNested
-      const fullPath = [...keys, key].join('/')
-      body.push(`"${key}": getContract<types.${normalizeName(key)}>('${address}', '${fullPath}', defaultSigner),`)
+      const abi = importedAbiIdentifier([key])
+
+      body.push(`"${key}": getContract('${address}', ${abi}, defaultSigner) as types.${normalizeName(key)},`)
     } else {
       body.push(`"${key}":`)
       body.push(generateBody(addressOrNested, [...keys, key]))
@@ -64,5 +85,6 @@ function generateBody(nestedAddresses: NestedAddresses, keys: string[], topLevel
   if (!topLevel) {
     body.push(`,`)
   }
+
   return body.join('\n')
 }
