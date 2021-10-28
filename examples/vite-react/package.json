@@ -6,9 +6,9 @@
     "dev": "concurrently --names \"hhat\",\"vite\" --c \"magenta,cyan\" \"hardhat node\" \"vite\"",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "postinstall": "eth-sdk",
+    "generate-types": "eth-sdk",
     "verify": "yarn build && yarn format && yarn lint && yarn test",
-    "test": "echo ok",
+    "postinstall": "yarn generate-types",
     "format": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
     "format:fix": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"./**/*.ts\"",
     "lint": "eslint --ext .ts scripts",
@@ -18,7 +18,7 @@
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   },
   "dependencies": {
-    "@dethcrypto/eth-sdk": "file:../../packages/cli",
+    "@dethcrypto/eth-sdk": "file:../../packages/eth-sdk",
     "@dethcrypto/eth-sdk-client": "file:../../packages/client",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "ethers": "^5.4.7",
