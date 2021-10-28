@@ -5,7 +5,7 @@ import { Fs } from '../helpers/fs'
 import { traverseSdkDefinition } from '../helpers/traverse'
 import { SdkDefinition } from '../sdk-def'
 import { Address } from '../sdk-def'
-import { getABIFromEtherscan } from './getAbiFromEtherscan'
+import { getABIFromEtherscan } from './etherscan/getAbiFromEtherscan'
 import { GetAbi } from './types'
 const d = debug('@dethcrypto/eth-sdk:abi')
 
