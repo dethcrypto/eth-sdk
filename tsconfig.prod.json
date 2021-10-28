@@ -10,5 +10,5 @@
     "incremental": true
   },
   "files": [],
-  "references": [{ "path": "./packages/cli/tsconfig.build.json" }]
+  "references": [{ "path": "./packages/eth-sdk/tsconfig.build.json" }]
 }

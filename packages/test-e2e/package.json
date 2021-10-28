@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "generate-sdk": "ts-node ../cli/src/cli.ts -o test/sdk",
+    "generate-sdk": "ts-node ../eth-sdk/src/cli.ts -o test/sdk",
     "format": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
     "format:fix": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"./**/*.ts\"",
     "lint": "eslint --ext .ts test",

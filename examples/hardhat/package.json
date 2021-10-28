@@ -14,7 +14,7 @@
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   },
   "devDependencies": {
-    "@dethcrypto/eth-sdk": "file:../../packages/cli",
+    "@dethcrypto/eth-sdk": "file:../../packages/eth-sdk",
     "@dethcrypto/eth-sdk-client": "file:../../packages/client",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "ethers": "^5.4.7",

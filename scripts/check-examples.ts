@@ -8,21 +8,21 @@ const VERBOSE = process.env.VERBOSE === 'true'
 
 const examplesDir = path.resolve(__dirname, '../examples')
 
-const failures: string[] = []
+const failures = new Set<string>()
 
 for (const dir of readdirSync(examplesDir)) {
   console.log(`Checking example: ${bold(dir)}`)
 
   const yarn = process.platform === 'win32' ? 'yarn.cmd' : 'yarn'
-  runProcess([yarn, '--non-interactive', '--frozen-lockfile'], dir)
+  runProcess([yarn, '--non-interactive'], dir)
   runProcess([yarn, 'typecheck'], dir)
 }
 
-if (failures.length > 0) {
+if (failures.size > 0) {
   console.error(
     '\n',
-    bold(failures.length) + ` example${failures.length > 1 ? 's' : ''} failed:`,
-    red(failures.join(', ')),
+    bold(failures.size) + ` example${failures.size > 1 ? 's' : ''} failed:`,
+    red([...failures].join(', ')),
     '\n',
   )
   process.exit(1)
@@ -49,7 +49,7 @@ function runProcess(command: string[], dir: string) {
       console.log(formatOutput(childProcess.output))
     }
   } else {
-    failures.push(dir)
+    failures.add(dir)
     console.error(bold(`❌ Failed with status ${childProcess.status} and output:` + '\n'))
     console.error(formatOutput(childProcess.output))
   }
