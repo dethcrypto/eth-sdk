@@ -1,6 +1,6 @@
 import got from 'got'
 
-import { Address } from '../../sdk-def'
+import { Address } from '../../config'
 import { symbolToNetworkId } from '../networks'
 import { EtherscanURLs, networkIDtoEndpoints } from './urls'
 

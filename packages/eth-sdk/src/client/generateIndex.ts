@@ -3,14 +3,14 @@ import { startCase } from 'lodash'
 import { join } from 'path'
 import { normalizeName } from 'typechain'
 
-import { Fs, realFs } from '../helpers/fs'
-import { traverseSdkDefinition } from '../helpers/traverse'
-import { NestedAddresses, SdkDefinition } from '../sdk-def/types'
+import { Fs, realFs } from '../peripherals/fs'
+import { traverseSdkDefinition } from '../config/traverse'
+import { NestedAddresses, EthSdKContracts } from '../config/types'
 
 const d = debug('@dethcrypto/eth-sdk:client')
 
 export async function generateIndex(
-  def: SdkDefinition,
+  def: EthSdKContracts,
   outputPath: string,
   outputToAbiRelativePath: string,
   fs: Fs = realFs,
@@ -42,7 +42,7 @@ function importedAbiIdentifier(keys: string[]): string {
   return name[0].toLowerCase() + name.slice(1)
 }
 
-async function getAbiImports(sdkDef: SdkDefinition, outputToAbiRelativePath: string) {
+async function getAbiImports(sdkDef: EthSdKContracts, outputToAbiRelativePath: string) {
   const paths: string[][] = []
   await traverseSdkDefinition(sdkDef, (network, keys) => void paths.push([network, ...keys]))
 
@@ -55,7 +55,7 @@ async function getAbiImports(sdkDef: SdkDefinition, outputToAbiRelativePath: str
     .join('\n')
 }
 
-function generateNetworkSdk(rawNetwork: string, sdkDef: SdkDefinition): string {
+function generateNetworkSdk(rawNetwork: string, sdkDef: EthSdKContracts): string {
   const nestedAddresses = sdkDef[rawNetwork]
   const network = startCase(rawNetwork).replace(' ', '')
 

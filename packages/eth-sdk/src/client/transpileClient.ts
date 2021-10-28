@@ -3,7 +3,7 @@ import * as glob from 'glob'
 import { basename, join, resolve } from 'path'
 import * as tsc from 'typescript'
 
-import { Fs } from '../helpers/fs'
+import { Fs } from '../peripherals/fs'
 const d = debug('@dethcrypto/eth-sdk-cli:client')
 
 export async function transpileClient(clientPath: string, outputPath: string, fs: Fs): Promise<void> {

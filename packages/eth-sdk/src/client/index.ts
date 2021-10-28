@@ -1,26 +1,31 @@
 import { join, relative } from 'path'
 
-import { Fs, realFs } from '../helpers/fs'
-import { SdkDefinition } from '../sdk-def'
+import { EthSdkCtx } from '../types'
 import { generateTsClient } from './generateTsClient'
 import { transpileClient } from './transpileClient'
 
-export async function generateClient(
-  sdkDef: SdkDefinition,
-  workingDirPath: string,
-  outputPackageRoot: string,
-  fs: Fs = realFs,
-) {
-  await fs.ensureDir(outputPackageRoot)
+export async function generateSdk(ctx: EthSdkCtx): Promise<void> {
+  const {
+    cliArgs: { workingDirPath },
+    config: { contracts, outputPath },
+    fs,
+  } = ctx
 
+  await fs.ensureDir(outputPath)
+
+  await copyStaticFiles(ctx)
+
+  const abisRoot = join(workingDirPath, 'abis')
+  const outputToAbiRelativePath = relative(outputPath, abisRoot).replace(/\\/g, '/')
+
+  const randomTmpDir = await fs.tmpDir('eth-sdk')
+  await generateTsClient(contracts, abisRoot, randomTmpDir, outputToAbiRelativePath, fs)
+  await transpileClient(randomTmpDir, outputPath, fs)
+}
+
+async function copyStaticFiles({ fs, config }: EthSdkCtx) {
   const staticDir = join(__dirname, '../../static')
   const dir = await fs.readDir(staticDir)
 
-  dir.forEach((file) => fs.copy(join(staticDir, file), join(outputPackageRoot, file)))
-
-  const randomTmpDir = await fs.tmpDir('eth-sdk')
-  const abisRoot = join(workingDirPath, 'abis')
-  const outputToAbiRelativePath = relative(outputPackageRoot, abisRoot).replace(/\\/g, '/')
-  await generateTsClient(sdkDef, abisRoot, randomTmpDir, outputToAbiRelativePath, fs)
-  await transpileClient(randomTmpDir, outputPackageRoot, fs)
+  await Promise.all(dir.map((file) => fs.copy(join(staticDir, file), join(config.outputPath, file))))
 }

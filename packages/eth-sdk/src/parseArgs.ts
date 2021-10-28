@@ -1,31 +1,38 @@
 import { Command } from 'commander'
 import { isAbsolute, join } from 'path'
 
-export const DEFAULT_CONFIG_PATH = './eth-sdk'
-export const DEFAULT_OUTPUT_PACKAGE_PATH = './node_modules/.dethcrypto/eth-sdk-client'
+const DEFAULT_CONFIG_PATH = './eth-sdk'
 
-export function parseArgs({ argv, cwd }: { argv: string[]; cwd: string }): Args {
+export interface EthSdkCliArgs {
+  workingDirPath: string
+}
+
+export function parseArgs({ argv, cwd }: { argv: string[]; cwd: string }): EthSdkCliArgs {
+  panicOnDeprecatedArgs(argv)
+
   const program = new Command()
   program.option('-p, --path <path>', 'Config root', DEFAULT_CONFIG_PATH)
-  program.option('-o, --out <path>', 'Output (Client package) path', DEFAULT_OUTPUT_PACKAGE_PATH)
   program.version(require('../package.json').version)
-
   program.parse(argv)
 
   const rawOpts = program.opts()
 
   return {
     workingDirPath: joinPaths({ cwd, path: rawOpts.path }),
-    outputRootPath: joinPaths({ cwd, path: rawOpts.out }),
   }
 }
 
-export function joinPaths({ path, cwd }: { path: string; cwd: string }) {
+function joinPaths({ path, cwd }: { path: string; cwd: string }) {
   const absolutePath = isAbsolute(path) ? path : join(cwd, path)
   return absolutePath.replace(/\\/g, '/')
 }
 
-export interface Args {
-  workingDirPath: string
-  outputRootPath: string
+function panicOnDeprecatedArgs(argv: string[]) {
+  if (argv.includes('--out')) {
+    throw new Error(
+      'The --out argument is deprecated. Please set "outputPath" property in your config file instead.' +
+        '\n' +
+        'Learn more about migration to eth-sdk 0.2 at https://github.com/dethcrypto/eth-sdk/releases.',
+    )
+  }
 }

@@ -1,7 +1,7 @@
 import { expect } from 'earljs'
 import { z } from 'zod'
 
-import { SdkDefinitionSchema } from '../../src/sdk-def/types'
+import { SdkDefinitionSchema } from '../../src/config/types'
 
 describe('sdk-def/types', () => {
   it('parses valid schemas', () => {

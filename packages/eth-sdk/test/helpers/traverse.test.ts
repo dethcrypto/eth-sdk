@@ -1,11 +1,11 @@
 import { expect, mockFn } from 'earljs'
 
-import { traverseSdkDefinition } from '../../src/helpers/traverse'
-import { makeAddress, SdkDefinition } from '../../src/sdk-def'
+import { traverseSdkDefinition } from '../../src/config/traverse'
+import { makeAddress, EthSdKContracts } from '../../src/config'
 
 describe('traverse', () => {
   it('traverses not-nested definitions', async () => {
-    const def: SdkDefinition = {
+    const def: EthSdKContracts = {
       mainnet: {
         dai: makeAddress('0x123'),
       },
@@ -19,7 +19,7 @@ describe('traverse', () => {
   })
 
   it('traverses nested definitions', async () => {
-    const def: SdkDefinition = {
+    const def: EthSdKContracts = {
       mainnet: {
         maker: {
           dai: makeAddress('0x123'),

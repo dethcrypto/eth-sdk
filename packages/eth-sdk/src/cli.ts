@@ -6,30 +6,38 @@ import ora from 'ora'
 import { relative } from 'path'
 
 import { gatherABIs } from './abi-management'
-import { generateClient } from './client'
-import { realFs } from './helpers/fs'
+import { generateSdk } from './client'
+import { findConfigFile, readConfig } from './config'
 import { parseArgs } from './parseArgs'
-import { loadSdkDefinition } from './sdk-def/loadSdkDef'
+import { realFs } from './peripherals/fs'
+import { EthSdkCtx } from './types'
+
 const d = debug('@dethcrypto/eth-sdk:cli')
 
 export async function main() {
   const cwd = process.cwd()
-  const args = parseArgs({ argv: process.argv, cwd })
+  const cliArgs = parseArgs({ argv: process.argv, cwd })
   const fs = realFs
 
-  d('Parsed args', args)
+  d('Parsed args', cliArgs)
 
-  const sdkDef = loadSdkDefinition(args, fs)
+  const config = await readConfig(findConfigFile(cliArgs, fs))
 
-  console.log(`Loaded sdk definition from ${chalk.green(args.workingDirPath)}`)
+  console.log(`Loaded sdk definition from ${chalk.green(cliArgs.workingDirPath)}`)
 
-  await spin(gatherABIs(sdkDef, args.workingDirPath, fs), 'Getting ABIs')
-  await spin(generateClient(sdkDef, args.workingDirPath, args.outputRootPath), 'Generating client')
-  console.log(`SDK generated to: ./${relative(cwd, args.outputRootPath)}`)
+  const context: EthSdkCtx = {
+    cliArgs,
+    config,
+    fs,
+  }
+
+  await spin('Getting ABIs', gatherABIs(context))
+  await spin('Generating client', generateSdk(context))
+  console.log(`SDK generated to: ${relative(cwd, config.outputPath)}`)
 }
 
-async function spin<T>(promise: Promise<T>, name: string): Promise<T> {
-  ora.promise(promise, { text: name, spinner: 'dots3', color: 'magenta' })
+async function spin<T>(text: string, promise: Promise<T>): Promise<T> {
+  ora.promise(promise, { text, spinner: 'dots3', color: 'magenta' })
   return await promise
 }
 

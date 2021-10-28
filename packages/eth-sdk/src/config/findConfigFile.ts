@@ -1,12 +1,16 @@
 import { join } from 'path'
 
-import { Fs } from '../helpers/fs'
-import { Args } from '../parseArgs'
-import { SdkDefinitionSchema } from './types'
+import { EthSdkCliArgs } from '../parseArgs'
+import { Fs } from '../peripherals/fs'
 
 const DEFAULT_CONFIG_FILENAMES = ['contracts.json', 'contracts.js']
 
-export function loadSdkDefinition(args: Args, fs: Fs) {
+/**
+ * @param args - arguments passed to the CLI
+ * @param fs - file system fasade
+ * @returns path to config file
+ */
+export function findConfigFile(args: EthSdkCliArgs, fs: Fs): string {
   const existingConfigs = DEFAULT_CONFIG_FILENAMES.map((fn) => join(args.workingDirPath, fn)).filter(fs.exists)
 
   if (existingConfigs.length === 0) {
@@ -19,7 +23,5 @@ export function loadSdkDefinition(args: Args, fs: Fs) {
     throw new Error(`Found too many config files!`)
   }
 
-  const loadedSchema = require(existingConfigs[0])
-
-  return SdkDefinitionSchema.parse(loadedSchema)
+  return existingConfigs[0]
 }

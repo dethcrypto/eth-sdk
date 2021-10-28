@@ -1,17 +1,18 @@
 import debug from 'debug'
 import { dirname, join } from 'path'
 
-import { Fs } from '../helpers/fs'
-import { traverseSdkDefinition } from '../helpers/traverse'
-import { SdkDefinition } from '../sdk-def'
-import { Address } from '../sdk-def'
+import { Address } from '../config'
+import { traverseSdkDefinition } from '../config/traverse'
+import { EthSdkCtx } from '../types'
 import { getABIFromEtherscan } from './etherscan/getAbiFromEtherscan'
 import { GetAbi } from './types'
 const d = debug('@dethcrypto/eth-sdk:abi')
 
-export async function gatherABIs(def: SdkDefinition, outputRoot: string, fs: Fs, getAbi: GetAbi = getABIFromEtherscan) {
-  await traverseSdkDefinition(def, async (network: string, key: string[], address: Address) => {
-    const fullAbiPath = join(outputRoot, 'abis', network, ...key) + '.json'
+export async function gatherABIs(ctx: EthSdkCtx, getAbi: GetAbi = getABIFromEtherscan) {
+  const { config } = ctx
+
+  await traverseSdkDefinition(config.contracts, async (network: string, key: string[], address: Address) => {
+    const fullAbiPath = join(config.outputRootPath, 'abis', network, ...key) + '.json'
     d(`Getting ABI for ${key.join('.')}`)
 
     if (!fs.exists(fullAbiPath)) {
