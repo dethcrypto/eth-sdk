@@ -84,6 +84,15 @@ main()
   })
 ```
 
+## Examples
+
+Check out examples of using `eth-sdk` in [`/examples`][examples] directory.
+
+- [Hardhat example](https://github.com/dethcrypto/eth-sdk/tree/master/examples/hardhat)
+- [Vite + React example](https://github.com/dethcrypto/eth-sdk/tree/master/examples/vite-react)
+
+[examples]: https://github.com/dethcrypto/eth-sdk/tree/master/examples
+
 ## Motivation and use cases
 
 The primary motivation for the project is reducing the ceremony needed to interact with smart contracts on Ethereum

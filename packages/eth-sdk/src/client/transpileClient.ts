@@ -1,6 +1,6 @@
 import debug from 'debug'
 import * as glob from 'glob'
-import { basename, join } from 'path'
+import { basename, join, resolve } from 'path'
 import * as tsc from 'typescript'
 
 import { Fs } from '../helpers/fs'
@@ -8,27 +8,55 @@ const d = debug('@dethcrypto/eth-sdk-cli:client')
 
 export function transpileClient(clientPath: string, outputPath: string, fs: Fs): void {
   d(`Transpiling client from ${clientPath} to ${outputPath}`)
-  const target = tsc.ScriptTarget.ES2018
-  const options: tsc.CompilerOptions = {
-    declaration: true,
-    target,
-    outDir: outputPath,
-    module: tsc.ModuleKind.CommonJS,
-    rootDir: clientPath,
-  }
-  const host = tsc.createCompilerHost(options)
-  host.getCurrentDirectory = () => clientPath
 
   const tsFiles = glob.sync('**/*.ts', { cwd: clientPath, absolute: true })
 
-  const program = tsc.createProgram(tsFiles, options, host)
-  program.emit()
+  outputs.forEach(({ directory, module }) => {
+    const outDir = resolve(outputPath, directory)
 
-  // we need to manually copy d.ts files b/c tsc won't do it
-  // https://stackoverflow.com/questions/56018167/typescript-does-not-copy-d-ts-files-to-build
+    const target = tsc.ScriptTarget.ES2018
+    const options: tsc.CompilerOptions = {
+      declaration: true,
+      target,
+      outDir,
+      module,
+      rootDir: clientPath,
+      resolveJsonModule: true,
+      esModuleInterop: true,
+      moduleResolution: tsc.ModuleResolutionKind.NodeJs,
+    }
+    const host = tsc.createCompilerHost(options)
+    host.getCurrentDirectory = () => clientPath
+
+    const program = tsc.createProgram(tsFiles, options, host)
+    const diagnostics = tsc.getPreEmitDiagnostics(program)
+
+    // We expect errors of code 2307 — the user does not have to have all
+    // dependencies installed during codegen. It will crash in runtime,
+    // https://www.typescriptlang.org/docs/handbook/module-resolution.html
+    if (diagnostics.some((d) => d.code !== 2307)) {
+      throw new Error(`TypeScript compilation failed.\n${diagnostics.map((d) => d.messageText).join('\n')}`)
+    }
+
+    program.emit()
+
+    copyDeclarationFiles(clientPath, outDir, fs)
+  })
+}
+
+const outputs = [
+  { module: tsc.ModuleKind.CommonJS, directory: 'cjs' },
+  { module: tsc.ModuleKind.ESNext, directory: 'esm' },
+]
+
+/**
+ * We need to manually copy d.ts files b/c tsc won't do it
+ * @see https://stackoverflow.com/questions/56018167/typescript-does-not-copy-d-ts-files-to-build
+ */
+function copyDeclarationFiles(clientPath: string, outDir: string, fs: Fs): void {
   const tsdFiles = glob.sync('types/**/*.d.ts', { cwd: clientPath, absolute: true })
   tsdFiles.map((tsdPath) => {
-    const outputFilePath = join(outputPath, 'types', basename(tsdPath))
+    const outputFilePath = join(outDir, 'types', basename(tsdPath))
     d(`Copying ${tsdPath} to ${outputFilePath}`)
     fs.copy(tsdPath, outputFilePath)
   })
