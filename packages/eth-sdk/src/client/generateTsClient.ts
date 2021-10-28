@@ -20,7 +20,7 @@ export async function generateTsClient(
   await generateTypes(abisGlob, typesOutputPath)
 
   const abisRootOut = join(outputRoot, 'abis')
-  fs.copy(abisRoot, abisRootOut)
+  await fs.copy(abisRoot, abisRootOut)
 
   await generateIndex(sdkDef, outputRoot, outputToAbiRelativePath)
 }

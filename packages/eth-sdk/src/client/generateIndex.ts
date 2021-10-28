@@ -34,7 +34,7 @@ export function getContract(address: string, abi: object, defaultSigner: Signer)
     .join('\n\n')}
   `
 
-  fs.write(indexPath, index)
+  await fs.write(indexPath, index)
 }
 
 function importedAbiIdentifier(keys: string[]): string {

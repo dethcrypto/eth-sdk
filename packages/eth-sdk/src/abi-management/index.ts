@@ -17,8 +17,8 @@ export async function gatherABIs(def: SdkDefinition, outputRoot: string, fs: Fs,
     if (!fs.exists(fullAbiPath)) {
       d('ABI doesnt exist already. Querying etherscan')
       const abi = await getAbi(network, address)
-      fs.ensureDir(dirname(fullAbiPath))
-      fs.write(fullAbiPath, JSON.stringify(abi))
+      await fs.ensureDir(dirname(fullAbiPath))
+      await fs.write(fullAbiPath, JSON.stringify(abi))
     }
   })
 }

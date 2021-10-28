@@ -1,3 +1,5 @@
 - Tests next to sources better show what's tested and what's not
 - src/sdk-def -> src/config? (zrobiłbym to przy PRze z innymi configami)
+  - nazwy sieci też powinny być sprawdzane (czy zodem czy czymś innym)
 - add README.md to `static` explaining what's the purpose of the directory
+- make Fs async and move it from `helpers` to `peripherals`

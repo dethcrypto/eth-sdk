@@ -11,14 +11,16 @@ export async function generateClient(
   outputPackageRoot: string,
   fs: Fs = realFs,
 ) {
-  fs.ensureDir(outputPackageRoot)
+  await fs.ensureDir(outputPackageRoot)
 
   const staticDir = join(__dirname, '../../static')
-  fs.readDir(staticDir).forEach((file) => fs.copy(join(staticDir, file), join(outputPackageRoot, file)))
+  const dir = await fs.readDir(staticDir)
 
-  const randomTmpDir = fs.tmpDir('eth-sdk')
+  dir.forEach((file) => fs.copy(join(staticDir, file), join(outputPackageRoot, file)))
+
+  const randomTmpDir = await fs.tmpDir('eth-sdk')
   const abisRoot = join(workingDirPath, 'abis')
   const outputToAbiRelativePath = relative(outputPackageRoot, abisRoot).replace(/\\/g, '/')
   await generateTsClient(sdkDef, abisRoot, randomTmpDir, outputToAbiRelativePath, fs)
-  transpileClient(randomTmpDir, outputPackageRoot, fs)
+  await transpileClient(randomTmpDir, outputPackageRoot, fs)
 }
