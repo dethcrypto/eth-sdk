@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./docs/logo.png?raw=true" width="100" alt="eth-sdk">
+  <img src="https://github.com/dethcrypto/eth-sdk/blob/master/docs/logo.png?raw=true" width="100" alt="eth-sdk">
   <h3 align="center">eth-sdk</h3>
   <p align="center">Generate type-safe, lightweight SDK for your Ethereum smart contracts</p>
   <p align="center">The quickest and easiest way to interact with Ethereum</p>
