@@ -5,8 +5,8 @@
 "@dethcrypto/eth-sdk-client@file:../../packages/client":
   version "0.1.4"
 
-"@dethcrypto/eth-sdk@file:../../packages/cli":
-  version "0.1.4"
+"@dethcrypto/eth-sdk@file:../../packages/eth-sdk":
+  version "0.1.6"
   dependencies:
     "@typechain/ethers-v5" "^7.0.1"
     chalk "^4.1.1"
@@ -19,7 +19,6 @@
     mkdirp "^1.0.4"
     ora "^5.4.1"
     tmp "^0.2.1"
-    ts-essentials "^7.0.2"
     typechain "^5.1.1"
     zod "^3.2.0"
 
@@ -2907,7 +2906,7 @@ tr46@~0.0.3:
   resolved "https://registry.yarnpkg.com/true-case-path/-/true-case-path-2.2.1.tgz#c5bf04a5bbec3fd118be4084461b3a27c4d796bf"
   integrity sha512-0z3j8R7MCjy10kc/g+qg7Ln3alJTodw9aDuVWZa3uiWqfuBMKeAeP2ocWcxoyM3D73yz3Jt/Pu4qPr4wHSdB/Q==
 
-ts-essentials@^7.0.1, ts-essentials@^7.0.2:
+ts-essentials@^7.0.1:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/ts-essentials/-/ts-essentials-7.0.3.tgz#686fd155a02133eedcc5362dc8b5056cde3e5a38"
   integrity sha512-8+gr5+lqO3G84KdiTSMRLtuyJ+nTBVRKuCrK4lidMPdVeEp0uqC875uE5NMcaA7YYMN7XsNiFQuMvasF8HT/xQ==
