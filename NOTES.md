@@ -1,0 +1,3 @@
+- Tests next to sources better show what's tested and what's not
+- src/sdk-def -> src/config? (zrobiłbym to przy PRze z innymi configami)
+- add README.md to `static` explaining what's the purpose of the directory
