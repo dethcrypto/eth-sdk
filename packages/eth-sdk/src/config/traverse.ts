@@ -1,9 +1,9 @@
 import { AsyncOrSync } from 'ts-essentials'
 
-import { Address, NestedAddresses, EthSdKContracts } from '.'
+import { Address, EthSdKContracts, NestedAddresses } from '.'
 
 export async function traverseSdkDefinition(
-  sdkDefinition: EthSdKContracts,
+  contracts: EthSdKContracts,
   traverse: (network: string, key: string[], address: Address) => AsyncOrSync<void>,
 ): Promise<void> {
   async function depthFirstTraverse(network: string, nestedAddresses: NestedAddresses, keys: string[]) {
@@ -16,7 +16,7 @@ export async function traverseSdkDefinition(
     }
   }
 
-  for (const [network, def] of Object.entries(sdkDefinition)) {
+  for (const [network, def] of Object.entries(contracts)) {
     await depthFirstTraverse(network, def, [])
   }
 }

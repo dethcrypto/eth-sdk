@@ -21,7 +21,8 @@ export async function main() {
 
   d('Parsed args', cliArgs)
 
-  const config = await readConfig(findConfigFile(cliArgs, fs))
+  const configPath = findConfigFile(cliArgs, fs)
+  const config = await readConfig(configPath, require)
 
   console.log(`Loaded sdk definition from ${chalk.green(cliArgs.workingDirPath)}`)
 

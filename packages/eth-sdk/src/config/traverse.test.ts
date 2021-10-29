@@ -1,13 +1,14 @@
 import { expect, mockFn } from 'earljs'
+import { constants } from 'ethers'
 
-import { traverseSdkDefinition } from '../../src/config/traverse'
-import { makeAddress, EthSdKContracts } from '../../src/config'
+import { EthSdKContracts, parseAddress } from '.'
+import { traverseSdkDefinition } from './traverse'
 
 describe('traverse', () => {
   it('traverses not-nested definitions', async () => {
     const def: EthSdKContracts = {
       mainnet: {
-        dai: makeAddress('0x123'),
+        dai: parseAddress(constants.AddressZero),
       },
     }
 
@@ -15,17 +16,17 @@ describe('traverse', () => {
 
     await traverseSdkDefinition(def, traverseSpy)
 
-    expect(traverseSpy).toHaveBeenCalledExactlyWith([['mainnet', ['dai'], '0x123']])
+    expect(traverseSpy).toHaveBeenCalledExactlyWith([['mainnet', ['dai'], constants.AddressZero]])
   })
 
   it('traverses nested definitions', async () => {
     const def: EthSdKContracts = {
       mainnet: {
         maker: {
-          dai: makeAddress('0x123'),
+          dai: parseAddress('0x6b175474e89094c44da98b954eedeac495271d0f'),
         },
         compound: {
-          cDai: makeAddress('0x321'),
+          cDai: parseAddress('0x5d3a536e4d6dbd6114cc1ead35777bab948e3643'),
         },
       },
     }
@@ -35,8 +36,8 @@ describe('traverse', () => {
     await traverseSdkDefinition(def, traverseSpy)
 
     expect(traverseSpy).toHaveBeenCalledExactlyWith([
-      ['mainnet', ['maker', 'dai'], '0x123'],
-      ['mainnet', ['compound', 'cDai'], '0x321'],
+      ['mainnet', ['maker', 'dai'], '0x6b175474e89094c44da98b954eedeac495271d0f'],
+      ['mainnet', ['compound', 'cDai'], '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643'],
     ])
   })
 })

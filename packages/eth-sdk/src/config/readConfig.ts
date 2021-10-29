@@ -1,15 +1,16 @@
-import { basename } from 'path'
+import { basename, extname } from 'path'
 
 import { makeError } from '../peripherals/makeError'
-import { EthSdkConfig } from './types'
+import { EthSdkConfig, ethSdkConfigSchema } from './types'
 
-export async function readConfig(filePath: string): Promise<EthSdkConfig> {
-  const [fileName, extension] = basename(filePath).split('.')
+export async function readConfig(filePath: string, requireJs: (id: string) => unknown): Promise<EthSdkConfig> {
+  const extension = extname(filePath)
+  const fileName = basename(filePath, extension)
 
   try {
     let json: unknown
     if (['.json', '.js'].includes(extension)) {
-      json = require(filePath)
+      json = requireJs(filePath)
 
       // We support bare contracts dictionary for backwards compatibility.
       if (fileName === 'contracts') {
@@ -20,7 +21,7 @@ export async function readConfig(filePath: string): Promise<EthSdkConfig> {
       throw new Error(`Unsupported config file extension: ${extension}`)
     }
 
-    return EthSdkConfig.parse(json)
+    return ethSdkConfigSchema.parse(json)
   } catch (err) {
     throw new Error(`Could not read config file: ${filePath}` + '\n' + makeError(err).message)
   }

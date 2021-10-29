@@ -1,37 +1,49 @@
-/* eslint-disable no-redeclare */ // @todo discuss using @typescript-eslint/no-redeclare instead
 import { Opaque } from 'ts-essentials'
+import type { ZodString } from 'zod'
 import { z } from 'zod'
+
+import { networkIDtoSymbol, NetworkSymbol } from '../abi-management/networks'
 
 export interface NestedAddresses {
   [name: string]: Address | NestedAddresses
 }
 
-export interface EthSdKContracts {
-  [network: string]: NestedAddresses
-}
+export interface EthSdKContracts extends Record<NetworkSymbol, NestedAddresses> {}
 
-const ethSdKContractsSchema = z.lazy(() =>
-  z.record(z.union([addressSchema, ethSdKContractsSchema])),
+const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
+
+export const ethSdKContractsSchema = z.lazy(() =>
+  z.record(
+    // @todo consider parsing network symbols manually, bcs zod errors are just bad
+    z.union(networkSymbolSchema as any as [ZodString, ZodString]),
+    z.union([addressSchema, ethSdKContractsSchema]),
+  ),
 ) as z.ZodSchema<EthSdKContracts>
 
-// @todo rename this to ethSdkConfigSchema or use declaration merging?
-export const EthSdkConfig = z
+export const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
     outputPath: z.string().default('./node_modules/.dethcrypto/eth-sdk-client'),
   })
   .strict()
 
-export interface EthSdkConfig extends z.infer<typeof EthSdkConfig> {}
+export interface EthSdkConfig extends z.infer<typeof ethSdkConfigSchema> {}
 
 export type Address = Opaque<string, 'address'>
-export const addressSchema: z.ZodType<Address> = z.string().regex(/^0x[0-9a-fA-F]{40}$/) as any
+const addressSchema: z.ZodType<Address> = z
+  .string()
+  .length(42)
+  .regex(/^0x[0-9a-fA-F]+$/) as any
 
 /**
  * @see https://info.etherscan.com/what-is-an-ethereum-address/
  * @param address - string representation of an address
  * @returns the same string branded as Address if it's a valid address
  */
-export function makeAddress(address: string): Address {
-  return addressSchema.parse(address)
+export function parseAddress(address: string): Address {
+  try {
+    return addressSchema.parse(address)
+  } catch (err) {
+    throw new Error(`"${address}" is not an address. An address must be 42 characters hexadecimal number string.`)
+  }
 }

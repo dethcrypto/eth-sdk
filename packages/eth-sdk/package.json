@@ -48,7 +48,7 @@
     "ora": "^5.4.1",
     "tmp-promise": "^3.0.3",
     "typechain": "^5.1.1",
-    "zod": "^3.2.0"
+    "zod": "^3.11.5"
   },
   "peerDependencies": {
     "ethers": "^5.3.1"
