@@ -1,8 +1,8 @@
 import { expect } from 'earljs'
 import { constants } from 'ethers'
-import { z } from 'zod'
 
-import { Address, ethSdkConfigSchema, parseAddress } from './types'
+import { ethSdKContractsSchema } from '.'
+import { Address, parseAddress, parseEthSdkConfig } from './types'
 
 describe('config types', () => {
   describe(parseAddress.name, () => {
@@ -16,9 +16,25 @@ describe('config types', () => {
     })
   })
 
-  describe('EthSdkConfig', () => {
+  describe('ethSdKContractsSchema', () => {
     it('parses valid schemas', () => {
-      const schema: unknown = {
+      ethSdKContractsSchema.parse({
+        mainnet: {
+          a: constants.AddressZero,
+          b: {
+            c: constants.AddressZero,
+            d: {
+              e: constants.AddressZero,
+            },
+          },
+        },
+      })
+    })
+  })
+
+  describe(parseEthSdkConfig.name, () => {
+    it('parses valid schemas', () => {
+      const schema = {
         contracts: {
           mainnet: {
             dai: constants.AddressZero,
@@ -26,7 +42,10 @@ describe('config types', () => {
         },
       }
 
-      ethSdkConfigSchema.parse(schema)
+      expect(parseEthSdkConfig(schema)).toEqual({
+        contracts: schema.contracts as any,
+        outputPath: expect.stringMatching(''),
+      })
     })
 
     it('throws on invalid schemas', () => {
@@ -34,7 +53,7 @@ describe('config types', () => {
         1: true,
       }
 
-      expect(() => ethSdkConfigSchema.parse(schema)).toThrow(z.ZodError)
+      expect(() => parseEthSdkConfig(schema)).toThrow(expect.stringMatching(`Unrecognized key(s) in object: '1'`))
     })
   })
 })

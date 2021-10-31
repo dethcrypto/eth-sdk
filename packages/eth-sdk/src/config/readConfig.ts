@@ -1,7 +1,8 @@
 import { basename, extname } from 'path'
 
-import { makeError } from '../peripherals/makeError'
-import { EthSdkConfig, ethSdkConfigSchema } from './types'
+import { makeError } from '../utils/makeError'
+import { parseEthSdkConfig } from '.'
+import { EthSdkConfig } from './types'
 
 export async function readConfig(filePath: string, requireJs: (id: string) => unknown): Promise<EthSdkConfig> {
   const extension = extname(filePath)
@@ -21,7 +22,7 @@ export async function readConfig(filePath: string, requireJs: (id: string) => un
       throw new Error(`Unsupported config file extension: ${extension}`)
     }
 
-    return ethSdkConfigSchema.parse(json)
+    return parseEthSdkConfig(json)
   } catch (err) {
     throw new Error(`Could not read config file: ${filePath}` + '\n' + makeError(err).message)
   }

@@ -1,8 +1,8 @@
 import debug from 'debug'
 import { join } from 'path'
 
-import { Fs, realFs } from '../peripherals/fs'
 import { EthSdKContracts } from '../config'
+import { Fs, realFs } from '../peripherals/fs'
 import { generateIndex } from './generateIndex'
 import { generateTypes } from './generateTypes'
 const d = debug('@dethcrypto/eth-sdk-cli:client')

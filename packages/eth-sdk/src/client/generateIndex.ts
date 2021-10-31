@@ -3,9 +3,11 @@ import { startCase } from 'lodash'
 import { join } from 'path'
 import { normalizeName } from 'typechain'
 
-import { Fs, realFs } from '../peripherals/fs'
+import { NetworkSymbol } from '../abi-management/networks'
 import { traverseSdkDefinition } from '../config/traverse'
-import { NestedAddresses, EthSdKContracts } from '../config/types'
+import { EthSdKContracts, NestedAddresses } from '../config/types'
+import { Fs, realFs } from '../peripherals/fs'
+import { unsafeKeys } from '../utils/unsafeKeys'
 
 const d = debug('@dethcrypto/eth-sdk:client')
 
@@ -29,7 +31,7 @@ export function getContract(address: string, abi: object, defaultSigner: Signer)
   return new Contract(address, abi, defaultSigner)
 }
 
-  ${Object.keys(def)
+  ${unsafeKeys(def)
     .map((network) => generateNetworkSdk(network, def)) // fix path to abi here
     .join('\n\n')}
   `
@@ -55,14 +57,14 @@ async function getAbiImports(sdkDef: EthSdKContracts, outputToAbiRelativePath: s
     .join('\n')
 }
 
-function generateNetworkSdk(rawNetwork: string, sdkDef: EthSdKContracts): string {
-  const nestedAddresses = sdkDef[rawNetwork]
-  const network = startCase(rawNetwork).replace(' ', '')
+function generateNetworkSdk(networkSymbol: NetworkSymbol, sdkDef: EthSdKContracts): string {
+  const nestedAddresses = sdkDef[networkSymbol]!
+  const network = startCase(networkSymbol).replace(' ', '')
 
   return `
 export type ${network}Sdk = ReturnType<typeof get${network}Sdk>
 export function get${network}Sdk(defaultSigner: Signer) {
-  return ${generateBody(nestedAddresses, [rawNetwork], true)}
+  return ${generateBody(nestedAddresses, [networkSymbol], true)}
 }
 `
 }

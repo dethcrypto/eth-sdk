@@ -1,7 +1,7 @@
 import { expect } from 'earljs'
 import { assert } from 'ts-essentials'
 
-import { EthSdkConfig, EthSdKContracts, ethSdKContractsSchema, parseAddress } from '.'
+import { EthSdkConfig, EthSdKContracts, parseAddress } from '.'
 import { readConfig } from './readConfig'
 
 // #region fixtures
@@ -46,7 +46,7 @@ describe('readConfig', () => {
     expect(actual).toEqual(configFixture)
   })
 
-  it.only('fails on malformed config.js contents', async () => {
+  it('fails on malformed config.js contents', async () => {
     const filePath = './eth-sdk/config.json'
 
     const promise = readConfig(
@@ -59,9 +59,7 @@ describe('readConfig', () => {
       }),
     )
 
-    console.log('>>', ethSdKContractsSchema.parse((await promise).contracts))
-
-    await expect(promise).toBeRejected('Dupa')
+    await expect(promise).toBeRejected(expect.stringMatching('Network "mkr" is not supported.'))
   })
 
   it('reads contracts and outputPath from config.js', async () => {

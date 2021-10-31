@@ -9,10 +9,10 @@ import { GetAbi } from './types'
 const d = debug('@dethcrypto/eth-sdk:abi')
 
 export async function gatherABIs(ctx: EthSdkCtx, getAbi: GetAbi = getABIFromEtherscan) {
-  const { config } = ctx
+  const { config, fs } = ctx
 
   await traverseSdkDefinition(config.contracts, async (network: string, key: string[], address: Address) => {
-    const fullAbiPath = join(config.outputRootPath, 'abis', network, ...key) + '.json'
+    const fullAbiPath = join(config.outputPath, 'abis', network, ...key) + '.json'
     d(`Getting ABI for ${key.join('.')}`)
 
     if (!fs.exists(fullAbiPath)) {
