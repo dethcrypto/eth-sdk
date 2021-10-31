@@ -1,3 +1,4 @@
+import { bold, cyan } from 'chalk'
 import { Command } from 'commander'
 import { isAbsolute, join } from 'path'
 
@@ -33,9 +34,10 @@ function panicOnDeprecatedArgs(argv: string[]) {
   for (const cliArg of deprecatedArgs) {
     if (argv.includes(cliArg)) {
       throw new Error(
-        `The "${cliArg}" argument is deprecated. Please set "outputPath" property in your config file instead.` +
-          '\n' +
-          'Learn more about migration to eth-sdk 0.2 at https://github.com/dethcrypto/eth-sdk/releases.',
+        bold.red(`\nThe "${cliArg}" argument is deprecated.\n`) +
+          `Please set "outputPath" property in your config file instead.\n` +
+          'Learn more about migration to eth-sdk 0.2 at\n' +
+          cyan.underline('https://github.com/dethcrypto/eth-sdk/releases\n'),
       )
     }
   }

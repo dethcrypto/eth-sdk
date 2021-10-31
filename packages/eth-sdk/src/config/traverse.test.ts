@@ -1,8 +1,8 @@
 import { expect, mockFn } from 'earljs'
 import { constants } from 'ethers'
 
-import { EthSdKContracts, parseAddress } from '.'
 import { traverseSdkDefinition } from './traverse'
+import { EthSdKContracts, parseAddress } from './types'
 
 describe('traverse', () => {
   it('traverses not-nested definitions', async () => {

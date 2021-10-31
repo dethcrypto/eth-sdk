@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "eth-sdk: typecheck",
+      "type": "shell",
+      "command": "yarn tsc -P ./packages/eth-sdk/tsconfig.json --noEmit --incremental false --composite false",
+      "problemMatcher": [
+        "$tsc"
+      ]
+    },
+    {
+      "label": "eth-sdk: lint:fix",
+      "type": "npm",
+      "script": "lint:fix",
+      "path": "packages/eth-sdk/",
+      "options": {
+        "cwd": "packages/eth-sdk/"
+      },
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    },
+    {
+      "label": "eth-sdk: check",
+      "dependsOn": [
+        "eth-sdk: typecheck",
+        "eth-sdk: lint:fix"
+      ],
+      "problemMatcher": []
+    },
+  ]
+}

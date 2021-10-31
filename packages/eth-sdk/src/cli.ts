@@ -8,15 +8,24 @@ import { relative } from 'path'
 import { gatherABIs } from './abi-management'
 import { generateSdk } from './client'
 import { findConfigFile, readConfig } from './config'
-import { parseArgs } from './parseArgs'
+import { EthSdkCliArgs, parseArgs } from './parseArgs'
 import { realFs } from './peripherals/fs'
 import { EthSdkCtx } from './types'
+import { makeError } from './utils/makeError'
 
 const d = debug('@dethcrypto/eth-sdk:cli')
 
 export async function main() {
   const cwd = process.cwd()
-  const cliArgs = parseArgs({ argv: process.argv, cwd })
+
+  let cliArgs: EthSdkCliArgs
+  try {
+    cliArgs = parseArgs({ argv: process.argv, cwd })
+  } catch (error: unknown) {
+    console.error(makeError(error).message)
+    process.exit(1)
+  }
+
   const fs = realFs
 
   d('Parsed args', cliArgs)
