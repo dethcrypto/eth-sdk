@@ -1,5 +1,6 @@
-import { expect } from 'earljs'
-import { assert } from 'ts-essentials'
+import { expect, mockFn } from 'earljs'
+import proxyquire = require('proxyquire')
+import { assert, noop } from 'ts-essentials'
 
 import { EthSdkConfig, EthSdkContracts, parseAddress } from '.'
 import { readConfig } from './readConfig'
@@ -68,6 +69,30 @@ describe('readConfig', () => {
       },
       outputPath: './eth-sdk/client',
     })
+  })
+
+  it("calls ts-node's register when config is written in TypeScript", async () => {
+    const register = mockFn().returns(undefined)
+
+    const { readConfig } = proxyquire<typeof import('./readConfig')>('./readConfig', {
+      'ts-node': { register },
+    })
+
+    const config = await readConfig('config.ts', mockRequire('config.ts', configFixture))
+
+    expect(register).toHaveBeenCalledWith([{ compilerOptions: { module: 'CommonJS' } }])
+    expect(config).toEqual(configFixture)
+  })
+
+  it('throws with meaningful error message when ts-node is not found', async () => {
+    const { readConfig } = proxyquire<typeof import('./readConfig')>('./readConfig', {
+      'ts-node': null,
+    })
+
+    await expect(readConfig('./eth-sdk/eth-sdk.config.ts', noop)).toBeRejected(
+      'Could not read config file: ./eth-sdk/eth-sdk.config.ts\n' +
+        'You need ts-node to write eth-sdk config in TypeScript.',
+    )
   })
 })
 

@@ -3,7 +3,7 @@ import { join } from 'path'
 import { EthSdkCliArgs } from '../parseArgs'
 import { Fs } from '../peripherals/fs'
 
-const CONFIG_EXTENSIONS = ['.js', '.json', '.cjs']
+const CONFIG_EXTENSIONS = ['.js', '.json', '.cjs', '.ts']
 const CONFIG_FILENAMES = ['config', 'eth-sdk.config'].flatMap((name) => CONFIG_EXTENSIONS.map((ext) => `${name}${ext}`))
 
 /**
