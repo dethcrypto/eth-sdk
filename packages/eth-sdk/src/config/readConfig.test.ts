@@ -1,11 +1,11 @@
 import { expect } from 'earljs'
 import { assert } from 'ts-essentials'
 
-import { EthSdkConfig, EthSdKContracts, parseAddress } from '.'
+import { EthSdkConfig, EthSdkContracts, parseAddress } from '.'
 import { readConfig } from './readConfig'
 
 // #region fixtures
-const contractsFixture: EthSdKContracts = {
+const contractsFixture: EthSdkContracts = {
   mainnet: {
     dai: parseAddress('0x6b175474e89094c44da98b954eedeac495271d0f'),
   },

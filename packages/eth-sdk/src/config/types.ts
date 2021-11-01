@@ -1,23 +1,46 @@
-import type { ZodString } from 'zod'
+import type { Opaque } from 'ts-essentials'
+import type { ZodString, ZodTypeDef } from 'zod'
 import { z } from 'zod'
 
 import { networkIDtoSymbol, NetworkSymbol, symbolToNetworkId } from '../abi-management/networks'
+import { NestedDict } from '../utils/utility-types'
 
 const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
 
-export interface NestedAddresses {
-  [name: string]: Address | NestedAddresses
+export type AddressInput = `0x${string}`
+export type Address = Opaque<AddressInput, 'Address'>
+
+const addressSchema: z.ZodType<Address, ZodTypeDef, AddressInput> = z
+  .string()
+  .length(42)
+  .regex(/^0x[0-9a-fA-F]+$/) as any
+
+/**
+ * @see https://info.etherscan.com/what-is-an-ethereum-address/
+ * @param address - string representation of an address
+ * @returns the same string branded as Address if it's a valid address
+ */
+export function parseAddress(address: string): Address {
+  const res = addressSchema.safeParse(address)
+  if (res.success) return res.data
+  else {
+    throw new Error(`"${address}" is not an address. An address must be 42 characters hexadecimal number string.`)
+  }
 }
 
-const nestedAddressesSchema = z.lazy(() =>
-  z.record(z.union([addressSchema, nestedAddressesSchema])),
-) as z.ZodSchema<NestedAddresses>
+export type NestedAddresses = NestedDict<Address>
+export type NestedAddressesInput = NestedDict<string>
 
-export type EthSdKContracts = {
-  [key in NetworkSymbol]?: NestedAddresses
-}
+const nestedAddressesSchema = z.lazy(() => z.record(z.union([addressSchema, nestedAddressesSchema]))) as z.ZodSchema<
+  NestedAddresses,
+  ZodTypeDef,
+  NestedAddressesInput
+>
 
-export const ethSdKContractsSchema: z.ZodSchema<EthSdKContracts> = z.record(
+export type EthSdkContracts = { [key in NetworkSymbol]?: NestedAddresses }
+export type EthSdkContractsInput = { [key in NetworkSymbol]?: NestedAddressesInput }
+
+export const ethSdKContractsSchema: z.ZodSchema<EthSdkContracts, ZodTypeDef, EthSdkContractsInput> = z.record(
   z.union(networkSymbolSchema as any as [ZodString, ZodString]),
   nestedAddressesSchema,
 )
@@ -30,9 +53,15 @@ const ethSdkConfigSchema = z
   .strict()
 
 /**
- * Type of *parsed* eth-sdk config
+ * Type of *parsed* eth-sdk config.
  */
 export interface EthSdkConfig extends z.infer<typeof ethSdkConfigSchema> {}
+
+// We expose this for users under `EthSdkConfig` name.
+/**
+ * Type of eth-sdk config file contents.
+ */
+export type EthSdkConfigInput = z.input<typeof ethSdkConfigSchema>
 
 export function parseEthSdkConfig(data: unknown) {
   const res = ethSdkConfigSchema.safeParse(data)
@@ -59,29 +88,5 @@ export function parseEthSdkConfig(data: unknown) {
     }
 
     throw new Error(message + '\n' + res.error.toString())
-  }
-}
-
-type Flavor<TValue, TBrand extends string> = TValue & { readonly __TYPE__?: TBrand }
-// @todo @krzkaczor let's discuss this — I'm using Flavor with optional brand
-// instead of Opaque here to allow exporting types for users.
-
-export type Address = Flavor<`0x${string}`, 'address'>
-
-const addressSchema: z.ZodType<Address> = z
-  .string()
-  .length(42)
-  .regex(/^0x[0-9a-fA-F]+$/) as any
-
-/**
- * @see https://info.etherscan.com/what-is-an-ethereum-address/
- * @param address - string representation of an address
- * @returns the same string branded as Address if it's a valid address
- */
-export function parseAddress(address: string): Address {
-  const res = addressSchema.safeParse(address)
-  if (res.success) return res.data
-  else {
-    throw new Error(`"${address}" is not an address. An address must be 42 characters hexadecimal number string.`)
   }
 }

@@ -2,11 +2,11 @@ import { expect, mockFn } from 'earljs'
 import { constants } from 'ethers'
 
 import { traverseContractsMap } from './traverse'
-import { EthSdKContracts, parseAddress } from './types'
+import { EthSdkContracts, parseAddress } from './types'
 
 describe('traverse', () => {
   it('traverses not-nested definitions', async () => {
-    const def: EthSdKContracts = {
+    const def: EthSdkContracts = {
       mainnet: {
         dai: parseAddress(constants.AddressZero),
       },
@@ -20,7 +20,7 @@ describe('traverse', () => {
   })
 
   it('traverses nested definitions', async () => {
-    const def: EthSdKContracts = {
+    const def: EthSdkContracts = {
       mainnet: {
         maker: {
           dai: parseAddress('0x6b175474e89094c44da98b954eedeac495271d0f'),

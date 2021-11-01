@@ -1,14 +1,14 @@
 import debug from 'debug'
 import { join } from 'path'
 
-import { EthSdKContracts } from '../config'
+import { EthSdkContracts } from '../config'
 import { Fs, realFs } from '../peripherals/fs'
 import { generateIndex } from './generateIndex'
 import { generateTypes } from './generateTypes'
 const d = debug('@dethcrypto/eth-sdk-cli:client')
 
 export async function generateTsClient(
-  contracts: EthSdKContracts,
+  contracts: EthSdkContracts,
   abisRoot: string,
   outputRoot: string,
   outputToAbiRelativePath: string,

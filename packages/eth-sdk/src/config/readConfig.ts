@@ -9,7 +9,7 @@ export async function readConfig(filePath: string, requireJs: (id: string) => un
 
   try {
     let json: unknown
-    if (['.json', '.js'].includes(extension)) {
+    if (['.json', '.js', '.cjs'].includes(extension)) {
       json = requireJs(filePath)
     } else {
       // @todo Support TypeScript configs
