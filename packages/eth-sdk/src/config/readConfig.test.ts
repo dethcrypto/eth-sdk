@@ -18,22 +18,7 @@ const configFixture: EthSdkConfig = {
 // #endregion fixtures
 
 describe('readConfig', () => {
-  it('reads contracts from contracts.json', async () => {
-    const filePath = './eth-sdk/contracts.json'
-
-    const requireMock = mockRequire(filePath, contractsFixture)
-
-    const actual = await readConfig(filePath, requireMock)
-    expect(actual).toEqual(configFixture)
-  })
-
-  it('reads contracts from contracts.js', async () => {
-    const filePath = './eth-sdk/contracts.json'
-    const actual = await readConfig(filePath, mockRequire(filePath, contractsFixture))
-    expect(actual).toEqual(configFixture)
-  })
-
-  it('reads contracts from config.json and sets default outputPath', async () => {
+  it('reads contracts from JSON config and sets default outputPath', async () => {
     const filePath = './eth-sdk/config.json'
 
     const actual = await readConfig(
@@ -46,7 +31,7 @@ describe('readConfig', () => {
     expect(actual).toEqual(configFixture)
   })
 
-  it('fails on malformed config.js contents', async () => {
+  it('fails on malformed config contents', async () => {
     const filePath = './eth-sdk/config.json'
 
     const promise = readConfig(
@@ -62,7 +47,7 @@ describe('readConfig', () => {
     await expect(promise).toBeRejected(expect.stringMatching('Network "mkr" is not supported.'))
   })
 
-  it('reads contracts and outputPath from config.js', async () => {
+  it('reads contracts and outputPath from JavaScript config', async () => {
     const filePath = './eth-sdk/config.js'
 
     const actual = await readConfig(

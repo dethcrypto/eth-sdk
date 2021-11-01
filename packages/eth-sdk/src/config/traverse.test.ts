@@ -1,7 +1,7 @@
 import { expect, mockFn } from 'earljs'
 import { constants } from 'ethers'
 
-import { traverseSdkDefinition } from './traverse'
+import { traverseContractsMap } from './traverse'
 import { EthSdKContracts, parseAddress } from './types'
 
 describe('traverse', () => {
@@ -14,7 +14,7 @@ describe('traverse', () => {
 
     const traverseSpy = mockFn().returns(undefined)
 
-    await traverseSdkDefinition(def, traverseSpy)
+    await traverseContractsMap(def, traverseSpy)
 
     expect(traverseSpy).toHaveBeenCalledExactlyWith([['mainnet', ['dai'], constants.AddressZero]])
   })
@@ -33,7 +33,7 @@ describe('traverse', () => {
 
     const traverseSpy = mockFn().returns(undefined)
 
-    await traverseSdkDefinition(def, traverseSpy)
+    await traverseContractsMap(def, traverseSpy)
 
     expect(traverseSpy).toHaveBeenCalledExactlyWith([
       ['mainnet', ['maker', 'dai'], '0x6b175474e89094c44da98b954eedeac495271d0f'],

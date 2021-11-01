@@ -4,7 +4,7 @@ import type { NetworkSymbol } from '../abi-management/networks'
 import { unsafeEntries } from '../utils/unsafeKeys'
 import type { Address, EthSdKContracts, NestedAddresses } from './types'
 
-export async function traverseSdkDefinition(
+export async function traverseContractsMap(
   contracts: EthSdKContracts,
   traverse: (network: NetworkSymbol, path: string[], address: Address) => AsyncOrSync<void>,
 ): Promise<void> {

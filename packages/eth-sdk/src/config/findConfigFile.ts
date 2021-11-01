@@ -3,7 +3,7 @@ import { join } from 'path'
 import { EthSdkCliArgs } from '../parseArgs'
 import { Fs } from '../peripherals/fs'
 
-const CONFIG_FILENAMES = ['contracts.json', 'contracts.js', 'config.js', 'config.json']
+const CONFIG_FILENAMES = ['config.js', 'config.json', 'eth-sdk.config.js', 'eth-sdk.config.json']
 
 /**
  * @param args - arguments passed to the CLI

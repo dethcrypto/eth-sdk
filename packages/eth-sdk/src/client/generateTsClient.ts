@@ -8,7 +8,7 @@ import { generateTypes } from './generateTypes'
 const d = debug('@dethcrypto/eth-sdk-cli:client')
 
 export async function generateTsClient(
-  sdkDef: EthSdKContracts,
+  contracts: EthSdKContracts,
   abisRoot: string,
   outputRoot: string,
   outputToAbiRelativePath: string,
@@ -22,5 +22,5 @@ export async function generateTsClient(
   const abisRootOut = join(outputRoot, 'abis')
   await fs.copy(abisRoot, abisRootOut)
 
-  await generateIndex(sdkDef, outputRoot, outputToAbiRelativePath)
+  await generateIndex(contracts, outputRoot, outputToAbiRelativePath)
 }
