@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./docs/logo.png?raw=true" width="100" alt="eth-sdk">
+  <img src="https://github.com/dethcrypto/eth-sdk/blob/master/docs/logo.png?raw=true" width="100" alt="" role="presentation">
   <h3 align="center">eth-sdk</h3>
   <p align="center">Generate type-safe, lightweight SDK for your Ethereum smart contracts</p>
   <p align="center">The quickest and easiest way to interact with Ethereum</p>
@@ -38,18 +38,22 @@ away. The SDK is an object consisting of ethers.js contracts initialized with AB
 generated via TypeChain.
 
 The first step is to create a config file specifying contracts that we wish to interact with. Default path to this file
-is `eth-sdk/contracts.json`:
+is `eth-sdk/config.ts`, but we also support `.json`, `.js` and `.cjs` extensions and `eth-sdk.config` base name.
 
-```json
-{
-  "mainnet": {
-    "dai": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
-  }
-}
+```ts
+import { defineConfig } from '@dethcrypto/eth-sdk'
+
+export default defineConfig({
+  contracts: {
+    mainnet: {
+      dai: '0x6b175474e89094c44da98b954eedeac495271d0f',
+    },
+  },
+})
 ```
 
-The top level key is a network identifier, `eth-sdk` needs it to query ABI information automatically. Following are
-key-value pairs of contract names and addresses. These can be arbitrarily nested.
+The key directly under `"contracts"` is a network identifier, `eth-sdk` needs it to query ABI information automatically.
+Following are key-value pairs of contract names and addresses. These can be deeply nested.
 
 Now you're ready to run `yarn eth-sdk`. Few things will happen under the hood:
 
