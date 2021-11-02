@@ -14,7 +14,16 @@ for (const dir of readdirSync(examplesDir)) {
   console.log(`Checking example: ${bold(dir)}`)
 
   const yarn = process.platform === 'win32' ? 'yarn.cmd' : 'yarn'
-  runProcess([yarn, '--non-interactive', '--no-lockfile'], dir)
+  runProcess(
+    [
+      yarn,
+      '--non-interactive',
+      '--no-lockfile',
+      // for local development when developer forgets to run with --no-lockfile
+      '--force',
+    ],
+    dir,
+  )
   runProcess([yarn, 'typecheck'], dir)
 }
 

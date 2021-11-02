@@ -1,24 +1,16 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "lib": ["ES2018"],
+    "lib": ["ES2019"],
     "module": "CommonJS",
     "moduleResolution": "node",
     "strict": true,
-    "target": "ES2018",
+    "target": "ES2019",
     "sourceMap": true,
     "composite": true,
-    "incremental": true
+    "incremental": true,
+    "exactOptionalPropertyTypes": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.mjs",
-    "**/*.cjs",
-    "**/.*.js",
-    "packages/client/index.cjs",
-    "examples/vite-react/hardhat.config.mts"
-  ],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs", "**/*.cjs", "**/.*.js"],
   "exclude": ["**/node_modules"]
 }

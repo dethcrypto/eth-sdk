@@ -28,9 +28,7 @@ export enum NetworkID {
   ARBITRUM_TESTNET = 421611,
 }
 
-export const networkIDtoSymbol: {
-  [networkID in NetworkID]: string
-} = {
+export const networkIDtoSymbol = {
   [NetworkID.MAINNET]: 'mainnet',
   [NetworkID.ROPSTEN]: 'ropsten',
   [NetworkID.RINKEBY]: 'rinkeby',
@@ -48,5 +46,8 @@ export const networkIDtoSymbol: {
   [NetworkID.POLYGON_MUMBAI]: 'polygonMumbai',
   [NetworkID.ARBITRUM_ONE]: 'arbitrumOne',
   [NetworkID.ARBITRUM_TESTNET]: 'arbitrumTestnet',
-}
+} as const
+
+export type NetworkSymbol = typeof networkIDtoSymbol[keyof typeof networkIDtoSymbol]
+
 export const symbolToNetworkId: SafeDictionary<NetworkID, string> = invert(networkIDtoSymbol) as any

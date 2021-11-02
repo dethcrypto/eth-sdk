@@ -3,14 +3,16 @@ import { startCase } from 'lodash'
 import { join } from 'path'
 import { normalizeName } from 'typechain'
 
-import { Fs, realFs } from '../helpers/fs'
-import { traverseSdkDefinition } from '../helpers/traverse'
-import { NestedAddresses, SdkDefinition } from '../sdk-def/types'
+import { NetworkSymbol } from '../abi-management/networks'
+import { traverseContractsMap } from '../config/traverse'
+import { EthSdkContracts, NestedAddresses } from '../config/types'
+import { Fs, realFs } from '../peripherals/fs'
+import { unsafeKeys } from '../utils/unsafeKeys'
 
 const d = debug('@dethcrypto/eth-sdk:client')
 
 export async function generateIndex(
-  def: SdkDefinition,
+  contracts: EthSdkContracts,
   outputPath: string,
   outputToAbiRelativePath: string,
   fs: Fs = realFs,
@@ -23,18 +25,18 @@ import { Signer, Contract } from 'ethers'
 
 import * as types from './types'
 
-${await getAbiImports(def, outputToAbiRelativePath)}
+${await getAbiImports(contracts, outputToAbiRelativePath)}
 
 export function getContract(address: string, abi: object, defaultSigner: Signer) {
   return new Contract(address, abi, defaultSigner)
 }
 
-  ${Object.keys(def)
-    .map((network) => generateNetworkSdk(network, def)) // fix path to abi here
+  ${unsafeKeys(contracts)
+    .map((network) => generateNetworkSdk(network, contracts)) // fix path to abi here
     .join('\n\n')}
   `
 
-  fs.write(indexPath, index)
+  await fs.write(indexPath, index)
 }
 
 function importedAbiIdentifier(keys: string[]): string {
@@ -42,9 +44,9 @@ function importedAbiIdentifier(keys: string[]): string {
   return name[0].toLowerCase() + name.slice(1)
 }
 
-async function getAbiImports(sdkDef: SdkDefinition, outputToAbiRelativePath: string) {
+async function getAbiImports(sdkDef: EthSdkContracts, outputToAbiRelativePath: string) {
   const paths: string[][] = []
-  await traverseSdkDefinition(sdkDef, (network, keys) => void paths.push([network, ...keys]))
+  await traverseContractsMap(sdkDef, (network, keys) => void paths.push([network, ...keys]))
 
   return paths
     .map((path) => {
@@ -55,14 +57,14 @@ async function getAbiImports(sdkDef: SdkDefinition, outputToAbiRelativePath: str
     .join('\n')
 }
 
-function generateNetworkSdk(rawNetwork: string, sdkDef: SdkDefinition): string {
-  const nestedAddresses = sdkDef[rawNetwork]
-  const network = startCase(rawNetwork).replace(' ', '')
+function generateNetworkSdk(networkSymbol: NetworkSymbol, sdkDef: EthSdkContracts): string {
+  const nestedAddresses = sdkDef[networkSymbol]!
+  const network = startCase(networkSymbol).replace(' ', '')
 
   return `
 export type ${network}Sdk = ReturnType<typeof get${network}Sdk>
 export function get${network}Sdk(defaultSigner: Signer) {
-  return ${generateBody(nestedAddresses, [rawNetwork], true)}
+  return ${generateBody(nestedAddresses, [networkSymbol], true)}
 }
 `
 }
