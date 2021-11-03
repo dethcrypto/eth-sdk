@@ -150,6 +150,17 @@ A map from network identifier into deeply nested key-value pairs of contract nam
 }
 ```
 
+Supported network identifiers are:
+
+```
+"mainnet"            "ropsten"            "rinkeby"
+"goerli"             "kovan"              "bsc"
+"bscTestnet"         "heco"               "hecoTestnet"
+"opera"              "ftmTestnet"         "optimism"
+"optimismKovan"      "polygon"            "polygonMumbai"
+"arbitrumOne"        "arbitrumTestnet"
+```
+
 #### `outputPath`
 
 Output directory for generated SDK.
