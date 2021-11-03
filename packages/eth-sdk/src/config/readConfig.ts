@@ -1,8 +1,7 @@
 import { extname } from 'path'
 
 import { makeError } from '../utils/makeError'
-import { parseEthSdkConfig } from '.'
-import { EthSdkConfig } from './types'
+import { EthSdkConfig, parseEthSdkConfig } from './types'
 
 export async function readConfig(filePath: string, requireJs: (id: string) => unknown): Promise<EthSdkConfig> {
   const extension = extname(filePath)

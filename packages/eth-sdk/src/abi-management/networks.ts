@@ -1,5 +1,5 @@
 import { invert } from 'lodash'
-import { SafeDictionary } from 'ts-essentials'
+import { Opaque, SafeDictionary } from 'ts-essentials'
 
 // note: copied from https://github.com/nomiclabs/hardhat/blob/master/packages/hardhat-etherscan/src/network/prober.ts
 export enum NetworkID {
@@ -48,6 +48,11 @@ export const networkIDtoSymbol = {
   [NetworkID.ARBITRUM_TESTNET]: 'arbitrumTestnet',
 } as const
 
-export type NetworkSymbol = typeof networkIDtoSymbol[keyof typeof networkIDtoSymbol]
+export type UserProvidedNetworkSymbol = Opaque<string, 'UserProvidedNetworkSymbol'>
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const UserProvidedNetworkSymbol = (s: string): UserProvidedNetworkSymbol => s as UserProvidedNetworkSymbol
 
-export const symbolToNetworkId: SafeDictionary<NetworkID, string> = invert(networkIDtoSymbol) as any
+export type PredefinedNetworkSymbol = typeof networkIDtoSymbol[keyof typeof networkIDtoSymbol]
+export type NetworkSymbol = UserProvidedNetworkSymbol | PredefinedNetworkSymbol
+
+export const symbolToNetworkId: SafeDictionary<NetworkID, PredefinedNetworkSymbol> = invert(networkIDtoSymbol) as any

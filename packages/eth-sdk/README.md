@@ -22,6 +22,7 @@
     - [`contracts`](#contracts)
     - [`outputPath`](#outputpath)
     - [`etherscanKey`](#etherscankey)
+    - [`etherscanURLs`](#etherscanurls)
 - [Examples](#examples)
 - [Motivation and use cases](#motivation-and-use-cases)
 - [Configuration](#configuration-1)
@@ -182,6 +183,21 @@ Etherscan API key.
 ```json
 {
   "etherscanKey": "ZWD4W1GTHISTFYJWONTPWTNXAFWORKB2WW"
+}
+```
+
+#### `etherscanURLs`
+
+**TODO: Description and better example?**
+
+```json
+{
+  "etherscanURLs": {
+    "helloworld": {
+      "apiURL": "https://api.etherscan.io/api",
+      "browserURL": "https://etherscan.io"
+    }
+  }
 }
 ```
 

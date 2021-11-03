@@ -46,6 +46,7 @@ describe('config types', () => {
         contracts: schema.contracts as any,
         outputPath: expect.stringMatching(''),
         etherscanKey: expect.stringMatching(''),
+        etherscanURLs: {},
       })
     })
 

@@ -1,6 +1,7 @@
-import { NetworkID } from '../networks'
+import { NetworkID, UserProvidedNetworkSymbol } from '../networks'
 
-// note: copied from https://github.com/nomiclabs/hardhat/blob/master/packages/hardhat-etherscan/src/network/prober.ts
+// #region copied from hardhat-etherscan source
+/** @see https://github.com/nomiclabs/hardhat/blob/master/packages/hardhat-etherscan/src/network/prober.ts */
 export interface EtherscanURLs {
   apiURL: string
   browserURL: string
@@ -80,3 +81,7 @@ export const networkIDtoEndpoints: NetworkId2Etherscan = {
     browserURL: 'https://testnet.arbiscan.io/',
   },
 }
+// #endregion copied from hardhat-etherscan source
+
+export interface UserEtherscanURLs extends Record<UserProvidedNetworkSymbol, EtherscanURLs> {}
+export interface UserEtherscanURLsInput extends Record<string, EtherscanURLs> {}
