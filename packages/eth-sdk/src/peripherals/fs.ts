@@ -1,7 +1,9 @@
 import fs from 'fs'
 import fsExtra from 'fs-extra'
+import glob, { IOptions as GlobOptions } from 'glob'
 import mkdirp from 'mkdirp'
 import { dir as tmpDir } from 'tmp-promise'
+import { promisify } from 'util'
 
 export interface Fs {
   exists(path: string): boolean
@@ -10,6 +12,7 @@ export interface Fs {
   copy(src: string, dest: string): Promise<void>
   readDir(path: string): Promise<string[]>
   tmpDir(prefix: string): Promise<string>
+  glob(pattern: string, options?: GlobOptions | undefined): Promise<string[]>
 }
 
 export const realFs: Fs = {
@@ -24,4 +27,5 @@ export const realFs: Fs = {
     const { path } = await tmpDir({ prefix })
     return path
   },
+  glob: promisify(glob),
 }
