@@ -29,7 +29,6 @@ eth-sdk [options]
 Options:
 
 - `-p, --path <path>` Config root (default: `./eth-sdk`)
-- `-o, --out <path>` Output (Client package) path (default: `./node_modules/.@dethcrypto/eth-sdk-client`)
 
 ## Getting started
 
