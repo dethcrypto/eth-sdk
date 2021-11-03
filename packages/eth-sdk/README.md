@@ -14,23 +14,18 @@
 
 ---
 
-# <<<<<<< HEAD
-
-- [Features ⚡](#features-)
-  > > > > > > > 0a2e054 (Draft configuration reference in README)
-- [<<<<<<< HEAD](#-head)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [CLI Options](#cli-options)
-    - [Getting started](#getting-started)
-    - [Configuration](#configuration)
-      - [`contracts`](#contracts)
-      - [`outputPath`](#outputpath)
-      - [`etherscanKey`](#etherscankey)
-  - [Examples](#examples)
-  - [Motivation and use cases](#motivation-and-use-cases)
-  - [Configuration](#configuration-1)
-  - [State of the project](#state-of-the-project)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [CLI Options](#cli-options)
+  - [Getting started](#getting-started)
+  - [Configuration](#configuration)
+    - [`contracts`](#contracts)
+    - [`outputPath`](#outputpath)
+    - [`etherscanKey`](#etherscankey)
+- [Examples](#examples)
+- [Motivation and use cases](#motivation-and-use-cases)
+- [Configuration](#configuration-1)
+- [State of the project](#state-of-the-project)
 
 ---
 
