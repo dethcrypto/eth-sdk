@@ -64,7 +64,7 @@ export function mockFilesystem(files: Record<FilePath, FileContents | DirectoryM
         return files[normalize(path)] === DirectoryMarker
       },
       readJson(path: string) {
-        return JSON.parse(files[normalize(path)])
+        return JSON.parse(files[normalize(path)].toString())
       },
     },
   }

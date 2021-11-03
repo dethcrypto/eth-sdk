@@ -5,7 +5,7 @@
   <p align="center">The quickest and easiest way to interact with Ethereum</p>
 </p>
 
-## Features ⚡
+<h2>Features ⚡</h2>
 
 - minimal - just provide addresses of contracts that you wish to interact with
 - easy to use - ABIs will be automatically downloaded from Etherscan
@@ -14,7 +14,6 @@
 
 ---
 
-- [Features ⚡](#features-)
 - [Installation](#installation)
 - [Usage](#usage)
   - [CLI Options](#cli-options)
@@ -59,7 +58,7 @@ away. The SDK is an object consisting of ethers.js contracts initialized with AB
 generated via TypeChain.
 
 The first step is to create a config file specifying contracts that we wish to interact with. Default path to this file
-is `eth-sdk/config.ts`, but we also support `.json`, `.js` and `.cjs` extensions and `eth-sdk.config` base name.
+is `eth-sdk/config.ts`.
 
 ```ts
 import { defineConfig } from '@dethcrypto/eth-sdk'
@@ -111,16 +110,41 @@ main()
 
 ### Configuration
 
+`eth-sdk` looks for a file named `config` or `eth-sdk.config` with `.ts`, `.json`, `.js` or `.cjs` extension inside of
+the directory specified by `--path` CLI argument.
+
+You can use exports from `@dethcrypto/eth-sdk` to leverage your IDE's intellisense. Exported types are `EthSdkConfig`,
+`EthSdkContracts`, `NestedAddresses` and `Address`.
+
+```ts
+import type { EthSdkConfig } from '@dethcrypto/eth-sdk'
+const config: EthSdkConfig = {
+  // ...
+}
+export default config
+```
+
+Alternatively, you can use `defineConfig` function to write your config in a typesafe way without need for annotations.
+
+```ts
+import { defineConfig } from '@dethcrypto/eth-sdk'
+export default defineConfig({
+  // ...
+})
+```
+
 #### `contracts`
 
-The key directly under `"contracts"` is a network identifier, `eth-sdk` needs it to query ABI information automatically.
-Following are key-value pairs of contract names and addresses. These can be deeply nested.
+A map from network identifier into deeply nested key-value pairs of contract names and addresses.
 
 ```json
 {
   "contracts": {
     "mainnet": {
-      "dai": "0x6b175474e89094c44da98b954eedeac495271d0f"
+      "dai": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "dao": {
+        "mkr": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
+      }
     }
   }
 }
