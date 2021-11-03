@@ -19,24 +19,26 @@ type FsMocks = {
 export function mockFilesystem(files: Record<FilePath, FileContents | DirectoryMarker>) {
   files = { ...files }
 
+  const normalize = (path: string) => path.replace(/\\/g, '/')
+
   const fs: Fs = {
     async write(path, contents) {
-      files[path] = contents
+      files[normalize(path)] = contents
     },
     async copy(src, dest) {
-      files[dest] = files[src]
+      files[normalize(dest)] = files[normalize(src)]
     },
     async ensureDir(path) {
-      files[path] = DirectoryMarker
+      files[normalize(path)] = DirectoryMarker
     },
     exists(path) {
-      return path in files
+      return normalize(path) in files
     },
     async readDir(path) {
-      return Object.keys(files).filter((file) => file.startsWith(path))
+      return Object.keys(files).filter((file) => file.startsWith(normalize(path)))
     },
     async tmpDir(prefix) {
-      const dir = `${prefix}-${Math.random()}`
+      const dir = `${normalize(prefix)}-${Math.random()}`
       files[dir] = DirectoryMarker
       return dir
     },
@@ -45,5 +47,25 @@ export function mockFilesystem(files: Record<FilePath, FileContents | DirectoryM
     },
   }
 
-  return Object.fromEntries(unsafeEntries(fs).map(([key, fn]) => [key, mockFn(fn)] as const)) as FsMocks
+  const fsMocks = Object.fromEntries(unsafeEntries(fs).map(([key, fn]) => [key, mockFn(fn)] as const)) as FsMocks
+
+  return {
+    ...fsMocks,
+    test: {
+      toString() {
+        return (
+          'mocked filesystem:\n\n' +
+          Object.entries(files)
+            .map(([path, contents]) => `${path}: ${contents.toString()}`)
+            .join('\n\n')
+        )
+      },
+      isDirectory(path: string) {
+        return files[normalize(path)] === DirectoryMarker
+      },
+      readJson(path: string) {
+        return JSON.parse(files[normalize(path)])
+      },
+    },
+  }
 }

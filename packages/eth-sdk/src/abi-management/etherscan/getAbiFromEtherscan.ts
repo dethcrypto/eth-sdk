@@ -4,15 +4,11 @@ import { Address } from '../../config'
 import { symbolToNetworkId } from '../networks'
 import { EtherscanURLs, networkIDtoEndpoints } from './urls'
 
-const OWN_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
-
-export async function getABIFromEtherscan(networkSymbol: string, address: Address): Promise<any> {
+export async function getABIFromEtherscan(networkSymbol: string, address: Address, apiKey: string): Promise<any> {
   const etherscanUrls = getEtherscanLinkFromNetworkSymbol(networkSymbol)
   if (!etherscanUrls) {
     throw new Error(`Can't find network info for ${networkSymbol}`)
   }
-
-  const apiKey = OWN_ETHERSCAN_KEY
 
   const url = `${etherscanUrls.apiURL}?module=contract&action=getabi&address=${address}&apikey=${apiKey}`
   const rawResponse = await got(url)

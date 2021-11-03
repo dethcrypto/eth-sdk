@@ -2,7 +2,7 @@ import { expect, mockFn } from 'earljs'
 import proxyquire = require('proxyquire')
 import { assert, noop } from 'ts-essentials'
 
-import { EthSdkConfig, EthSdkContracts, parseAddress } from '.'
+import { EthSdkConfig, EthSdkConfigInput, EthSdkContracts, parseAddress } from '.'
 import { readConfig } from './readConfig'
 
 // #region fixtures
@@ -15,6 +15,7 @@ const contractsFixture: EthSdkContracts = {
 const configFixture: EthSdkConfig = {
   contracts: contractsFixture,
   outputPath: './node_modules/.dethcrypto/eth-sdk-client',
+  etherscanKey: 'CONFIG_ETHERSCAN_KEY',
 }
 // #endregion fixtures
 
@@ -26,6 +27,7 @@ describe('readConfig', () => {
       filePath,
       mockRequire(filePath, {
         contracts: contractsFixture,
+        etherscanKey: 'CONFIG_ETHERSCAN_KEY',
       }),
     )
 
@@ -39,7 +41,7 @@ describe('readConfig', () => {
       filePath,
       mockRequire(filePath, {
         contracts: {
-          // There should be a network object here.
+          // @ts-expect-error There should be a network object here.
           mkr: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
         },
       }),
@@ -68,6 +70,7 @@ describe('readConfig', () => {
         },
       },
       outputPath: './eth-sdk/client',
+      etherscanKey: expect.stringMatching(''),
     })
   })
 
@@ -96,7 +99,7 @@ describe('readConfig', () => {
   })
 })
 
-function mockRequire(filePath: string, result: unknown) {
+function mockRequire(filePath: string, result: EthSdkConfigInput) {
   return (path: string) => {
     assert(path === filePath, `requireMock is expected to be called with ${filePath}`)
     return result

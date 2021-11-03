@@ -49,6 +49,7 @@ const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
     outputPath: z.string().default('./node_modules/.dethcrypto/eth-sdk-client'),
+    etherscanKey: z.string().default('WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'),
   })
   .strict()
 
