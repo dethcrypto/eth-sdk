@@ -87,7 +87,7 @@ module.exports = {
     'no-octal-escape': 'error',
     'no-path-concat': 'error',
     'no-proto': 'error',
-    'no-redeclare': [
+    '@typescript-eslint/no-redeclare': [
       'error',
       {
         builtinGlobals: false,

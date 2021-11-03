@@ -4,8 +4,7 @@ import { Address } from '../../config'
 import { symbolToNetworkId } from '../networks'
 import { EtherscanURLs, networkIDtoEndpoints } from './urls'
 
-// @todo support user provided keys (especially important when to fight rate limiting)
-const ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
+const OWN_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
 
 export async function getABIFromEtherscan(networkSymbol: string, address: Address): Promise<any> {
   const etherscanUrls = getEtherscanLinkFromNetworkSymbol(networkSymbol)
@@ -13,7 +12,9 @@ export async function getABIFromEtherscan(networkSymbol: string, address: Addres
     throw new Error(`Can't find network info for ${networkSymbol}`)
   }
 
-  const url = `${etherscanUrls.apiURL}?module=contract&action=getabi&address=${address}&apikey=${ETHERSCAN_KEY}`
+  const apiKey = OWN_ETHERSCAN_KEY
+
+  const url = `${etherscanUrls.apiURL}?module=contract&action=getabi&address=${address}&apikey=${apiKey}`
   const rawResponse = await got(url)
   // @todo error handling for incorrect api keys
   const jsonResponse = JSON.parse(rawResponse.body)
