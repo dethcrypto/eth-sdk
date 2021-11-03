@@ -91,6 +91,7 @@ module.exports = {
       'error',
       {
         builtinGlobals: false,
+        ignoreDeclarationMerge: true,
       },
     ],
     'no-regex-spaces': 'error',

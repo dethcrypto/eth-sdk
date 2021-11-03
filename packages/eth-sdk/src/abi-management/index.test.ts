@@ -1,3 +1,4 @@
+import { mockFilesystem } from '../../test/filesystemMock'
 import { parseAddress } from '../config'
 import { EthSdkCtx } from '../types'
 import { gatherABIs } from './index'
@@ -12,10 +13,24 @@ const ctx: EthSdkCtx = {
       },
     },
   },
+  fs: mockFilesystem({}),
 }
 
-
 describe(gatherABIs.name, () => {
-  it('writes ')
-
+  it('writes abi to output path', async () => {
+    await gatherABIs(ctx, async (network, address) => fixtures.abi)
+    console.log()
+  })
 })
+
+const fixtures = {
+  abi: {
+    constant: true,
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', type: 'bytes32' }],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function',
+  },
+}
