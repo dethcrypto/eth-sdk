@@ -15,7 +15,6 @@ export async function readConfig(filePath: string, requireJs: (id: string) => un
       await registerTsNode()
       exported = requireJs(filePath)
     } else {
-      // @todo Support TypeScript configs
       throw new Error(`Unsupported config file extension: ${extension}`)
     }
 
