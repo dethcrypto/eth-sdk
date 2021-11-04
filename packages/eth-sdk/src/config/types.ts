@@ -5,6 +5,9 @@ import { z } from 'zod'
 import { networkIDtoSymbol, NetworkSymbol, symbolToNetworkId } from '../abi-management/networks'
 import { NestedDict } from '../utils/utility-types'
 
+const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
+const DEFAULT_OUTPUT_PATH = './node_modules/.dethcrypto/eth-sdk-client'
+
 const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
 
 export type AddressInput = `0x${string}`
@@ -48,8 +51,8 @@ export const ethSdKContractsSchema: z.ZodSchema<EthSdkContracts, ZodTypeDef, Eth
 const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
-    outputPath: z.string().default('./node_modules/.dethcrypto/eth-sdk-client'),
-    etherscanKey: z.string().default('WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'),
+    outputPath: z.string().default(DEFAULT_OUTPUT_PATH),
+    etherscanKey: z.string().default(DEFAULT_ETHERSCAN_KEY),
   })
   .strict()
 
