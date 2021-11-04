@@ -31,9 +31,7 @@ export async function getABIFromEtherscan(
   return abi
 }
 
-/**
- * @internal exported for tests only
- */
+/** @internal exported for tests only */
 export type FetchAbi = (url: string) => Promise<Pick<Response<string>, 'body'>>
 
 function getEtherscanLinkFromNetworkSymbol(
