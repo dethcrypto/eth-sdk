@@ -5,7 +5,7 @@
   <p align="center">The quickest and easiest way to interact with Ethereum</p>
 </p>
 
-<h1>Features ⚡</h1>
+<h2>Features ⚡</h2>
 
 - minimal - just provide addresses of contracts that you wish to interact with
 - easy to use - ABIs will be automatically downloaded from Etherscan
@@ -26,8 +26,6 @@
 - [Examples](#examples)
 - [Motivation and use cases](#motivation-and-use-cases)
 - [State of the project](#state-of-the-project)
-
----
 
 # Installation
 
