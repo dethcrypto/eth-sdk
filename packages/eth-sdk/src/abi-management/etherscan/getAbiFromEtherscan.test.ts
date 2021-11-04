@@ -22,10 +22,7 @@ describe(getABIFromEtherscan.name, () => {
     const apiKey = 'woop'
 
     const userNetworks: UserEtherscanURLs = {
-      [symbol]: {
-        apiURL: 'https://dethcryptoscan.test/api/v1',
-        browserURL: 'https://dethcryptoscan.test',
-      },
+      [symbol]: 'https://dethcryptoscan.test/api/v1',
     }
 
     const fetch = mockEndpoint()
@@ -44,7 +41,7 @@ const DAI_ADDRESS = parseAddress('0x6B175474E89094C44Da98b954EedeAC495271d0F')
 
 const RETURNED_ABI = ['{{ RETURNED_ABI }}']
 function mockEndpoint() {
-  const fetch: FetchAbi = async (url) => ({
+  const fetch: FetchAbi = async (_url) => ({
     body: JSON.stringify({
       status: '1',
       result: JSON.stringify(RETURNED_ABI),

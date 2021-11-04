@@ -151,7 +151,7 @@ A map from network identifier into deeply nested key-value pairs of contract nam
 }
 ```
 
-Supported network identifiers are:
+Predefined network identifiers are:
 
 ```
 "mainnet"            "ropsten"            "rinkeby"
@@ -161,6 +161,8 @@ Supported network identifiers are:
 "optimismKovan"      "polygon"            "polygonMumbai"
 "arbitrumOne"        "arbitrumTestnet"
 ```
+
+You can add your own Etherscan URL 
 
 #### `outputPath`
 
@@ -193,9 +195,11 @@ Etherscan API key.
 ```json
 {
   "etherscanURLs": {
+    "helloworld": "https://api.etherscan.io/api"
+  },
+  "contracts": {
     "helloworld": {
-      "apiURL": "https://api.etherscan.io/api",
-      "browserURL": "https://etherscan.io"
+      // ...
     }
   }
 }

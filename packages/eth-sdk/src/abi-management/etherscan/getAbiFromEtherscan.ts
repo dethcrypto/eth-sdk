@@ -1,8 +1,9 @@
 import got, { Response } from 'got'
 
-import { Address } from '../../config'
+import type { Address } from '../../config'
+import type { URLString } from '../../utils/utility-types'
 import { NetworkSymbol, symbolToNetworkId, UserProvidedNetworkSymbol } from '../networks'
-import { EtherscanURLs, networkIDtoEndpoints, UserEtherscanURLs } from './urls'
+import { networkIDtoEndpoints, UserEtherscanURLs } from './urls'
 
 export async function getABIFromEtherscan(
   networkSymbol: NetworkSymbol,
@@ -11,12 +12,12 @@ export async function getABIFromEtherscan(
   userNetworks: UserEtherscanURLs,
   fetch: FetchAbi = got,
 ): Promise<object> {
-  const etherscanUrls = getEtherscanLinkFromNetworkSymbol(networkSymbol, userNetworks)
-  if (!etherscanUrls) {
+  const apiUrl = getEtherscanLinkFromNetworkSymbol(networkSymbol, userNetworks)
+  if (!apiUrl) {
     throw new Error(`Can't find network info for ${networkSymbol}`)
   }
 
-  const url = `${etherscanUrls.apiURL}?module=contract&action=getabi&address=${address}&apikey=${apiKey}`
+  const url = `${apiUrl}?module=contract&action=getabi&address=${address}&apikey=${apiKey}`
   const rawResponse = await fetch(url)
   // @todo error handling for incorrect api keys
   const jsonResponse = JSON.parse(rawResponse.body)
@@ -38,7 +39,7 @@ export type FetchAbi = (url: string) => Promise<Pick<Response<string>, 'body'>>
 function getEtherscanLinkFromNetworkSymbol(
   networkSymbol: NetworkSymbol,
   userNetworks: UserEtherscanURLs,
-): EtherscanURLs | undefined {
+): URLString | undefined {
   if (isUserProvidedNetwork(networkSymbol, userNetworks)) {
     return userNetworks[networkSymbol]
   }
