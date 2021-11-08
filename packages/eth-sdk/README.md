@@ -219,7 +219,10 @@ have type information so your IDE can assist you.
 It works well with all sorts of scripts, backend services, and even frontend apps. Note: If you develop smart contracts
 it's better to use TypeChain directly (especially via HardHat integration).
 
-# State of the project
+# Contributing
 
-The project is in a very experimental stage. Don't hesitate to create an issue / pull request helping to steer the
-vision.
+Check out our [contributing guidelines](./CONTRIBUTING.md)
+
+# License
+
+deth (@dethcrypto) MIT
