@@ -12,8 +12,8 @@ describe(gatherABIs.name, () => {
     const getAbiMock = mockFn((async () => abiFixtures) as GetAbi)
     await gatherABIs(ctxFixture, getAbiMock)
 
-    expect(fs.test.isDirectory('outputPath/abis/kovan')).toEqual(true)
-    expect(fs.test.readJson('outputPath/abis/kovan/dai.json')).toEqual(abiFixtures)
+    expect(fs.test.isDirectory('workdirPath/abis/kovan')).toEqual(true)
+    expect(fs.test.readJson('workdirPath/abis/kovan/dai.json')).toEqual(abiFixtures)
     expect(getAbiMock).toHaveBeenCalledWith(['kovan', contractsFixture.kovan.dai, etherscanKeyFixture, {}])
   })
 })
@@ -40,7 +40,7 @@ const contractsFixture = {
 const etherscanKeyFixture = 'CTX_CONFIG_ETHERSCAN_KEY'
 
 const ctxFixture: EthSdkCtx = {
-  cliArgs: { workingDirPath: '' },
+  cliArgs: { workingDirPath: 'workdirPath' },
   config: {
     outputPath: 'outputPath',
     contracts: contractsFixture,

@@ -17,11 +17,9 @@ export type GetAbi = (
   userNetworks: UserEtherscanURLs,
 ) => Promise<object>
 
-export async function gatherABIs(ctx: EthSdkCtx, getAbi: GetAbi = getABIFromEtherscan) {
-  const { config, fs } = ctx
-
+export async function gatherABIs({ config, fs, cliArgs }: EthSdkCtx, getAbi: GetAbi = getABIFromEtherscan) {
   await traverseContractsMap(config.contracts, async (network, key, address) => {
-    const fullAbiPath = join(config.outputPath, 'abis', network, ...key) + '.json'
+    const fullAbiPath = join(cliArgs.workingDirPath, 'abis', network, ...key) + '.json'
     d(`Getting ABI for ${key.join('.')}`)
 
     if (!fs.exists(fullAbiPath)) {
