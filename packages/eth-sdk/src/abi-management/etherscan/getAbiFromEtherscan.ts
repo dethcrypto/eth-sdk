@@ -1,17 +1,24 @@
-import got from 'got'
+import got, { Response } from 'got'
 
-import { Address } from '../../config'
-import { symbolToNetworkId } from '../networks'
-import { EtherscanURLs, networkIDtoEndpoints } from './urls'
+import type { Address } from '../../config'
+import type { URLString } from '../../utils/utility-types'
+import { NetworkSymbol, symbolToNetworkId, UserProvidedNetworkSymbol } from '../networks'
+import { networkIDtoEndpoints, UserEtherscanURLs } from './urls'
 
-export async function getABIFromEtherscan(networkSymbol: string, address: Address, apiKey: string): Promise<any> {
-  const etherscanUrls = getEtherscanLinkFromNetworkSymbol(networkSymbol)
-  if (!etherscanUrls) {
+export async function getABIFromEtherscan(
+  networkSymbol: NetworkSymbol,
+  address: Address,
+  apiKey: string,
+  userNetworks: UserEtherscanURLs,
+  fetch: FetchAbi = got,
+): Promise<object> {
+  const apiUrl = getEtherscanLinkFromNetworkSymbol(networkSymbol, userNetworks)
+  if (!apiUrl) {
     throw new Error(`Can't find network info for ${networkSymbol}`)
   }
 
-  const url = `${etherscanUrls.apiURL}?module=contract&action=getabi&address=${address}&apikey=${apiKey}`
-  const rawResponse = await got(url)
+  const url = `${apiUrl}?module=contract&action=getabi&address=${address}&apikey=${apiKey}`
+  const rawResponse = await fetch(url)
   // @todo error handling for incorrect api keys
   const jsonResponse = JSON.parse(rawResponse.body)
 
@@ -24,13 +31,25 @@ export async function getABIFromEtherscan(networkSymbol: string, address: Addres
   return abi
 }
 
-function getEtherscanLinkFromNetworkSymbol(networkSymbol: string): EtherscanURLs | undefined {
-  const networkId = symbolToNetworkId[networkSymbol]
-  if (networkId === undefined) {
-    return undefined
+/** @internal exported for tests only */
+export type FetchAbi = (url: string) => Promise<Pick<Response<string>, 'body'>>
+
+function getEtherscanLinkFromNetworkSymbol(
+  networkSymbol: NetworkSymbol,
+  userNetworks: UserEtherscanURLs,
+): URLString | undefined {
+  if (isUserProvidedNetwork(networkSymbol, userNetworks)) {
+    return userNetworks[networkSymbol]
   }
 
-  const etherscanUrls = networkIDtoEndpoints[networkId]
+  const networkId = symbolToNetworkId[networkSymbol]
 
-  return etherscanUrls
+  return networkId && networkIDtoEndpoints[networkId]
+}
+
+function isUserProvidedNetwork(
+  symbol: NetworkSymbol,
+  userNetworks: UserEtherscanURLs,
+): symbol is UserProvidedNetworkSymbol {
+  return symbol in userNetworks
 }

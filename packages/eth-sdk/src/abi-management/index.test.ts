@@ -3,8 +3,7 @@ import { expect, mockFn } from 'earljs'
 import { mockFilesystem } from '../../test/filesystemMock'
 import { parseAddress } from '../config'
 import { EthSdkCtx } from '../types'
-import { gatherABIs } from './index'
-import { GetAbi } from './types'
+import { gatherABIs, GetAbi } from './index'
 
 const fs = mockFilesystem({})
 
@@ -15,7 +14,7 @@ describe(gatherABIs.name, () => {
 
     expect(fs.test.isDirectory('outputPath/abis/kovan')).toEqual(true)
     expect(fs.test.readJson('outputPath/abis/kovan/dai.json')).toEqual(abiFixtures)
-    expect(getAbiMock).toHaveBeenCalledWith(['kovan', contractsFixture.kovan.dai, etherscanKeyFixture])
+    expect(getAbiMock).toHaveBeenCalledWith(['kovan', contractsFixture.kovan.dai, etherscanKeyFixture, {}])
   })
 })
 
@@ -46,6 +45,7 @@ const ctxFixture: EthSdkCtx = {
     outputPath: 'outputPath',
     contracts: contractsFixture,
     etherscanKey: etherscanKeyFixture,
+    etherscanURLs: {},
   },
   fs,
 }

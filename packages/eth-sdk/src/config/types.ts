@@ -2,8 +2,11 @@ import type { Opaque } from 'ts-essentials'
 import type { ZodString, ZodTypeDef } from 'zod'
 import { z } from 'zod'
 
+import type { UserEtherscanURLs, UserEtherscanURLsInput } from '../abi-management/etherscan/urls'
 import { networkIDtoSymbol, NetworkSymbol, symbolToNetworkId } from '../abi-management/networks'
 import { NestedDict } from '../utils/utility-types'
+
+export type { UserEtherscanURLs, UserEtherscanURLsInput }
 
 const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
 const DEFAULT_OUTPUT_PATH = './node_modules/.dethcrypto/eth-sdk-client'
@@ -48,11 +51,16 @@ export const ethSdKContractsSchema: z.ZodSchema<EthSdkContracts, ZodTypeDef, Eth
   nestedAddressesSchema,
 )
 
+const etherscanURLsSchema: z.ZodSchema<UserEtherscanURLs, ZodTypeDef, UserEtherscanURLsInput> = z.record(
+  z.string(),
+) as any
+
 const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
     outputPath: z.string().default(DEFAULT_OUTPUT_PATH),
     etherscanKey: z.string().default(DEFAULT_ETHERSCAN_KEY),
+    etherscanURLs: etherscanURLsSchema.default({}),
   })
   .strict()
 

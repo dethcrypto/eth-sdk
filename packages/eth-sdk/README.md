@@ -22,14 +22,12 @@
     - [`contracts`](#contracts)
     - [`outputPath`](#outputpath)
     - [`etherscanKey`](#etherscankey)
+    - [`etherscanURLs`](#etherscanurls)
 - [Examples](#examples)
 - [Motivation and use cases](#motivation-and-use-cases)
-- [Configuration](#configuration-1)
 - [State of the project](#state-of-the-project)
 
----
-
-## Installation
+# Installation
 
 ```
 yarn add --dev @dethcrypto/eth-sdk @dethcrypto/eth-sdk-client
@@ -37,13 +35,13 @@ yarn add --dev @dethcrypto/eth-sdk @dethcrypto/eth-sdk-client
 
 `eth-sdk` uses ethers.js and TypeScript, so these dependencies have to be installed as well.
 
-## Usage
+# Usage
 
 ```bash
 eth-sdk [options]
 ```
 
-### CLI Options
+## CLI Options
 
 Options:
 
@@ -51,7 +49,7 @@ Options:
 
   `eth-sdk` looks for the config file in this directory, and saves downloaded ABIs there.
 
-### Getting started
+## Getting started
 
 `eth-sdk` takes a JSON config file with ethereum addresses and generates a fully type-safe SDK that you can use right
 away. The SDK is an object consisting of ethers.js contracts initialized with ABIs provided by etherscan and with types
@@ -108,7 +106,7 @@ main()
   })
 ```
 
-### Configuration
+## Configuration
 
 `eth-sdk` looks for a file named `config` or `eth-sdk.config` with `.ts`, `.json`, `.js` or `.cjs` extension inside of
 the directory specified by `--path` CLI argument.
@@ -133,7 +131,7 @@ export default defineConfig({
 })
 ```
 
-#### `contracts`
+### `contracts`
 
 A map from network identifier into deeply nested key-value pairs of contract names and addresses.
 
@@ -150,7 +148,7 @@ A map from network identifier into deeply nested key-value pairs of contract nam
 }
 ```
 
-Supported network identifiers are:
+Predefined network identifiers are:
 
 ```
 "mainnet"            "ropsten"            "rinkeby"
@@ -161,7 +159,9 @@ Supported network identifiers are:
 "arbitrumOne"        "arbitrumTestnet"
 ```
 
-#### `outputPath`
+You can configure your own Etherscan URLs in [`etherscanURLs`](#etherscanurls).
+
+### `outputPath`
 
 Output directory for generated SDK.
 
@@ -173,7 +173,7 @@ Output directory for generated SDK.
 }
 ```
 
-#### `etherscanKey`
+### `etherscanKey`
 
 Etherscan API key.
 
@@ -185,7 +185,22 @@ Etherscan API key.
 }
 ```
 
-## Examples
+### `etherscanURLs`
+
+Key-value pairs of network identifier and Etherscan API URL to fetch ABIs from.
+
+```json
+{
+  "etherscanURLs": {
+    "helloworld": "https://api.etherscan.io/api"
+  },
+  "contracts": {
+    "helloworld": {}
+  }
+}
+```
+
+# Examples
 
 Check out examples of using `eth-sdk` in [`/examples`][examples] directory.
 
@@ -194,7 +209,7 @@ Check out examples of using `eth-sdk` in [`/examples`][examples] directory.
 
 [examples]: https://github.com/dethcrypto/eth-sdk/tree/master/examples
 
-## Motivation and use cases
+# Motivation and use cases
 
 The primary motivation for the project is reducing the ceremony needed to interact with smart contracts on Ethereum
 while using JavaScript or TypeScript. It takes care of boring parts like ABI management and auto-generates all the
@@ -204,10 +219,7 @@ have type information so your IDE can assist you.
 It works well with all sorts of scripts, backend services, and even frontend apps. Note: If you develop smart contracts
 it's better to use TypeChain directly (especially via HardHat integration).
 
-## Configuration
-
-## State of the project
+# State of the project
 
 The project is in a very experimental stage. Don't hesitate to create an issue / pull request helping to steer the
-vision. Particularly things like input configuration are not set in stone (how should JSON config look like? should we
-support `.yml` etc)
+vision.

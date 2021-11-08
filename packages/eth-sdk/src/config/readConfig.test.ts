@@ -16,6 +16,7 @@ const configFixture: EthSdkConfig = {
   contracts: contractsFixture,
   outputPath: './node_modules/.dethcrypto/eth-sdk-client',
   etherscanKey: 'CONFIG_ETHERSCAN_KEY',
+  etherscanURLs: {},
 }
 // #endregion fixtures
 
@@ -71,6 +72,7 @@ describe('readConfig', () => {
       },
       outputPath: './eth-sdk/client',
       etherscanKey: expect.stringMatching(''),
+      etherscanURLs: {},
     })
   })
 
