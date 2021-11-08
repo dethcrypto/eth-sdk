@@ -45,6 +45,7 @@ describe('config types', () => {
       expect(parseEthSdkConfig(schema)).toEqual({
         contracts: schema.contracts as any,
         outputPath: expect.stringMatching(''),
+        etherscanKey: expect.stringMatching(''),
       })
     })
 

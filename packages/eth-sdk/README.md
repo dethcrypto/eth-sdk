@@ -5,12 +5,29 @@
   <p align="center">The quickest and easiest way to interact with Ethereum</p>
 </p>
 
-## Features ⚡
+<h2>Features ⚡</h2>
 
 - minimal - just provide addresses of contracts that you wish to interact with
 - easy to use - ABIs will be automatically downloaded from Etherscan
 - familiar API - Generates ethers.js contract wrappers
 - type-safe - Leverages TypeChain for maximum type-safety
+
+---
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [CLI Options](#cli-options)
+  - [Getting started](#getting-started)
+  - [Configuration](#configuration)
+    - [`contracts`](#contracts)
+    - [`outputPath`](#outputpath)
+    - [`etherscanKey`](#etherscankey)
+- [Examples](#examples)
+- [Motivation and use cases](#motivation-and-use-cases)
+- [Configuration](#configuration-1)
+- [State of the project](#state-of-the-project)
+
+---
 
 ## Installation
 
@@ -26,18 +43,22 @@ yarn add --dev @dethcrypto/eth-sdk @dethcrypto/eth-sdk-client
 eth-sdk [options]
 ```
 
+### CLI Options
+
 Options:
 
-- `-p, --path <path>` Config root (default: `./eth-sdk`)
+- `-p, --path <path>` working directory (default: `./eth-sdk`)
 
-## Getting started
+  `eth-sdk` looks for the config file in this directory, and saves downloaded ABIs there.
+
+### Getting started
 
 `eth-sdk` takes a JSON config file with ethereum addresses and generates a fully type-safe SDK that you can use right
 away. The SDK is an object consisting of ethers.js contracts initialized with ABIs provided by etherscan and with types
 generated via TypeChain.
 
 The first step is to create a config file specifying contracts that we wish to interact with. Default path to this file
-is `eth-sdk/config.ts`, but we also support `.json`, `.js` and `.cjs` extensions and `eth-sdk.config` base name.
+is `eth-sdk/config.ts`.
 
 ```ts
 import { defineConfig } from '@dethcrypto/eth-sdk'
@@ -87,6 +108,83 @@ main()
   })
 ```
 
+### Configuration
+
+`eth-sdk` looks for a file named `config` or `eth-sdk.config` with `.ts`, `.json`, `.js` or `.cjs` extension inside of
+the directory specified by `--path` CLI argument.
+
+You can use exports from `@dethcrypto/eth-sdk` to leverage your IDE's intellisense. Exported types are `EthSdkConfig`,
+`EthSdkContracts`, `NestedAddresses` and `Address`.
+
+```ts
+import type { EthSdkConfig } from '@dethcrypto/eth-sdk'
+const config: EthSdkConfig = {
+  // ...
+}
+export default config
+```
+
+Alternatively, you can use `defineConfig` function to write your config in a typesafe way without need for annotations.
+
+```ts
+import { defineConfig } from '@dethcrypto/eth-sdk'
+export default defineConfig({
+  // ...
+})
+```
+
+#### `contracts`
+
+A map from network identifier into deeply nested key-value pairs of contract names and addresses.
+
+```json
+{
+  "contracts": {
+    "mainnet": {
+      "dai": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "dao": {
+        "mkr": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
+      }
+    }
+  }
+}
+```
+
+Supported network identifiers are:
+
+```
+"mainnet"            "ropsten"            "rinkeby"
+"goerli"             "kovan"              "bsc"
+"bscTestnet"         "heco"               "hecoTestnet"
+"opera"              "ftmTestnet"         "optimism"
+"optimismKovan"      "polygon"            "polygonMumbai"
+"arbitrumOne"        "arbitrumTestnet"
+```
+
+#### `outputPath`
+
+Output directory for generated SDK.
+
+**Defaults to `./node_modules/.dethcrypto/eth-sdk`**
+
+```json
+{
+  "outputPath": "./node_modules/.dethcrypto/eth-sdk"
+}
+```
+
+#### `etherscanKey`
+
+Etherscan API key.
+
+**Defaults to eth-sdk's own key.**
+
+```json
+{
+  "etherscanKey": "ZWD4W1GTHISTFYJWONTPWTNXAFWORKB2WW"
+}
+```
+
 ## Examples
 
 Check out examples of using `eth-sdk` in [`/examples`][examples] directory.
@@ -105,6 +203,8 @@ have type information so your IDE can assist you.
 
 It works well with all sorts of scripts, backend services, and even frontend apps. Note: If you develop smart contracts
 it's better to use TypeChain directly (especially via HardHat integration).
+
+## Configuration
 
 ## State of the project
 
