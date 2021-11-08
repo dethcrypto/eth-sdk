@@ -3,6 +3,11 @@
   <h3 align="center">eth-sdk</h3>
   <p align="center">Generate type-safe, lightweight SDK for your Ethereum smart contracts</p>
   <p align="center">The quickest and easiest way to interact with Ethereum</p>
+  <p align="center">
+    <a href="https://github.com/ethereum-ts/eth-sdk/actions"><img alt="Build Status" src="https://github.com/ethereum-ts/eth-sdk/workflows/CI/badge.svg"></a>
+    <a href="/package.json"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
+    <a href="https://discord.gg/cpbj5BDq"><img alt="Join our discord!" src="https://img.shields.io/discord/895381864922091630.svg?color=7289da&label=deth&logo=discord&style=flat-square"></a>
+  </p>
 </p>
 
 <h2>Features ⚡</h2>
@@ -24,8 +29,10 @@
     - [`etherscanKey`](#etherscankey)
     - [`etherscanURLs`](#etherscanurls)
 - [Examples](#examples)
+- [Videos](#videos)
 - [Motivation and use cases](#motivation-and-use-cases)
-- [State of the project](#state-of-the-project)
+- [Contributing](#contributing)
+- [License](#license)
 
 # Installation
 
@@ -208,6 +215,10 @@ Check out examples of using `eth-sdk` in [`/examples`][examples] directory.
 - [Vite + React example](https://github.com/dethcrypto/eth-sdk/tree/master/examples/vite-react)
 
 [examples]: https://github.com/dethcrypto/eth-sdk/tree/master/examples
+
+## Videos
+
+- [EthGlobal's DevSummit (2021)](https://www.youtube.com/watch?v=G5URGgZQ9do)
 
 # Motivation and use cases
 
