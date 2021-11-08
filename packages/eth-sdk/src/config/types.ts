@@ -8,8 +8,9 @@ import { NestedDict } from '../utils/utility-types'
 
 export type { UserEtherscanURLs, UserEtherscanURLsInput }
 
-const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
 const DEFAULT_OUTPUT_PATH = './node_modules/.dethcrypto/eth-sdk-client'
+const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
+const DEFAULT_INFURA_ENDPOINT = 'https://mainnet.infura.io/v3/0993a4f4500c4fff88649d28b331898c'
 
 const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
 
@@ -62,6 +63,12 @@ const ethSdkConfigSchema = z
     outputPath: z.string().default(DEFAULT_OUTPUT_PATH),
     etherscanKey: z.string().default(DEFAULT_ETHERSCAN_KEY),
     etherscanURLs: etherscanURLsSchema.default({}),
+    infura: z
+      .object({
+        endpoint: z.string(),
+        secret: z.string().optional(),
+      })
+      .default({ endpoint: DEFAULT_INFURA_ENDPOINT }),
   })
   .strict()
 

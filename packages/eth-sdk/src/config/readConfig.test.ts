@@ -17,6 +17,9 @@ const configFixture: EthSdkConfig = {
   outputPath: './node_modules/.dethcrypto/eth-sdk-client',
   etherscanKey: 'CONFIG_ETHERSCAN_KEY',
   etherscanURLs: {},
+  infura: {
+    endpoint: 'https://mainnet.infura.test',
+  },
 }
 // #endregion fixtures
 
@@ -32,7 +35,12 @@ describe('readConfig', () => {
       }),
     )
 
-    expect(actual).toEqual(configFixture)
+    expect(actual).toEqual({
+      ...configFixture,
+      infura: {
+        endpoint: expect.stringMatching('https://'),
+      },
+    })
   })
 
   it('fails on malformed config contents', async () => {
@@ -73,6 +81,9 @@ describe('readConfig', () => {
       outputPath: './eth-sdk/client',
       etherscanKey: expect.stringMatching(''),
       etherscanURLs: {},
+      infura: {
+        endpoint: expect.stringMatching('https://'),
+      },
     })
   })
 

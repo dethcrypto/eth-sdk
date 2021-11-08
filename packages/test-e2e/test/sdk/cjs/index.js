@@ -8,6 +8,8 @@ const ethers_1 = require("ethers");
 const dai_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/tokens/dai.json"));
 const mkr_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/tokens/mkr.json"));
 const uniswap_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/uniswap.json"));
+const with_implementation_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/proxies/with_implementation.json"));
+const withComptrollerImplementation_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/proxies/withComptrollerImplementation.json"));
 function getContract(address, abi, defaultSigner) {
     return new ethers_1.Contract(address, abi, defaultSigner);
 }
@@ -19,6 +21,10 @@ function getMainnetSdk(defaultSigner) {
             "mkr": getContract('0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2', mkr_json_1.default, defaultSigner),
         },
         "uniswap": getContract('0x1F98431c8aD98523631AE4a59f267346ea31F984', uniswap_json_1.default, defaultSigner),
+        "proxies": {
+            "with_implementation": getContract('0x1c5a768bdb10750f9007e33243fef5f3e094ad3a', with_implementation_json_1.default, defaultSigner),
+            "withComptrollerImplementation": getContract('0x3d9819210a31b4961b30ef54be2aed79b9c9cd3b', withComptrollerImplementation_json_1.default, defaultSigner),
+        },
     };
 }
 exports.getMainnetSdk = getMainnetSdk;
