@@ -35,7 +35,7 @@ export function parseAddress(address: string): Address {
 }
 
 export type NestedAddresses = NestedDict<Address>
-export type NestedAddressesInput = NestedDict<string>
+export type NestedAddressesInput = NestedDict<AddressInput>
 
 const nestedAddressesSchema = z.lazy(() => z.record(z.union([addressSchema, nestedAddressesSchema]))) as z.ZodSchema<
   NestedAddresses,
