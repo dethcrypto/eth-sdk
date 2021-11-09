@@ -16,10 +16,11 @@ const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.lite
 export type AddressInput = `0x${string}`
 export type Address = Opaque<AddressInput, 'Address'>
 
+const ADDRESS_ERROR_MESSAGE = 'An address must be 42 characters hexadecimal number string.'
 const addressSchema: z.ZodType<Address, ZodTypeDef, AddressInput> = z
   .string()
-  .length(42)
-  .regex(/^0x[0-9a-fA-F]+$/) as any
+  .length(42, { message: ADDRESS_ERROR_MESSAGE })
+  .regex(/^0x[0-9a-fA-F]+$/, { message: ADDRESS_ERROR_MESSAGE }) as any
 
 /**
  * @see https://info.etherscan.com/what-is-an-ethereum-address/
@@ -30,12 +31,12 @@ export function parseAddress(address: string): Address {
   const res = addressSchema.safeParse(address)
   if (res.success) return res.data
   else {
-    throw new Error(`"${address}" is not an address. An address must be 42 characters hexadecimal number string.`)
+    throw new Error(`"${address}" is not an address. ${ADDRESS_ERROR_MESSAGE}`)
   }
 }
 
 export type NestedAddresses = NestedDict<Address>
-export type NestedAddressesInput = NestedDict<string>
+export type NestedAddressesInput = NestedDict<AddressInput>
 
 const nestedAddressesSchema = z.lazy(() => z.record(z.union([addressSchema, nestedAddressesSchema]))) as z.ZodSchema<
   NestedAddresses,
@@ -80,7 +81,7 @@ export function parseEthSdkConfig(data: unknown) {
   if (res.success) {
     return res.data
   } else {
-    const message = 'Failed to parse eth-sdk config.'
+    const message = 'Failed to parse eth-sdk config'
 
     const [issue] = res.error.issues
     if (issue.code === 'invalid_union') {
@@ -89,7 +90,7 @@ export function parseEthSdkConfig(data: unknown) {
       if (error.code === 'invalid_type' && error.expected in symbolToNetworkId) {
         throw new Error(
           message +
-            '\n' +
+            '.\n' +
             `Network "${error.received}" is not supported.\n` +
             'Supported networks are:' +
             Object.values(networkIDtoSymbol)
@@ -99,6 +100,10 @@ export function parseEthSdkConfig(data: unknown) {
       }
     }
 
-    throw new Error(message + '\n' + res.error.toString())
+    throw new Error(
+      message +
+        ':\n' +
+        res.error.issues.map((issue) => `${issue.code} at "${issue.path.join('.')}": ${issue.message}`).join('\n'),
+    )
   }
 }
