@@ -29,12 +29,13 @@ export async function transpileClient(clientPath: string, outputPath: string, fs
       host.getCurrentDirectory = () => clientPath
 
       const program = tsc.createProgram(tsFiles, options, host)
-      const diagnostics = tsc.getPreEmitDiagnostics(program)
+      let diagnostics = tsc.getPreEmitDiagnostics(program)
 
       // We expect errors of code 2307 — the user does not have to have all
       // dependencies installed during codegen. It will crash in runtime,
       // https://www.typescriptlang.org/docs/handbook/module-resolution.html
-      if (diagnostics.some((d) => d.code !== 2307)) {
+      diagnostics = diagnostics.filter((d) => d.code !== 2307)
+      if (diagnostics.length) {
         throw new Error(`TypeScript compilation failed.\n${diagnostics.map((d) => d.messageText).join('\n')}`)
       }
 
