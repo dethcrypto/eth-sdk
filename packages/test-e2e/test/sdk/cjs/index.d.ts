@@ -9,7 +9,7 @@ export declare function getMainnetSdk(defaultSigner: Signer): {
     };
     uniswap: types.Uniswap;
     proxies: {
-        with_implementation: types.WithImplementation;
-        withComptrollerImplementation: types.WithComptrollerImplementation;
+        proxyStandardStorageSlot: types.ProxyStandardStorageSlot;
+        proxyCustomImplementation: types.ProxyCustomImplementation;
     };
 };

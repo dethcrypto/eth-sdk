@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Uniswap__factory = exports.Mkr__factory = exports.Dai__factory = exports.WithComptrollerImplementation__factory = exports.WithImplementation__factory = void 0;
-var WithImplementation__factory_1 = require("./factories/WithImplementation__factory");
-Object.defineProperty(exports, "WithImplementation__factory", { enumerable: true, get: function () { return WithImplementation__factory_1.WithImplementation__factory; } });
-var WithComptrollerImplementation__factory_1 = require("./factories/WithComptrollerImplementation__factory");
-Object.defineProperty(exports, "WithComptrollerImplementation__factory", { enumerable: true, get: function () { return WithComptrollerImplementation__factory_1.WithComptrollerImplementation__factory; } });
+exports.Uniswap__factory = exports.Mkr__factory = exports.Dai__factory = exports.ProxyStandardStorageSlot__factory = exports.ProxyCustomImplementation__factory = void 0;
+var ProxyCustomImplementation__factory_1 = require("./factories/ProxyCustomImplementation__factory");
+Object.defineProperty(exports, "ProxyCustomImplementation__factory", { enumerable: true, get: function () { return ProxyCustomImplementation__factory_1.ProxyCustomImplementation__factory; } });
+var ProxyStandardStorageSlot__factory_1 = require("./factories/ProxyStandardStorageSlot__factory");
+Object.defineProperty(exports, "ProxyStandardStorageSlot__factory", { enumerable: true, get: function () { return ProxyStandardStorageSlot__factory_1.ProxyStandardStorageSlot__factory; } });
 var Dai__factory_1 = require("./factories/Dai__factory");
 Object.defineProperty(exports, "Dai__factory", { enumerable: true, get: function () { return Dai__factory_1.Dai__factory; } });
 var Mkr__factory_1 = require("./factories/Mkr__factory");

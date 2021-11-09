@@ -74,6 +74,7 @@ const ethSdkConfigSchema = z
 
 /**
  * Type of *parsed* eth-sdk config.
+ * @internal
  */
 export interface EthSdkConfig extends z.infer<typeof ethSdkConfigSchema> {}
 

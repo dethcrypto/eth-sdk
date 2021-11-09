@@ -9,15 +9,18 @@ const config = {
       },
       uniswap: '0x1F98431c8aD98523631AE4a59f267346ea31F984',
       proxies: {
-        // 'withImplementation': '',
+        // 'withPublicImplementationGetter': '',
         /**
-         * transparent proxy pattern
-         * @see https://eips.ethereum.org/EIPS/eip-1967#implementation
+         * transparent proxy pattern with standard storage slot
+         * 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc
+         * @see https://eips.ethereum.org/EIPS/eip-1967#specification
          */
-        with_implementation: '0x1c5a768bdb10750f9007e33243fef5f3e094ad3a',
-        // '.0x360894': '',
-        /** custom proxy */
-        withComptrollerImplementation: '0x3d9819210a31b4961b30ef54be2aed79b9c9cd3b',
+        proxyStandardStorageSlot: '0x1c5a768bdb10750f9007e33243fef5f3e094ad3a',
+        /**
+         * Etherscan calls this "custom proxy implementation"
+         * We look getter name ending with "Implementation".
+         */
+        proxyCustomImplementation: '0x3d9819210a31b4961b30ef54be2aed79b9c9cd3b',
       },
     },
   },

@@ -1,6 +1,7 @@
 import got, { Response } from 'got'
 
 import type { Address } from '../../config'
+import type { Abi } from '../../types'
 import type { URLString } from '../../utils/utility-types'
 import { NetworkSymbol, symbolToNetworkId, UserProvidedNetworkSymbol } from '../networks'
 import { networkIDtoEndpoints, UserEtherscanURLs } from './urls'
@@ -11,7 +12,7 @@ export async function getABIFromEtherscan(
   apiKey: string,
   userNetworks: UserEtherscanURLs,
   fetch: FetchAbi = got,
-): Promise<object> {
+): Promise<Abi> {
   const apiUrl = getEtherscanLinkFromNetworkSymbol(networkSymbol, userNetworks)
   if (!apiUrl) {
     throw new Error(`Can't find network info for ${networkSymbol}`)
@@ -26,7 +27,7 @@ export async function getABIFromEtherscan(
     throw new Error(`Can't find mainnet abi for ${address}. Msg: ${rawResponse.body}`)
   }
 
-  const abi = JSON.parse(jsonResponse.result)
+  const abi = JSON.parse(jsonResponse.result) as Abi
 
   return abi
 }
