@@ -9,7 +9,6 @@ const config = {
       },
       uniswap: '0x1F98431c8aD98523631AE4a59f267346ea31F984',
       proxies: {
-        // 'withPublicImplementationGetter': '',
         /**
          * transparent proxy pattern with standard storage slot
          * 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc

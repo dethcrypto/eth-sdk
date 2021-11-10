@@ -36,7 +36,6 @@ export async function gatherABIs(
       let abi = await getAbi(network, address, etherscanKey, etherscanURLs)
 
       const detectedProxy = await detectProxy(address, abi, getProvider(config))
-      console.log({ detectedProxy })
       if (detectedProxy.isProxy) {
         // Implementation ABI will usually contain proxy ABI,
         // so just replacing is a good enough merging strategy.
