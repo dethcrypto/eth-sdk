@@ -15,6 +15,8 @@ const DEFAULT_INFURA_ENDPOINT = 'https://mainnet.infura.io/v3/0993a4f4500c4fff88
 const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
 
 export type AddressInput = `0x${string}`
+
+/** @internal */
 export type Address = Opaque<AddressInput, 'Address'>
 
 const ADDRESS_ERROR_MESSAGE = 'An address must be 42 characters hexadecimal number string.'
@@ -32,7 +34,8 @@ export function parseAddress(address: string): Address {
   const res = addressSchema.safeParse(address)
   if (res.success) return res.data
   else {
-    throw new Error(`"${address}" is not an address. ${ADDRESS_ERROR_MESSAGE}`)
+    const errorCode = res.error.issues[0].code
+    throw new Error(`"${address}" is not an address. ${ADDRESS_ERROR_MESSAGE} (${errorCode})`)
   }
 }
 

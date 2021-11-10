@@ -35,9 +35,8 @@ async function lookForImplementationAddr(address: Address, abi: Abi, provider: R
 
   // If there is an `.implementation` getter, we try to call it.
   const implementationGetter = abi.find((fragment) => fragment.name === 'implementation')
-  console.log({ implementationGetter })
   if (implementationGetter && isPossibleImplementationGetter(implementationGetter)) {
-    return call('implementations')
+    return call('implementation')
   }
 
   // We check storage slot specified by EIP-1967 to hold implementation address.
@@ -45,11 +44,9 @@ async function lookForImplementationAddr(address: Address, abi: Abi, provider: R
   const stored = BigNumber.from(await provider.getStorageAt(address, EIP1967_IMPLEMENTATION_STORAGE_SLOT))
   if (!stored.isZero()) return stored
 
-  // Otherwise, we look for getters ending with "Implementation"
+  // Otherwise, we try shortest getter ending with "Implementation"
   const possibleImplementationGetters = abi.filter(isPossibleImplementationGetter)
-  console.log({ possibleImplementationGetters })
   if (possibleImplementationGetters.length) {
-    // This isn't a very sophisticated heuristic
     const [frag] = possibleImplementationGetters.sort((a, b) => a.name.length - b.name.length)
     return call(frag.name)
   }
@@ -57,7 +54,8 @@ async function lookForImplementationAddr(address: Address, abi: Abi, provider: R
   return null
 }
 
-const EIP1967_IMPLEMENTATION_STORAGE_SLOT = '0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc'
+/** @internal */
+export const EIP1967_IMPLEMENTATION_STORAGE_SLOT = '0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc'
 
 const isPossibleImplementationGetter = (frag: JsonFragment): frag is JsonFragment & { name: string } => {
   if (
