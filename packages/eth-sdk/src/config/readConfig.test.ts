@@ -17,7 +17,7 @@ const configFixture: EthSdkConfig = {
   outputPath: './node_modules/.dethcrypto/eth-sdk-client',
   etherscanKey: 'CONFIG_ETHERSCAN_KEY',
   etherscanURLs: {},
-  infura: {
+  rpcProvider: {
     endpoint: 'https://mainnet.infura.test',
   },
 }
@@ -37,7 +37,7 @@ describe('readConfig', () => {
 
     expect(actual).toEqual({
       ...configFixture,
-      infura: {
+      rpcProvider: {
         endpoint: expect.stringMatching('https://'),
       },
     })
@@ -81,7 +81,7 @@ describe('readConfig', () => {
       outputPath: './eth-sdk/client',
       etherscanKey: expect.stringMatching(''),
       etherscanURLs: {},
-      infura: {
+      rpcProvider: {
         endpoint: expect.stringMatching('https://'),
       },
     })

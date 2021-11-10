@@ -53,6 +53,7 @@
     "zod": "^3.11.5"
   },
   "peerDependencies": {
-    "ethers": "^5.3.1"
+    "ethers": "^5",
+    "@ethersproject/abstract-provider": "^5"
   }
 }

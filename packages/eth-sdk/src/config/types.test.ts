@@ -65,7 +65,7 @@ describe('config types', () => {
         outputPath: expect.stringMatching(''),
         etherscanKey: expect.stringMatching(''),
         etherscanURLs: {},
-        infura: {
+        rpcProvider: {
           endpoint: expect.stringMatching('https://'),
         },
       })
