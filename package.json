@@ -5,6 +5,7 @@
   "engines": {
     "yarn": ">=1.15.2"
   },
+  "type": "module",
   "scripts": {
     "format": "wsrun -c format",
     "format:fix": "wsrun -c format:fix",
@@ -51,7 +52,7 @@
     "proxyquire": "^2.1.3",
     "ts-essentials": "^9.0.0",
     "ts-node": "^10.4.0",
-    "typescript": "^4.4.4",
+    "typescript": "^4.5.1-rc",
     "wsrun": "^5.2.4"
   }
 }

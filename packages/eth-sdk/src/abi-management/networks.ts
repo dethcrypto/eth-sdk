@@ -1,4 +1,4 @@
-import { invert } from 'lodash'
+import { invert } from 'lodash-es'
 import { Opaque, SafeDictionary } from 'ts-essentials'
 
 // note: copied from https://github.com/nomiclabs/hardhat/blob/master/packages/hardhat-etherscan/src/network/prober.ts

@@ -8,6 +8,7 @@
     "url": "https://github.com/dethcrypto/eth-sdk",
     "directory": "packages/eth-sdk"
   },
+  "type": "module",
   "keywords": [
     "ethereum",
     "TypeScript",
@@ -34,11 +35,13 @@
     "lint:fix": "yarn lint --fix",
     "typecheck": "tsc --noEmit --incremental false --composite false",
     "clean": "rm -rf dist && rm -f tsconfig.build.tsbuildinfo",
-    "test": "mocha --config ../../.mocharc.js",
+    "test": "mocha --config ../../.mocharc.cjs",
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   },
   "dependencies": {
+    "@ethereum-sourcify/contract-call-decoder": "^0.1.1",
     "@typechain/ethers-v5": "^8.0.1",
+    "@types/lodash-es": "^4.17.5",
     "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "debug": "^4.3.2",
@@ -46,6 +49,7 @@
     "glob": "^7.2.0",
     "got": "^11.8.2",
     "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "mkdirp": "^1.0.4",
     "ora": "^5.4.1",
     "tmp-promise": "^3.0.3",
@@ -53,9 +57,9 @@
     "zod": "^3.11.5"
   },
   "peerDependencies": {
-    "ethers": "^5",
-    "@ethersproject/abstract-provider": "^5",
     "@ethersproject/abi": "^5",
-    "@ethersproject/bignumber": "^5"
+    "@ethersproject/abstract-provider": "^5",
+    "@ethersproject/bignumber": "^5",
+    "ethers": "^5"
   }
 }

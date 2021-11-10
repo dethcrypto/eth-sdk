@@ -1,24 +1,14 @@
 import debug from 'debug'
 import { dirname, join } from 'path'
 
-import { Address } from '../config'
 import { traverseContractsMap } from '../config/traverse'
 import { EthSdkCtx } from '../types'
-import { Abi } from '../types'
 import { detectProxy } from './detectProxy'
 import { getABIFromEtherscan } from './etherscan/getAbiFromEtherscan'
-import type { UserEtherscanURLs } from './etherscan/urls'
 import { GetRpcProvider, getRpcProvider } from './getRpcProvider'
-import type { NetworkSymbol } from './networks'
+import { GetAbi } from './types'
 
 const d = debug('@dethcrypto/eth-sdk:abi')
-
-export type GetAbi = (
-  network: NetworkSymbol,
-  address: Address,
-  apiKey: string,
-  userNetworks: UserEtherscanURLs,
-) => Promise<Abi>
 
 export async function gatherABIs(
   { config, fs, cliArgs }: EthSdkCtx,

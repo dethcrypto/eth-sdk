@@ -1,5 +1,5 @@
 import debug from 'debug'
-import { startCase } from 'lodash'
+import { startCase } from 'lodash-es'
 import { join } from 'path'
 import { normalizeName } from 'typechain'
 

@@ -18,7 +18,11 @@ process.on('unhandledRejection', (reason, promise) => {
 })
 
 module.exports = {
-  require: ['ts-node/register/transpile-only', 'earljs/mocha'],
+  'node-option': ['experimental-specifier-resolution=node', 'loader=ts-node/esm/transpile-only'],
+  require: [
+    'ts-node/register/transpile-only',
+    // 'earljs/mocha'
+  ],
   extension: ['ts'],
   watchExtensions: ['ts'],
   spec: ['{test,src}/**/*.test.ts'],
