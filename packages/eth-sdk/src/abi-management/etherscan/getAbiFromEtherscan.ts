@@ -1,6 +1,5 @@
-import got, { Response } from 'got'
-
 import type { Address } from '../../config'
+import { FetchJson, fetchJson } from '../../peripherals/fetchJson'
 import type { Abi } from '../../types'
 import type { URLString } from '../../utils/utility-types'
 import { NetworkSymbol, symbolToNetworkId, UserProvidedNetworkSymbol } from '../networks'
@@ -11,7 +10,7 @@ export async function getABIFromEtherscan(
   address: Address,
   apiKey: string,
   userNetworks: UserEtherscanURLs,
-  fetch: FetchAbi = got,
+  fetch: FetchJson<EtherscanResponse> = fetchJson,
 ): Promise<Abi> {
   const apiUrl = getEtherscanLinkFromNetworkSymbol(networkSymbol, userNetworks)
   if (!apiUrl) {
@@ -19,21 +18,17 @@ export async function getABIFromEtherscan(
   }
 
   const url = `${apiUrl}?module=contract&action=getabi&address=${address}&apikey=${apiKey}`
-  const rawResponse = await fetch(url)
   // @todo error handling for incorrect api keys
-  const jsonResponse = JSON.parse(rawResponse.body)
+  const response = await fetch(url)
 
-  if (jsonResponse.status !== '1') {
-    throw new Error(`Can't find mainnet abi for ${address}. Msg: ${rawResponse.body}`)
+  if (response.status !== '1') {
+    throw new Error(`Can't find mainnet abi for ${address}. Msg: ${JSON.stringify(response, null, 2)}`)
   }
 
-  const abi = JSON.parse(jsonResponse.result) as Abi
+  const abi = JSON.parse(response.result) as Abi
 
   return abi
 }
-
-/** @internal exported for tests only */
-export type FetchAbi = (url: string) => Promise<Pick<Response<string>, 'body'>>
 
 function getEtherscanLinkFromNetworkSymbol(
   networkSymbol: NetworkSymbol,
@@ -53,4 +48,13 @@ function isUserProvidedNetwork(
   userNetworks: UserEtherscanURLs,
 ): symbol is UserProvidedNetworkSymbol {
   return symbol in userNetworks
+}
+
+/**
+ * @see https://docs.etherscan.io/api-endpoints/contracts
+ */
+export interface EtherscanResponse {
+  status: string
+  result: string
+  message: 'OK' | 'NOTOK'
 }
