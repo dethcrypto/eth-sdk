@@ -29,6 +29,7 @@
     - [`etherscanKey`](#etherscankey)
     - [`etherscanURLs`](#etherscanurls)
     - [`rpc`](#rpc)
+    - [`noFollowProxies`](#nofollowproxies)
 - [Examples](#examples)
   - [Videos](#videos)
 - [Motivation and use cases](#motivation-and-use-cases)
@@ -223,6 +224,16 @@ Configuration for Ethereum JSON-RPC provider needed for _following proxies_.
 
 For every contract address, eth-sdk checks if it's a proxy, and if it is, it saves the ABI of the implementation
 contract instead of the ABI of the proxy.
+
+### `noFollowProxies`
+
+You can opt out of proxy following by setting `noFollowProxies` flag in your config to `true`.
+
+```json
+{
+  "noFollowProxies": true
+}
+```
 
 # Examples
 
