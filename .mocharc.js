@@ -18,7 +18,6 @@ process.on('unhandledRejection', (reason, promise) => {
 })
 
 module.exports = {
-  'node-option': ['experimental-specifier-resolution=node', 'loader=ts-node/esm/transpile-only'],
   require: [
     'ts-node/register/transpile-only',
     // 'earljs/mocha'

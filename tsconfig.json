@@ -2,7 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "lib": ["ES2019"],
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "strict": true,
     "target": "ES2019",
@@ -11,6 +11,6 @@
     "incremental": true,
     "exactOptionalPropertyTypes": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs", "**/*.cjs", "**/.*.js", ".mocharc.cjs"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs", "**/*.cjs", "**/.*.js"],
   "exclude": ["**/node_modules"]
 }

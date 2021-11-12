@@ -1,16 +1,16 @@
 import type { Address } from '../../config'
-import { FetchJson, fetchJson } from '../../peripherals/fetchJson'
+import { FetchJson } from '../../peripherals/fetchJson'
 import type { Abi } from '../../types'
 import type { URLString } from '../../utils/utility-types'
-import { NetworkSymbol, symbolToNetworkId, UserProvidedNetworkSymbol } from '../networks'
+import { isUserProvidedNetwork, NetworkSymbol, symbolToNetworkId } from '../networks'
 import { networkToEtherscanUrl, UserEtherscanURLs } from './urls'
 
-export async function getABIFromEtherscan(
+export async function getAbiFromEtherscan(
   networkSymbol: NetworkSymbol,
   address: Address,
   apiKey: string,
   userNetworks: UserEtherscanURLs,
-  fetch: FetchJson<EtherscanResponse> = fetchJson,
+  fetch: FetchJson<EtherscanResponse>,
 ): Promise<Abi> {
   const apiUrl = getEtherscanLinkFromNetworkSymbol(networkSymbol, userNetworks)
   if (!apiUrl) {
@@ -41,13 +41,6 @@ function getEtherscanLinkFromNetworkSymbol(
   const networkId = symbolToNetworkId[networkSymbol]
 
   return networkId && networkToEtherscanUrl[networkId]
-}
-
-function isUserProvidedNetwork(
-  symbol: NetworkSymbol,
-  userNetworks: UserEtherscanURLs,
-): symbol is UserProvidedNetworkSymbol {
-  return symbol in userNetworks
 }
 
 /**

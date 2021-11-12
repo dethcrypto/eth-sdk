@@ -31,7 +31,7 @@ describe(getRpcProvider.name, () => {
   })
 
   it('returns null when there is no RPC URL for given network', () => {
-    const provider = getRpcProvider(config, 'user-provided' as UserProvidedNetworkSymbol)
+    const provider = getRpcProvider(config, UserProvidedNetworkSymbol('user-provided'))
 
     expect(provider).toEqual(null)
   })

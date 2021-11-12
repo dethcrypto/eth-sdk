@@ -71,6 +71,7 @@ describe('config types', () => {
         rpc: {
           mainnet: 'https://cloudflare-eth.com',
         },
+        abiSource: 'etherscan',
       })
     })
 

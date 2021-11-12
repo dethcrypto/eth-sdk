@@ -1,18 +1,23 @@
 import debug from 'debug'
 import { dirname, join } from 'path'
 
+import { EthSdkConfig } from '../config'
 import { traverseContractsMap } from '../config/traverse'
+import { fetchJson } from '../peripherals/fetchJson'
 import { EthSdkCtx } from '../types'
 import { detectProxy } from './detectProxy'
-import { getABIFromEtherscan } from './etherscan/getAbiFromEtherscan'
+import { getAbiFromEtherscan } from './etherscan/getAbiFromEtherscan'
 import { GetRpcProvider, getRpcProvider } from './getRpcProvider'
+import { getAbiFromSourcify } from './sourcify/getAbiFromSourcify'
 import { GetAbi } from './types'
 
-const d = debug('@dethcrypto/eth-sdk:abi')
+export type { GetAbi }
+
+export const d = debug('@dethcrypto/eth-sdk:abi')
 
 export async function gatherABIs(
   { config, fs, cliArgs }: EthSdkCtx,
-  getAbi: GetAbi = getABIFromEtherscan,
+  getAbi: GetAbi = makeGetAbi(config),
   getProvider: GetRpcProvider = getRpcProvider,
 ) {
   await traverseContractsMap(config.contracts, async (network, key, address) => {
@@ -21,9 +26,7 @@ export async function gatherABIs(
 
     if (!fs.exists(fullAbiPath)) {
       d('ABI doesnt exist already. Querying etherscan')
-      const { etherscanKey, etherscanURLs } = config
-
-      let abi = await getAbi(network, address, etherscanKey, etherscanURLs)
+      let abi = await getAbi(network, address)
 
       if (!config.noFollowProxies) {
         const rpcProvider = getProvider(config, network)
@@ -32,7 +35,7 @@ export async function gatherABIs(
           if (detectedProxy.isProxy) {
             // Implementation ABI will usually contain proxy ABI,
             // so just replacing is a good enough merging strategy.
-            abi = await getAbi(network, detectedProxy.implAddress, etherscanKey, etherscanURLs)
+            abi = await getAbi(network, detectedProxy.implAddress)
           }
         } else {
           console.warn(
@@ -45,4 +48,17 @@ export async function gatherABIs(
       await fs.write(fullAbiPath, JSON.stringify(abi))
     }
   })
+}
+
+const makeGetAbi = (config: EthSdkConfig): GetAbi => {
+  switch (config.abiSource) {
+    case 'etherscan':
+      return (network, address) =>
+        getAbiFromEtherscan(network, address, config.etherscanKey, config.etherscanURLs, fetchJson)
+    case 'sourcify': {
+      // @todo allow passing this in config
+      const userNetworkIds = {}
+      return (network, address) => getAbiFromSourcify(network, address, userNetworkIds, fetchJson)
+    }
+  }
 }

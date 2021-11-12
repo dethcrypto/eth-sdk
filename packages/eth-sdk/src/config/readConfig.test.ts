@@ -18,6 +18,7 @@ const configFixture: EthSdkConfig = {
   etherscanKey: 'CONFIG_ETHERSCAN_KEY',
   etherscanURLs: {},
   rpc: {},
+  abiSource: 'etherscan',
 }
 // #endregion fixtures
 
@@ -62,6 +63,7 @@ describe('readConfig', () => {
           kovan: { mkr: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2' },
         },
         outputPath: './eth-sdk/client',
+        abiSource: 'sourcify',
       }),
     )
 
@@ -75,6 +77,7 @@ describe('readConfig', () => {
       etherscanKey: expect.stringMatching(''),
       etherscanURLs: {},
       rpc: {},
+      abiSource: 'sourcify',
     })
   })
 
