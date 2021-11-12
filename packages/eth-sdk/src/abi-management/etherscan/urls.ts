@@ -9,7 +9,7 @@ type NetworkId2Etherscan = { [networkID in NetworkID]: URLString }
  *
  * @see https://github.com/nomiclabs/hardhat/blob/master/packages/hardhat-etherscan/src/network/prober.ts
  */
-export const networkIDtoEndpoints: NetworkId2Etherscan = {
+export const networkToEtherscanUrl: NetworkId2Etherscan = {
   [NetworkID.MAINNET]: 'https://api.etherscan.io/api',
   [NetworkID.ROPSTEN]: 'https://api-ropsten.etherscan.io/api',
   [NetworkID.RINKEBY]: 'https://api-rinkeby.etherscan.io/api',

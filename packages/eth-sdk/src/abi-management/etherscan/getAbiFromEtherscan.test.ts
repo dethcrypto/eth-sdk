@@ -2,6 +2,7 @@ import { expect, mockFn } from 'earljs'
 import { constants } from 'ethers'
 
 import { parseAddress, UserEtherscanURLs } from '../../config'
+import { Abi } from '../../types'
 import { UserProvidedNetworkSymbol } from '../networks'
 import { FetchAbi, getABIFromEtherscan } from './getAbiFromEtherscan'
 
@@ -39,7 +40,7 @@ describe(getABIFromEtherscan.name, () => {
 const ADDRESS_ZERO = parseAddress(constants.AddressZero)
 const DAI_ADDRESS = parseAddress('0x6B175474E89094C44Da98b954EedeAC495271d0F')
 
-const RETURNED_ABI = ['{{ RETURNED_ABI }}']
+const RETURNED_ABI = ['{{ RETURNED_ABI }}'] as Abi
 function mockEndpoint() {
   const fetch: FetchAbi = async (_url) => ({
     body: JSON.stringify({

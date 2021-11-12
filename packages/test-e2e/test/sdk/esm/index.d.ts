@@ -8,4 +8,8 @@ export declare function getMainnetSdk(defaultSigner: Signer): {
         mkr: types.Mkr;
     };
     uniswap: types.Uniswap;
+    proxies: {
+        proxyStandardStorageSlot: types.ProxyStandardStorageSlot;
+        proxyCustomImplementation: types.ProxyCustomImplementation;
+    };
 };

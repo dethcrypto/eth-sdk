@@ -8,12 +8,14 @@ import { NestedDict } from '../utils/utility-types'
 
 export type { UserEtherscanURLs, UserEtherscanURLsInput }
 
-const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
 const DEFAULT_OUTPUT_PATH = './node_modules/.dethcrypto/eth-sdk-client'
+const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
 
 const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
 
 export type AddressInput = `0x${string}`
+
+/** @internal */
 export type Address = Opaque<AddressInput, 'Address'>
 
 const ADDRESS_ERROR_MESSAGE = 'An address must be 42 characters hexadecimal number string.'
@@ -31,7 +33,8 @@ export function parseAddress(address: string): Address {
   const res = addressSchema.safeParse(address)
   if (res.success) return res.data
   else {
-    throw new Error(`"${address}" is not an address. ${ADDRESS_ERROR_MESSAGE}`)
+    const errorCode = res.error.issues[0].code
+    throw new Error(`"${address}" is not an address. ${ADDRESS_ERROR_MESSAGE} (${errorCode})`)
   }
 }
 
@@ -56,17 +59,24 @@ const etherscanURLsSchema: z.ZodSchema<UserEtherscanURLs, ZodTypeDef, UserEthers
   z.string(),
 ) as any
 
+export type RpcURLs = { [key in NetworkSymbol]?: string }
+
+const rpcUrlsSchema: z.ZodSchema<RpcURLs> = z.record(z.string())
+
 const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
     outputPath: z.string().default(DEFAULT_OUTPUT_PATH),
     etherscanKey: z.string().default(DEFAULT_ETHERSCAN_KEY),
     etherscanURLs: etherscanURLsSchema.default({}),
+    rpc: rpcUrlsSchema.default({}),
+    noFollowProxies: z.boolean().optional(),
   })
   .strict()
 
 /**
  * Type of *parsed* eth-sdk config.
+ * @internal
  */
 export interface EthSdkConfig extends z.infer<typeof ethSdkConfigSchema> {}
 
@@ -107,3 +117,6 @@ export function parseEthSdkConfig(data: unknown) {
     )
   }
 }
+
+/** @internal */
+export const createEthSdkConfig: (config: EthSdkConfigInput) => EthSdkConfig = parseEthSdkConfig
