@@ -58,6 +58,9 @@ describe('config types', () => {
             dai: constants.AddressZero,
           },
         },
+        rpc: {
+          mainnet: 'https://cloudflare-eth.com',
+        },
       }
 
       expect(parseEthSdkConfig(input)).toEqual({
@@ -65,8 +68,8 @@ describe('config types', () => {
         outputPath: expect.stringMatching(''),
         etherscanKey: expect.stringMatching(''),
         etherscanURLs: {},
-        rpcProvider: {
-          endpoint: expect.stringMatching('https://'),
+        rpc: {
+          mainnet: 'https://cloudflare-eth.com',
         },
       })
     })

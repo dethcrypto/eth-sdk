@@ -4,7 +4,7 @@ import type { Address } from '../../config'
 import type { Abi } from '../../types'
 import type { URLString } from '../../utils/utility-types'
 import { NetworkSymbol, symbolToNetworkId, UserProvidedNetworkSymbol } from '../networks'
-import { networkIDtoEndpoints, UserEtherscanURLs } from './urls'
+import { networkToEtherscanUrl, UserEtherscanURLs } from './urls'
 
 export async function getABIFromEtherscan(
   networkSymbol: NetworkSymbol,
@@ -45,7 +45,7 @@ function getEtherscanLinkFromNetworkSymbol(
 
   const networkId = symbolToNetworkId[networkSymbol]
 
-  return networkId && networkIDtoEndpoints[networkId]
+  return networkId && networkToEtherscanUrl[networkId]
 }
 
 function isUserProvidedNetwork(

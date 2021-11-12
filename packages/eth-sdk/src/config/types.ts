@@ -10,7 +10,6 @@ export type { UserEtherscanURLs, UserEtherscanURLsInput }
 
 const DEFAULT_OUTPUT_PATH = './node_modules/.dethcrypto/eth-sdk-client'
 const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
-const DEFAULT_RPC_PROVIDER_ENDPOINT = 'https://mainnet.infura.io/v3/0993a4f4500c4fff88649d28b331898c'
 
 const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
 
@@ -60,13 +59,18 @@ const etherscanURLsSchema: z.ZodSchema<UserEtherscanURLs, ZodTypeDef, UserEthers
   z.string(),
 ) as any
 
+export type RpcURLs = { [key in NetworkSymbol]?: string }
+
+const rpcUrlsSchema: z.ZodSchema<RpcURLs> = z.record(z.string())
+
 const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
     outputPath: z.string().default(DEFAULT_OUTPUT_PATH),
     etherscanKey: z.string().default(DEFAULT_ETHERSCAN_KEY),
     etherscanURLs: etherscanURLsSchema.default({}),
-    rpcProvider: z.object({ endpoint: z.string() }).default({ endpoint: DEFAULT_RPC_PROVIDER_ENDPOINT }),
+    rpc: rpcUrlsSchema.default({}),
+    noFollowProxies: z.boolean().optional(),
   })
   .strict()
 
@@ -113,3 +117,6 @@ export function parseEthSdkConfig(data: unknown) {
     )
   }
 }
+
+/** @internal */
+export const createEthSdkConfig: (config: EthSdkConfigInput) => EthSdkConfig = parseEthSdkConfig

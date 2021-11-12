@@ -3,10 +3,10 @@ import { Dictionary } from 'ts-essentials'
 
 import { mockFilesystem } from '../../test/filesystemMock'
 import { randomAddress } from '../../test/test-utils'
-import { parseAddress } from '../config'
+import { createEthSdkConfig, parseAddress } from '../config'
 import { Abi, EthSdkCtx } from '../types'
 import { constrain } from '../utils/constrain'
-import { RpcProvider } from './getRpcProvider'
+import { GetRpcProvider, RpcProvider } from './getRpcProvider'
 import { gatherABIs, GetAbi } from './index'
 
 const fs = mockFilesystem({})
@@ -43,9 +43,7 @@ describe(gatherABIs.name, () => {
         outputPath: 'outputPath',
         etherscanKey: etherscanKeyFixture,
         etherscanURLs: {},
-        rpcProvider: {
-          endpoint: 'https://rpc-provider.test',
-        },
+        rpc: {},
       },
       fs,
     }
@@ -71,9 +69,7 @@ describe(gatherABIs.name, () => {
         outputPath: 'outputPath',
         etherscanKey: etherscanKeyFixture,
         etherscanURLs: {},
-        rpcProvider: {
-          endpoint: 'https://rpc-provider.test',
-        },
+        rpc: {},
       },
       fs,
     }
@@ -87,18 +83,71 @@ describe(gatherABIs.name, () => {
         [implementationAddr]: abis.implementation,
       }[addr]
     }) as GetAbi)
+    const getProvider = mockFn<GetRpcProvider>(() => ({
+      ...rpcProvider,
+      getCode: mockFn<RpcProvider['getCode']>().resolvesTo('0xfff'),
+      getStorageAt: mockFn<RpcProvider['getStorageAt']>().resolvesTo(implementationAddr),
+    }))
 
-    await gatherABIs(
-      ctx,
-      getAbi,
-      (): RpcProvider => ({
-        ...rpcProvider,
-        getCode: mockFn<RpcProvider['getCode']>().resolvesTo('0xfff'),
-        getStorageAt: mockFn<RpcProvider['getStorageAt']>().resolvesTo(implementationAddr),
-      }),
-    )
+    await gatherABIs(ctx, getAbi, getProvider)
 
     expect(fs.test.readJson('workdirPath/abis/goerli/proxy.json')).toEqual(abis.implementation)
+    expect(getProvider).toHaveBeenCalledWith([expect.anything(), 'goerli'])
+  })
+
+  it('does not call any rpc provider method when config.noFollowProxies is true', async () => {
+    const fs = mockFilesystem({})
+    const rpcProvider = {
+      call: mockFn<RpcProvider['call']>().throws(new Error('.call should not be called')),
+      getCode: mockFn<RpcProvider['getCode']>().throws(new Error('.getCode should not be called')),
+      getStorageAt: mockFn<RpcProvider['getStorageAt']>().throws(new Error('.getStorageAt should not be called')),
+    }
+
+    const getAbi = mockFn((async () => []) as GetAbi)
+    const ctx: EthSdkCtx = {
+      cliArgs: { workingDirPath: 'workdirPath' },
+      config: createEthSdkConfig({
+        contracts: {
+          kovan: {
+            dai: parseAddress('0x6B175474E89094C44Da98b954EedeAC495271d0F'),
+          },
+        },
+        noFollowProxies: true,
+      }),
+      fs,
+    }
+
+    await gatherABIs(ctx, getAbi, (): RpcProvider => rpcProvider)
+
+    expect(fs.test.readJson('workdirPath/abis/kovan/dai.json')).toEqual([])
+  })
+
+  it('logs warning when rpc provider is not found', async () => {
+    const _consoleWarn = console.warn
+    const mockWarn = mockFn<typeof _consoleWarn>().returns(undefined)
+    console.warn = mockWarn
+
+    const ctx: EthSdkCtx = {
+      cliArgs: { workingDirPath: 'workdirPath' },
+      config: createEthSdkConfig({
+        contracts: {
+          kovan: {
+            dai: parseAddress('0x6B175474E89094C44Da98b954EedeAC495271d0F'),
+          },
+        },
+      }),
+      fs: mockFilesystem({}),
+    }
+
+    const getProvider: GetRpcProvider = () => null
+
+    await gatherABIs(ctx, async () => [], getProvider)
+
+    expect(mockWarn).toHaveBeenCalledWith([
+      expect.stringMatching(`Please add it to "config.rpc.kovan" to enable fetching proxy implementation ABIs`),
+    ])
+
+    console.warn = _consoleWarn
   })
 })
 

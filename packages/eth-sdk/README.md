@@ -28,8 +28,9 @@
     - [`outputPath`](#outputpath)
     - [`etherscanKey`](#etherscankey)
     - [`etherscanURLs`](#etherscanurls)
+    - [`rpc`](#rpc)
 - [Examples](#examples)
-- [Videos](#videos)
+  - [Videos](#videos)
 - [Motivation and use cases](#motivation-and-use-cases)
 - [Contributing](#contributing)
 - [License](#license)
@@ -206,6 +207,22 @@ Key-value pairs of network identifier and Etherscan API URL to fetch ABIs from.
   }
 }
 ```
+
+### `rpc`
+
+Configuration for Ethereum JSON-RPC provider needed for _following proxies_.
+
+```json
+{
+  "rpc": {
+    "mainnet": "https://mainnet.infura.io/v3/00000000000000000000000000000000",
+    "kovan": "https://kovan.infura.io/v3/00000000000000000000000000000000"
+  }
+}
+```
+
+For every contract address, eth-sdk checks if it's a proxy, and if it is, it saves the ABI of the implementation
+contract instead of the ABI of the proxy.
 
 # Examples
 

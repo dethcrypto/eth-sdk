@@ -35,11 +35,20 @@ export async function gatherABIs(
 
       let abi = await getAbi(network, address, etherscanKey, etherscanURLs)
 
-      const detectedProxy = await detectProxy(address, abi, getProvider(config))
-      if (detectedProxy.isProxy) {
-        // Implementation ABI will usually contain proxy ABI,
-        // so just replacing is a good enough merging strategy.
-        abi = await getAbi(network, detectedProxy.implAddress, etherscanKey, etherscanURLs)
+      if (!config.noFollowProxies) {
+        const rpcProvider = getProvider(config, network)
+        if (rpcProvider) {
+          const detectedProxy = await detectProxy(address, abi, rpcProvider)
+          if (detectedProxy.isProxy) {
+            // Implementation ABI will usually contain proxy ABI,
+            // so just replacing is a good enough merging strategy.
+            abi = await getAbi(network, detectedProxy.implAddress, etherscanKey, etherscanURLs)
+          }
+        } else {
+          console.warn(
+            `No RPC URL found for network ${network}. Please add it to "config.rpc.${network}" to enable fetching proxy implementation ABIs.`,
+          )
+        }
       }
 
       await fs.ensureDir(dirname(fullAbiPath))
