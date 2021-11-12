@@ -10,6 +10,7 @@ export type { UserEtherscanURLs, UserEtherscanURLsInput }
 
 const DEFAULT_OUTPUT_PATH = './node_modules/.dethcrypto/eth-sdk-client'
 const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
+const DEFAULT_ABI_SOURCE: AbiSource = 'etherscan'
 
 const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
 
@@ -63,6 +64,9 @@ export type RpcURLs = { [key in NetworkSymbol]?: string }
 
 const rpcUrlsSchema: z.ZodSchema<RpcURLs> = z.record(z.string())
 
+const abiSourceSchema = z.union([z.literal('etherscan'), z.literal('sourcify')])
+export type AbiSource = z.infer<typeof abiSourceSchema>
+
 const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
@@ -71,6 +75,7 @@ const ethSdkConfigSchema = z
     etherscanURLs: etherscanURLsSchema.default({}),
     rpc: rpcUrlsSchema.default({}),
     noFollowProxies: z.boolean().optional(),
+    abiSource: abiSourceSchema.default(DEFAULT_ABI_SOURCE),
   })
   .strict()
 
