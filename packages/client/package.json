@@ -1,6 +1,6 @@
 {
   "name": "@dethcrypto/eth-sdk-client",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "description": "This package is required if you want `eth-sdk` to generate SDK directly to `node_modules`.",
   "repository": {
