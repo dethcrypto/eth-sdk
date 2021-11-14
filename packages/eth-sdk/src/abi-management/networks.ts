@@ -26,6 +26,9 @@ export enum NetworkID {
   // Arbitrum
   ARBITRUM_ONE = 42161,
   ARBITRUM_TESTNET = 421611,
+  // Avalanche
+  AVALANCHE = 43114,
+  AVALANCHE_FUJI_TESTNET = 43113,
 }
 
 export const networkIDtoSymbol = {
@@ -46,6 +49,8 @@ export const networkIDtoSymbol = {
   [NetworkID.POLYGON_MUMBAI]: 'polygonMumbai',
   [NetworkID.ARBITRUM_ONE]: 'arbitrumOne',
   [NetworkID.ARBITRUM_TESTNET]: 'arbitrumTestnet',
+  [NetworkID.AVALANCHE]: 'avalanche',
+  [NetworkID.AVALANCHE_FUJI_TESTNET]: 'fuji',
 } as const
 
 export type UserProvidedNetworkSymbol = Opaque<string, 'UserProvidedNetworkSymbol'>
