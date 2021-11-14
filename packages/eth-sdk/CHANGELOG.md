@@ -1,5 +1,11 @@
 # @dethcrypto/eth-sdk
 
+## 0.2.1
+
+### Patch Changes
+
+- 75c37b5: Add support for Avalanche networks (mainnet and fuji testnet)
+
 ## 0.2.0
 
 ### Minor Changes
