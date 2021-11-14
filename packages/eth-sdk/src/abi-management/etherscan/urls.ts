@@ -27,6 +27,9 @@ export const networkToEtherscanUrl: NetworkId2Etherscan = {
   [NetworkID.POLYGON_MUMBAI]: 'https://api-testnet.polygonscan.com/api',
   [NetworkID.ARBITRUM_ONE]: 'https://api.arbiscan.io/api',
   [NetworkID.ARBITRUM_TESTNET]: 'https://api-testnet.arbiscan.io/api',
+  [NetworkID.AVALANCHE]: 'https://api.snowtrace.io/api',
+  [NetworkID.AVALANCHE_FUJI_TESTNET]: 'https://api-testnet.snowtrace.io/api',
+
 }
 
 export interface UserEtherscanURLs extends Record<UserProvidedNetworkSymbol, URLString> {}
