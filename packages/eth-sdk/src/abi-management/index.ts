@@ -39,7 +39,7 @@ export async function gatherABIs(
           }
         } else {
           console.warn(
-            `No RPC URL found for network ${network}. Please add it to "config.rpc.${network}" to enable fetching proxy implementation ABIs.`,
+            `\n\nNo RPC URL found for network ${network}. Please add it to "config.rpc.${network}" to enable fetching proxy implementation ABIs.\n\n`,
           )
         }
       }
