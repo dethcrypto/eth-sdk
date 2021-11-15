@@ -12,8 +12,6 @@ const DEFAULT_OUTPUT_PATH = './node_modules/.dethcrypto/eth-sdk-client'
 const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
 const DEFAULT_ABI_SOURCE: AbiSource = 'etherscan'
 
-const networkSymbolSchema = Object.values(networkIDtoSymbol).map((net) => z.literal(net))
-
 export type AddressInput = `0x${string}`
 
 /** @internal */
