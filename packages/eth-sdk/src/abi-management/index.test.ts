@@ -38,7 +38,7 @@ describe(gatherABIs.name, () => {
     }
     const ctx: EthSdkCtx = {
       cliArgs: { workingDirPath: 'workdirPath' },
-      config: {
+      config: createEthSdkConfig({
         contracts,
         outputPath: 'outputPath',
         etherscanKey: etherscanKeyFixture,
