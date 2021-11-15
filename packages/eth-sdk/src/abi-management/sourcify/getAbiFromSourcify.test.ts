@@ -3,6 +3,7 @@ import { expect, mockFn } from 'earljs'
 import { parseAddress } from '../../config'
 import { FetchJson } from '../../peripherals/fetchJson'
 import { Abi } from '../../types'
+import { UserProvidedNetworkSymbol } from '../networks'
 import { getAbiFromSourcify, SourcifyFile } from './getAbiFromSourcify'
 
 describe(getAbiFromSourcify.name, () => {
@@ -10,15 +11,28 @@ describe(getAbiFromSourcify.name, () => {
     'dethcrypto-test': 1337,
   }
 
-  it('extracts abi from fetched files', async () => {
-    // see https://ropsten.etherscan.io/address/0x0000A906D248Cc99FB8CB296C8Ad8C6Df05431c9#contracts
-    const addr = parseAddress('0x0000A906D248Cc99FB8CB296C8Ad8C6Df05431c9')
+  // see https://ropsten.etherscan.io/address/0x0000A906D248Cc99FB8CB296C8Ad8C6Df05431c9#contracts
+  const addr = parseAddress('0x0000A906D248Cc99FB8CB296C8Ad8C6Df05431c9')
 
+  it('extracts abi from fetched files', async () => {
     const fetchAbi = mockFn<FetchJson<SourcifyFile[]>>(async (_url) => FILES_FROM_SOURCIFY)
     const abi = await getAbiFromSourcify('ropsten', addr, userNetworkIds, fetchAbi)
 
     expect(fetchAbi).toHaveBeenCalledWith([`https://sourcify.dev/server/files/3/${addr}`])
     expect(abi).toEqual(CONTRACT_ABI)
+  })
+
+  it('calls Sourcify with user provided network id', async () => {
+    const fetchAbi = mockFn<FetchJson<SourcifyFile[]>>(async (_url) => FILES_FROM_SOURCIFY)
+    const _abi = await getAbiFromSourcify(UserProvidedNetworkSymbol('dethcrypto-test'), addr, userNetworkIds, fetchAbi)
+
+    expect(fetchAbi).toHaveBeenCalledWith([
+      `https://sourcify.dev/server/files/${userNetworkIds['dethcrypto-test']}/${addr}`,
+    ])
+  })
+
+  it('throws when network id is not found', async () => {
+    // @todo
   })
 })
 

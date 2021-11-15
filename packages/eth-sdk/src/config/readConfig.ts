@@ -31,7 +31,7 @@ async function registerTsNode() {
   try {
     const { register } = await import('ts-node')
 
-    register({ compilerOptions: { module: 'CommonJS' } })
+    register({ compilerOptions: { module: 'CommonJS' }, transpileOnly: true })
   } catch (error) {
     const err = makeError(error) as Error & { code?: string }
     if (err.code === 'MODULE_NOT_FOUND') {

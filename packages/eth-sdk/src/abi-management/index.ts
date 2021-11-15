@@ -56,9 +56,7 @@ const makeGetAbi = (config: EthSdkConfig): GetAbi => {
       return (network, address) =>
         getAbiFromEtherscan(network, address, config.etherscanKey, config.etherscanURLs, fetchJson)
     case 'sourcify': {
-      // @todo allow passing this in config
-      const userNetworkIds = {}
-      return (network, address) => getAbiFromSourcify(network, address, userNetworkIds, fetchJson)
+      return (network, address) => getAbiFromSourcify(network, address, config.networkIds, fetchJson)
     }
   }
 }

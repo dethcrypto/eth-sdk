@@ -60,9 +60,9 @@ export const UserProvidedNetworkSymbol = (s: string): UserProvidedNetworkSymbol 
 
 export function isUserProvidedNetwork(
   symbol: NetworkSymbol,
-  userNetworks: Record<UserProvidedNetworkSymbol, string>,
+  userNetworks: Record<UserProvidedNetworkSymbol, string | number | undefined>,
 ): symbol is UserProvidedNetworkSymbol {
-  return symbol in userNetworks
+  return !!(symbol in userNetworks && userNetworks[symbol as keyof typeof userNetworks])
 }
 
 export type PredefinedNetworkSymbol = typeof networkIDtoSymbol[keyof typeof networkIDtoSymbol]

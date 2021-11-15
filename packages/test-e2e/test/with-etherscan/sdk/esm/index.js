@@ -1,9 +1,9 @@
 import { Contract } from 'ethers';
-import daiAbi from '../../../eth-sdk/abis/mainnet/tokens/dai.json';
-import mkrAbi from '../../../eth-sdk/abis/mainnet/tokens/mkr.json';
-import uniswapAbi from '../../../eth-sdk/abis/mainnet/uniswap.json';
-import proxyStandardStorageSlotAbi from '../../../eth-sdk/abis/mainnet/proxies/proxyStandardStorageSlot.json';
-import proxyCustomImplementationAbi from '../../../eth-sdk/abis/mainnet/proxies/proxyCustomImplementation.json';
+import daiAbi from '../../eth-sdk/abis/mainnet/tokens/dai.json';
+import mkrAbi from '../../eth-sdk/abis/mainnet/tokens/mkr.json';
+import uniswapAbi from '../../eth-sdk/abis/mainnet/uniswap.json';
+import proxyStandardStorageSlotAbi from '../../eth-sdk/abis/mainnet/proxies/proxyStandardStorageSlot.json';
+import proxyCustomImplementationAbi from '../../eth-sdk/abis/mainnet/proxies/proxyCustomImplementation.json';
 export function getContract(address, abi, defaultSigner) {
     return new Contract(address, abi, defaultSigner);
 }

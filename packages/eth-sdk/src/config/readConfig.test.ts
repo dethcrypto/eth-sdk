@@ -2,7 +2,7 @@ import { expect, mockFn } from 'earljs'
 import proxyquire = require('proxyquire')
 import { assert, noop } from 'ts-essentials'
 
-import { EthSdkConfig, EthSdkConfigInput, EthSdkContracts, parseAddress } from '.'
+import { createEthSdkConfig, EthSdkConfig, EthSdkConfigInput, EthSdkContracts, parseAddress } from '.'
 import { readConfig } from './readConfig'
 
 // #region fixtures
@@ -19,6 +19,7 @@ const configFixture: EthSdkConfig = {
   etherscanURLs: {},
   rpc: {},
   abiSource: 'etherscan',
+  networkIds: {},
 }
 // #endregion fixtures
 
@@ -50,7 +51,7 @@ describe('readConfig', () => {
       }),
     )
 
-    await expect(promise).toBeRejected(expect.stringMatching('Network "mkr" is not supported.'))
+    await expect(promise).toBeRejected(expect.stringMatching(`"contracts.mkr": Expected object, received string`))
   })
 
   it('reads contracts and outputPath from JavaScript config', async () => {
@@ -78,6 +79,7 @@ describe('readConfig', () => {
       etherscanURLs: {},
       rpc: {},
       abiSource: 'sourcify',
+      networkIds: {},
     })
   })
 
@@ -90,7 +92,7 @@ describe('readConfig', () => {
 
     const config = await readConfig('config.ts', mockRequire('config.ts', configFixture))
 
-    expect(register).toHaveBeenCalledWith([{ compilerOptions: { module: 'CommonJS' } }])
+    expect(register).toHaveBeenCalledWith([{ compilerOptions: { module: 'CommonJS' }, transpileOnly: true }])
     expect(config).toEqual(configFixture)
   })
 
@@ -102,6 +104,27 @@ describe('readConfig', () => {
     await expect(readConfig('./eth-sdk/eth-sdk.config.ts', noop)).toBeRejected(
       'Could not read config file: ./eth-sdk/eth-sdk.config.ts\n' +
         'You need ts-node to write eth-sdk config in TypeScript.',
+    )
+  })
+
+  it('reads networkIds', async () => {
+    const actual = await readConfig(
+      'config.js',
+      (): EthSdkConfigInput => ({
+        contracts: {},
+        networkIds: {
+          'my-network': 47,
+        },
+      }),
+    )
+
+    expect(actual).toEqual(
+      createEthSdkConfig({
+        contracts: {},
+        networkIds: {
+          'my-network': 47,
+        },
+      }),
     )
   })
 })

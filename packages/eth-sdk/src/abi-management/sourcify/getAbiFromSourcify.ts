@@ -10,7 +10,7 @@ import { isUserProvidedNetwork, NetworkSymbol, symbolToNetworkId, UserProvidedNe
 export const getAbiFromSourcify = async (
   networkSymbol: NetworkSymbol,
   address: Address,
-  userNetworkIds: Record<UserProvidedNetworkSymbol, string>,
+  userNetworkIds: Record<UserProvidedNetworkSymbol, number | undefined>,
   fetch: FetchJson<SourcifyFile[]>,
 ): Promise<Abi> => {
   const networkId = isUserProvidedNetwork(networkSymbol, userNetworkIds)

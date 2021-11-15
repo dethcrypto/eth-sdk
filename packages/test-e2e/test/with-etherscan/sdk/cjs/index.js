@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getMainnetSdk = exports.getContract = void 0;
 const ethers_1 = require("ethers");
-const dai_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/tokens/dai.json"));
-const mkr_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/tokens/mkr.json"));
-const uniswap_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/uniswap.json"));
-const proxyStandardStorageSlot_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/proxies/proxyStandardStorageSlot.json"));
-const proxyCustomImplementation_json_1 = __importDefault(require("../../../eth-sdk/abis/mainnet/proxies/proxyCustomImplementation.json"));
+const dai_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/tokens/dai.json"));
+const mkr_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/tokens/mkr.json"));
+const uniswap_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/uniswap.json"));
+const proxyStandardStorageSlot_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/proxies/proxyStandardStorageSlot.json"));
+const proxyCustomImplementation_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/proxies/proxyCustomImplementation.json"));
 function getContract(address, abi, defaultSigner) {
     return new ethers_1.Contract(address, abi, defaultSigner);
 }

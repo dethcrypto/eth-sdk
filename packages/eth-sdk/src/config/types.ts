@@ -1,5 +1,5 @@
 import type { Opaque } from 'ts-essentials'
-import type { ZodString, ZodTypeDef } from 'zod'
+import type { ZodTypeDef } from 'zod'
 import { z } from 'zod'
 
 import type { UserEtherscanURLs, UserEtherscanURLsInput } from '../abi-management/etherscan/urls'
@@ -49,23 +49,25 @@ const nestedAddressesSchema = z.lazy(() => z.record(z.union([addressSchema, nest
 >
 
 export type EthSdkContracts = { [key in NetworkSymbol]?: NestedAddresses }
-export type EthSdkContractsInput = { [key in NetworkSymbol]?: NestedAddressesInput }
+export type EthSdkContractsInput = { [key in NetworkSymbol | (string & {})]?: NestedAddressesInput }
 
-export const ethSdKContractsSchema: z.ZodSchema<EthSdkContracts, ZodTypeDef, EthSdkContractsInput> = z.record(
-  z.union(networkSymbolSchema as any as [ZodString, ZodString]),
-  nestedAddressesSchema,
-)
+export const ethSdKContractsSchema: z.ZodSchema<EthSdkContracts, ZodTypeDef, EthSdkContractsInput> =
+  z.record(nestedAddressesSchema)
 
 const etherscanURLsSchema: z.ZodSchema<UserEtherscanURLs, ZodTypeDef, UserEtherscanURLsInput> = z.record(
   z.string(),
 ) as any
 
-export type RpcURLs = { [key in NetworkSymbol]?: string }
+export type RpcURLs = { [key in NetworkSymbol | (string & {})]?: string }
 
 const rpcUrlsSchema: z.ZodSchema<RpcURLs> = z.record(z.string())
 
 const abiSourceSchema = z.union([z.literal('etherscan'), z.literal('sourcify')])
 export type AbiSource = z.infer<typeof abiSourceSchema>
+
+export type NetworkIds = { [key in NetworkSymbol | (string & {})]?: number }
+
+export const networkIdsSchema: z.ZodSchema<NetworkIds> = z.record(z.number())
 
 const ethSdkConfigSchema = z
   .object({
@@ -76,6 +78,7 @@ const ethSdkConfigSchema = z
     rpc: rpcUrlsSchema.default({}),
     noFollowProxies: z.boolean().optional(),
     abiSource: abiSourceSchema.default(DEFAULT_ABI_SOURCE),
+    networkIds: networkIdsSchema.default({}),
   })
   .strict()
 

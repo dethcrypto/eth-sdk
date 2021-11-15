@@ -36,7 +36,11 @@ export async function transpileClient(clientPath: string, outputPath: string, fs
       // https://www.typescriptlang.org/docs/handbook/module-resolution.html
       diagnostics = diagnostics.filter((d) => d.code !== 2307)
       if (diagnostics.length) {
-        throw new Error(`TypeScript compilation failed.\n${diagnostics.map((d) => d.messageText).join('\n')}`)
+        throw new Error(
+          `TypeScript compilation failed.\n${diagnostics
+            .map((d) => d.messageText)
+            .join('\n')}\n\nIn source file:\n\n${program.getSourceFiles().map((x) => x.text)}`,
+        )
       }
 
       program.emit()
