@@ -14,7 +14,7 @@ describe(getAbiFromSourcify.name, () => {
     // see https://ropsten.etherscan.io/address/0x0000A906D248Cc99FB8CB296C8Ad8C6Df05431c9#contracts
     const addr = parseAddress('0x0000A906D248Cc99FB8CB296C8Ad8C6Df05431c9')
 
-    const fetchAbi = mockFn<FetchJson<SourcifyFile[]>>(async (url) => FILES_FROM_SOURCIFY)
+    const fetchAbi = mockFn<FetchJson<SourcifyFile[]>>(async (_url) => FILES_FROM_SOURCIFY)
     const abi = await getAbiFromSourcify('ropsten', addr, userNetworkIds, fetchAbi)
 
     expect(fetchAbi).toHaveBeenCalledWith([`https://sourcify.dev/server/files/3/${addr}`])
@@ -32,7 +32,7 @@ const CONTRACT_ABI: Abi = [
         name: '',
         type: 'uint256',
       },
-    ],  
+    ],
     stateMutability: 'view',
     type: 'function',
   },
