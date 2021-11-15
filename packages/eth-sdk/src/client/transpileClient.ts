@@ -36,11 +36,7 @@ export async function transpileClient(clientPath: string, outputPath: string, fs
       // https://www.typescriptlang.org/docs/handbook/module-resolution.html
       diagnostics = diagnostics.filter((d) => d.code !== 2307)
       if (diagnostics.length) {
-        throw new Error(
-          `TypeScript compilation failed.\n${diagnostics
-            .map((d) => d.messageText)
-            .join('\n')}\n\nIn source file:\n\n${program.getSourceFiles().map((x) => x.text)}`,
-        )
+        throw new Error(`TypeScript compilation failed.\n${diagnostics.map(stringifyDiagnostic).join('\n')}`)
       }
 
       program.emit()
@@ -52,3 +48,13 @@ const outputs = [
   { module: tsc.ModuleKind.CommonJS, directory: 'cjs' },
   { module: tsc.ModuleKind.ESNext, directory: 'esm' },
 ]
+
+function stringifyDiagnostic(diagnostic: tsc.Diagnostic) {
+  if (diagnostic.file) {
+    const { line, character } = tsc.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start!)
+    const message = tsc.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
+    console.log(`${diagnostic.file.fileName} (${Number(line) + 1},${Number(character) + 1}): ${message}`)
+  } else {
+    console.log(tsc.flattenDiagnosticMessageText(diagnostic.messageText, '\n'))
+  }
+}
