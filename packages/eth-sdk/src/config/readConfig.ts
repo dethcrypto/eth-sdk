@@ -28,10 +28,15 @@ export async function readConfig(filePath: string, requireJs: (id: string) => un
 }
 
 async function registerTsNode() {
+  if (typeof require === 'function' && '.ts' in require.extensions) {
+    // If ts-node is already registered, we do nothing.
+    return
+  }
+
   try {
     const { register } = await import('ts-node')
 
-    register({ compilerOptions: { module: 'CommonJS' }, transpileOnly: true })
+    register({ compilerOptions: { module: 'CommonJS' } })
   } catch (error) {
     const err = makeError(error) as Error & { code?: string }
     if (err.code === 'MODULE_NOT_FOUND') {

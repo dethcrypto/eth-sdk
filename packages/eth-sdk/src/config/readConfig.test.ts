@@ -92,7 +92,7 @@ describe('readConfig', () => {
 
     const config = await readConfig('config.ts', mockRequire('config.ts', configFixture))
 
-    expect(register).toHaveBeenCalledWith([{ compilerOptions: { module: 'CommonJS' }, transpileOnly: true }])
+    expect(register).toHaveBeenCalledWith([{ compilerOptions: { module: 'CommonJS' } }])
     expect(config).toEqual(configFixture)
   })
 
