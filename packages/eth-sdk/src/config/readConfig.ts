@@ -3,7 +3,7 @@ import { extname } from 'path'
 import { makeError } from '../utils/makeError'
 import { EthSdkConfig, parseEthSdkConfig } from './types'
 
-export async function readConfig(filePath: string, requireJs: (id: string) => unknown): Promise<EthSdkConfig> {
+export async function readConfig(filePath: string, requireJs: Require): Promise<EthSdkConfig> {
   const extension = extname(filePath)
 
   try {
@@ -11,7 +11,9 @@ export async function readConfig(filePath: string, requireJs: (id: string) => un
     if (['.json', '.js', '.cjs'].includes(extension)) {
       exported = requireJs(filePath)
     } else if (extension === '.ts') {
-      await registerTsNode()
+      if (!tsNodeIsRegistered(requireJs)) {
+        await registerTsNode()
+      }
       exported = requireJs(filePath)
     } else {
       throw new Error(`Unsupported config file extension: ${extension}`)
@@ -27,12 +29,13 @@ export async function readConfig(filePath: string, requireJs: (id: string) => un
   }
 }
 
-async function registerTsNode() {
-  if (typeof require === 'function' && '.ts' in require.extensions) {
-    // If ts-node is already registered, we do nothing.
-    return
-  }
+/** @internal */
+export interface Require {
+  (id: string): unknown
+  extensions?: { [K in string]?: (...args: any[]) => void }
+}
 
+async function registerTsNode() {
   try {
     const { register } = await import('ts-node')
 
@@ -44,4 +47,8 @@ async function registerTsNode() {
     }
     throw err
   }
+}
+
+function tsNodeIsRegistered({ extensions }: Require) {
+  return extensions && '.ts' in extensions
 }

@@ -3,7 +3,7 @@ import proxyquire = require('proxyquire')
 import { assert, noop } from 'ts-essentials'
 
 import { createEthSdkConfig, EthSdkConfig, EthSdkConfigInput, EthSdkContracts, parseAddress } from '.'
-import { readConfig } from './readConfig'
+import { readConfig, Require } from './readConfig'
 
 // #region fixtures
 const contractsFixture: EthSdkContracts = {
@@ -107,10 +107,23 @@ describe('readConfig', () => {
     )
   })
 
+  it("does not call ts-node's register if .ts extension is already handled", async () => {
+    const { readConfig } = proxyquire<typeof import('./readConfig')>('./readConfig', {
+      'ts-node': { register: mockFn().throws('should not be called') },
+    })
+
+    const config = await readConfig(
+      'config.ts',
+      mockRequire('config.ts', configFixture, { registeredExtensions: ['.ts'] }),
+    )
+
+    expect(config).toEqual(configFixture)
+  })
+
   it('reads networkIds', async () => {
     const actual = await readConfig(
       'config.js',
-      (): EthSdkConfigInput => ({
+      mockRequire('config.js', {
         contracts: {},
         networkIds: {
           'my-network': 47,
@@ -129,9 +142,17 @@ describe('readConfig', () => {
   })
 })
 
-function mockRequire(filePath: string, result: EthSdkConfigInput) {
-  return (path: string) => {
+function mockRequire(
+  filePath: string,
+  result: EthSdkConfigInput,
+  { registeredExtensions = [] }: { registeredExtensions?: string[] } = {},
+): Require {
+  const res = (path: string) => {
     assert(path === filePath, `requireMock is expected to be called with ${filePath}`)
     return result
   }
+
+  res.extensions = Object.fromEntries(['.js', ...registeredExtensions].map((ext) => [ext, noop]))
+
+  return res
 }

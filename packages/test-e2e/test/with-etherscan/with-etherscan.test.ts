@@ -48,5 +48,5 @@ describe('with ABIs from Etherscan', () => {
       expect(maxAssets.gt(0)).toEqual(true)
       expect(isComptroller).toEqual(true)
     })
-  })
+  }).timeout(10000)
 })
