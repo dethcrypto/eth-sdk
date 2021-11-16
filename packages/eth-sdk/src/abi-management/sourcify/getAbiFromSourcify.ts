@@ -17,6 +17,12 @@ export const getAbiFromSourcify = async (
     ? userNetworkIds[networkSymbol]
     : symbolToNetworkId[networkSymbol]
 
+  if (networkId == null) {
+    throw new Error(
+      `Network ID for "${networkSymbol}" was not found. Please add it to "networkIds" object in the config.`,
+    )
+  }
+
   const body = await fetch(`https://sourcify.dev/server/files/${networkId}/${address}`)
 
   try {

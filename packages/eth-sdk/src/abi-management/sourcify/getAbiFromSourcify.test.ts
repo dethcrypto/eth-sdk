@@ -32,7 +32,12 @@ describe(getAbiFromSourcify.name, () => {
   })
 
   it('throws when network id is not found', async () => {
-    // @todo
+    const network = UserProvidedNetworkSymbol('cool-net')
+    await expect(getAbiFromSourcify(network, addr, {}, async (_url) => FILES_FROM_SOURCIFY)).toBeRejected(
+      expect.stringMatching(
+        `Network ID for "cool-net" was not found. Please add it to "networkIds" object in the config.`,
+      ),
+    )
   })
 })
 
