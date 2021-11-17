@@ -1,6 +1,6 @@
 {
   "name": "@dethcrypto/eth-sdk",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "description": "🛠 Generate type-safe, lightweight SDK for your Ethereum smart contracts",
   "repository": {

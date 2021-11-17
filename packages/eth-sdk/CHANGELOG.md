@@ -1,5 +1,12 @@
 # @dethcrypto/eth-sdk
 
+## 0.2.2
+
+### Patch Changes
+
+- 1b4f0ce: Fix: Custom network identifiers in `config.contracts` don't fail config validation anymore.
+- 1b4f0ce: Fetch contract ABIs from Sourcify when `config.abiSource` is set to `"sourcify'`.
+
 ## 0.2.1
 
 ### Patch Changes
