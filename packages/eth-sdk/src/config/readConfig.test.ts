@@ -2,8 +2,8 @@ import { expect, mockFn } from 'earljs'
 import proxyquire = require('proxyquire')
 import { assert, noop } from 'ts-essentials'
 
-import { EthSdkConfig, EthSdkConfigInput, EthSdkContracts, parseAddress } from '.'
-import { readConfig } from './readConfig'
+import { createEthSdkConfig, EthSdkConfig, EthSdkConfigInput, EthSdkContracts, parseAddress } from '.'
+import { readConfig, Require } from './readConfig'
 
 // #region fixtures
 const contractsFixture: EthSdkContracts = {
@@ -18,6 +18,8 @@ const configFixture: EthSdkConfig = {
   etherscanKey: 'CONFIG_ETHERSCAN_KEY',
   etherscanURLs: {},
   rpc: {},
+  abiSource: 'etherscan',
+  networkIds: {},
 }
 // #endregion fixtures
 
@@ -49,7 +51,7 @@ describe('readConfig', () => {
       }),
     )
 
-    await expect(promise).toBeRejected(expect.stringMatching('Network "mkr" is not supported.'))
+    await expect(promise).toBeRejected(expect.stringMatching(`"contracts.mkr": Expected object, received string`))
   })
 
   it('reads contracts and outputPath from JavaScript config', async () => {
@@ -62,6 +64,7 @@ describe('readConfig', () => {
           kovan: { mkr: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2' },
         },
         outputPath: './eth-sdk/client',
+        abiSource: 'sourcify',
       }),
     )
 
@@ -75,6 +78,8 @@ describe('readConfig', () => {
       etherscanKey: expect.stringMatching(''),
       etherscanURLs: {},
       rpc: {},
+      abiSource: 'sourcify',
+      networkIds: {},
     })
   })
 
@@ -101,11 +106,53 @@ describe('readConfig', () => {
         'You need ts-node to write eth-sdk config in TypeScript.',
     )
   })
+
+  it("does not call ts-node's register if .ts extension is already handled", async () => {
+    const { readConfig } = proxyquire<typeof import('./readConfig')>('./readConfig', {
+      'ts-node': { register: mockFn().throws('should not be called') },
+    })
+
+    const config = await readConfig(
+      'config.ts',
+      mockRequire('config.ts', configFixture, { registeredExtensions: ['.ts'] }),
+    )
+
+    expect(config).toEqual(configFixture)
+  })
+
+  it('reads networkIds', async () => {
+    const actual = await readConfig(
+      'config.js',
+      mockRequire('config.js', {
+        contracts: {},
+        networkIds: {
+          'my-network': 47,
+        },
+      }),
+    )
+
+    expect(actual).toEqual(
+      createEthSdkConfig({
+        contracts: {},
+        networkIds: {
+          'my-network': 47,
+        },
+      }),
+    )
+  })
 })
 
-function mockRequire(filePath: string, result: EthSdkConfigInput) {
-  return (path: string) => {
+function mockRequire(
+  filePath: string,
+  result: EthSdkConfigInput,
+  { registeredExtensions = [] }: { registeredExtensions?: string[] } = {},
+): Require {
+  const res = (path: string) => {
     assert(path === filePath, `requireMock is expected to be called with ${filePath}`)
     return result
   }
+
+  res.extensions = Object.fromEntries(['.js', ...registeredExtensions].map((ext) => [ext, noop]))
+
+  return res
 }

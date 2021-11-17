@@ -30,6 +30,8 @@
     - [`etherscanURLs`](#etherscanurls)
     - [`rpc`](#rpc)
     - [`noFollowProxies`](#nofollowproxies)
+    - [`abiSource`](#abisource)
+    - [`networkIds`](#networkids)
 - [Examples](#examples)
   - [Videos](#videos)
 - [Motivation and use cases](#motivation-and-use-cases)
@@ -168,7 +170,8 @@ Predefined network identifiers are:
 "arbitrumOne"        "arbitrumTestnet"
 ```
 
-You can configure your own Etherscan URLs in [`etherscanURLs`](#etherscanurls).
+You can use other networks, but you will need to configure Etherscan URLs for them in [`etherscanURLs`](#etherscanurls)
+or provide [`networkIds`](#networkids) when using Sourcify as `abiSource`.
 
 ### `outputPath`
 
@@ -234,6 +237,33 @@ You can opt out of proxy following by setting `noFollowProxies` flag in your con
   "noFollowProxies": true
 }
 ```
+
+### `abiSource`
+
+_Default: `"etherscan"`_
+
+One of `"etherscan"`, `"sourcify"`. Specifies the source to fetch contract ABIs from.
+
+### `networkIds`
+
+As Sourcify `/files` endpoint requires network identifier, you will need to provide one when using a custom network.
+
+```json
+{
+  "abiSource": "sourcify",
+  "networkIds": {
+    "myNetwork": 3
+  },
+  "contracts": {
+    "myNetwork": {
+      "dai": "0x6b175474e89094c44da98b954eedeac495271d0f"
+    }
+  }
+}
+```
+
+`eth-sdk` already knows ids of 19 commonly used networks, including mainnet, testnets, Optimism and Arbitrum, so you
+won't need to provide them. You can find the list of all predefined networks in [`contracts`](#contracts) documentation.
 
 # Examples
 

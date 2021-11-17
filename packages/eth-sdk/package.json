@@ -53,9 +53,9 @@
     "zod": "^3.11.5"
   },
   "peerDependencies": {
-    "ethers": "^5",
-    "@ethersproject/abstract-provider": "^5",
     "@ethersproject/abi": "^5",
-    "@ethersproject/bignumber": "^5"
+    "@ethersproject/abstract-provider": "^5",
+    "@ethersproject/bignumber": "^5",
+    "ethers": "^5"
   }
 }

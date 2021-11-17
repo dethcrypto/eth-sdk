@@ -1,28 +1,23 @@
 import debug from 'debug'
 import { dirname, join } from 'path'
 
-import { Address } from '../config'
+import { EthSdkConfig } from '../config'
 import { traverseContractsMap } from '../config/traverse'
+import { fetchJson } from '../peripherals/fetchJson'
 import { EthSdkCtx } from '../types'
-import { Abi } from '../types'
 import { detectProxy } from './detectProxy'
-import { getABIFromEtherscan } from './etherscan/getAbiFromEtherscan'
-import type { UserEtherscanURLs } from './etherscan/urls'
+import { getAbiFromEtherscan } from './etherscan/getAbiFromEtherscan'
 import { GetRpcProvider, getRpcProvider } from './getRpcProvider'
-import type { NetworkSymbol } from './networks'
+import { getAbiFromSourcify } from './sourcify/getAbiFromSourcify'
+import { GetAbi } from './types'
 
-const d = debug('@dethcrypto/eth-sdk:abi')
+export type { GetAbi }
 
-export type GetAbi = (
-  network: NetworkSymbol,
-  address: Address,
-  apiKey: string,
-  userNetworks: UserEtherscanURLs,
-) => Promise<Abi>
+export const d = debug('@dethcrypto/eth-sdk:abi')
 
 export async function gatherABIs(
   { config, fs, cliArgs }: EthSdkCtx,
-  getAbi: GetAbi = getABIFromEtherscan,
+  getAbi: GetAbi = makeGetAbi(config),
   getProvider: GetRpcProvider = getRpcProvider,
 ) {
   await traverseContractsMap(config.contracts, async (network, key, address) => {
@@ -31,9 +26,7 @@ export async function gatherABIs(
 
     if (!fs.exists(fullAbiPath)) {
       d('ABI doesnt exist already. Querying etherscan')
-      const { etherscanKey, etherscanURLs } = config
-
-      let abi = await getAbi(network, address, etherscanKey, etherscanURLs)
+      let abi = await getAbi(network, address)
 
       if (!config.noFollowProxies) {
         const rpcProvider = getProvider(config, network)
@@ -42,11 +35,11 @@ export async function gatherABIs(
           if (detectedProxy.isProxy) {
             // Implementation ABI will usually contain proxy ABI,
             // so just replacing is a good enough merging strategy.
-            abi = await getAbi(network, detectedProxy.implAddress, etherscanKey, etherscanURLs)
+            abi = await getAbi(network, detectedProxy.implAddress)
           }
         } else {
           console.warn(
-            `No RPC URL found for network ${network}. Please add it to "config.rpc.${network}" to enable fetching proxy implementation ABIs.`,
+            `\n\nNo RPC URL found for network ${network}. Please add it to "config.rpc.${network}" to enable fetching proxy implementation ABIs.\n\n`,
           )
         }
       }
@@ -55,4 +48,15 @@ export async function gatherABIs(
       await fs.write(fullAbiPath, JSON.stringify(abi))
     }
   })
+}
+
+const makeGetAbi = (config: EthSdkConfig): GetAbi => {
+  switch (config.abiSource) {
+    case 'etherscan':
+      return (network, address) =>
+        getAbiFromEtherscan(network, address, config.etherscanKey, config.etherscanURLs, fetchJson)
+    case 'sourcify': {
+      return (network, address) => getAbiFromSourcify(network, address, config.networkIds, fetchJson)
+    }
+  }
 }

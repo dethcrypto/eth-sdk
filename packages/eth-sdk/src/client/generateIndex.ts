@@ -1,5 +1,5 @@
 import debug from 'debug'
-import { startCase } from 'lodash'
+import { camelCase } from 'lodash'
 import { join } from 'path'
 import { normalizeName } from 'typechain'
 
@@ -59,7 +59,7 @@ async function getAbiImports(sdkDef: EthSdkContracts, outputToAbiRelativePath: s
 
 function generateNetworkSdk(networkSymbol: NetworkSymbol, sdkDef: EthSdkContracts): string {
   const nestedAddresses = sdkDef[networkSymbol]!
-  const network = startCase(networkSymbol).replace(' ', '')
+  const network = pascalCase(networkSymbol)
 
   return `
 export type ${network}Sdk = ReturnType<typeof get${network}Sdk>
@@ -89,4 +89,8 @@ function generateBody(nestedAddresses: NestedAddresses, keys: string[], topLevel
   }
 
   return body.join('\n')
+}
+
+function pascalCase(str: string): string {
+  return str[0].toUpperCase() + camelCase(str).slice(1)
 }

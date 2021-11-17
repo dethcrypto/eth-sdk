@@ -60,6 +60,7 @@ describe('config types', () => {
         },
         rpc: {
           mainnet: 'https://cloudflare-eth.com',
+          'my-network': 'https://cloudflare-eth.com/my-network',
         },
       }
 
@@ -70,7 +71,10 @@ describe('config types', () => {
         etherscanURLs: {},
         rpc: {
           mainnet: 'https://cloudflare-eth.com',
+          'my-network': 'https://cloudflare-eth.com/my-network',
         },
+        abiSource: 'etherscan',
+        networkIds: {},
       })
     })
 

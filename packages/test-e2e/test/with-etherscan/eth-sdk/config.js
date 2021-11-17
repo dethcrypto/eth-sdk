@@ -23,7 +23,7 @@ const config = {
       },
     },
   },
-  outputPath: 'test/sdk',
+  outputPath: 'sdk',
 }
 
 module.exports = config

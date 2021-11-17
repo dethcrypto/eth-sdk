@@ -5,13 +5,13 @@ import { parseAddress, UserEtherscanURLs } from '../../config'
 import { FetchJson } from '../../peripherals/fetchJson'
 import { Abi } from '../../types'
 import { UserProvidedNetworkSymbol } from '../networks'
-import { EtherscanResponse, getABIFromEtherscan } from './getAbiFromEtherscan'
+import { EtherscanResponse, getAbiFromEtherscan } from './getAbiFromEtherscan'
 
-describe(getABIFromEtherscan.name, () => {
+describe(getAbiFromEtherscan.name, () => {
   it('fetches from predefined etherscan URL', async () => {
     const apiKey = '{{ API_KEY }}'
     const fetch = mockEndpoint()
-    const actual = await getABIFromEtherscan('mainnet', DAI_ADDRESS, apiKey, {}, fetch)
+    const actual = await getAbiFromEtherscan('mainnet', DAI_ADDRESS, apiKey, {}, fetch)
 
     expect(actual).toEqual(RETURNED_ABI)
     expect(fetch).toHaveBeenCalledWith([
@@ -29,7 +29,7 @@ describe(getABIFromEtherscan.name, () => {
 
     const fetch = mockEndpoint()
 
-    const actual = await getABIFromEtherscan(symbol, ADDRESS_ZERO, apiKey, userNetworks, fetch)
+    const actual = await getAbiFromEtherscan(symbol, ADDRESS_ZERO, apiKey, userNetworks, fetch)
 
     expect(actual).toEqual(RETURNED_ABI)
     expect(fetch).toHaveBeenCalledWith([
