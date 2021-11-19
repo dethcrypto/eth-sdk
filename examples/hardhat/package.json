@@ -1,25 +1,30 @@
 {
-  "name": "hardhat-project",
+  "name": "@dethcrypto/hardhat-script-example",
+  "private": true,
   "license": "MIT",
+  "type": "commonjs",
   "scripts": {
-    "verify": "yarn format && yarn lint && yarn test && yarn typecheck",
-    "test": "yarn generate-types && hardhat run ./scripts/exploit.ts",
+    "verify": "yarn format && yarn test && yarn lint && yarn typecheck",
+    "test": "ts-node ./scripts/run-test.ts",
     "format": "../../node_modules/.bin/prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --check \"./**/*.ts\"",
     "format:fix": "../../node_modules/.bin/prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"./**/*.ts\"",
     "lint": "../../node_modules/.bin/eslint --ext .ts scripts",
     "lint:fix": "yarn lint --fix",
     "typecheck": "tsc --noEmit --incremental false --composite false",
     "clean": "rm -rf dist && rm -f tsconfig.build.tsbuildinfo",
-    "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck",
-    "generate-types": "eth-sdk",
-    "postinstall": "yarn generate-types"
+    "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   },
   "devDependencies": {
     "@dethcrypto/eth-sdk": "file:../../packages/eth-sdk",
     "@dethcrypto/eth-sdk-client": "file:../../packages/client",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@types/wait-on": "^5.3.1",
+    "cross-spawn-with-kill": "^1.0.0",
     "ethers": "^5.4.7",
+    "get-port": "^6.0.0",
     "hardhat": "^2.6.5",
-    "typescript": "^4"
+    "ts-node": "^10.4.0",
+    "typescript": "^4",
+    "wait-on": "^6.0.0"
   }
 }
