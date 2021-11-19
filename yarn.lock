@@ -263,23 +263,6 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@dethcrypto/eth-sdk@link:packages/eth-sdk":
-  version "0.2.2"
-  dependencies:
-    "@typechain/ethers-v5" "^8.0.1"
-    chalk "^4.1.2"
-    commander "^8.3.0"
-    debug "^4.3.2"
-    fs-extra "^10.0.0"
-    glob "^7.2.0"
-    got "^11.8.2"
-    lodash "^4.17.21"
-    mkdirp "^1.0.4"
-    ora "^5.4.1"
-    tmp-promise "^3.0.3"
-    typechain "^6.0.2"
-    zod "^3.11.5"
-
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"

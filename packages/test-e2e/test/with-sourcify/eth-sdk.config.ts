@@ -1,4 +1,4 @@
-import { defineConfig } from '@dethcrypto/eth-sdk'
+import { defineConfig } from '../../../eth-sdk'
 
 export default defineConfig({
   contracts: {
