@@ -11,6 +11,6 @@
     "incremental": true,
     "exactOptionalPropertyTypes": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs", "**/*.cjs", "**/.*.js", "examples/hardhat/scripts/run-test.mts"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs", "**/*.cjs", "**/.*.js"],
   "exclude": ["**/node_modules"]
 }
