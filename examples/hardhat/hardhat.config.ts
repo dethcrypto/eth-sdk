@@ -9,7 +9,8 @@ const config: HardhatUserConfig = {
     hardhat: {
       forking: {
         enabled: true,
-        url: process.env.ARCHIVE_NODE_RPC_URL!,
+        url:
+          process.env.ARCHIVE_NODE_RPC_URL || 'https://eth-mainnet.alchemyapi.io/v2/Dr5usbY6KnDFmPBD-ky7I1J8DBny-i-G',
         blockNumber: 13323323,
       },
     },

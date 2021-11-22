@@ -33,15 +33,8 @@ async function main() {
 
   console.log('Generated SDK with eth-sdk')
 
-  if (process.env.ARCHIVE_NODE_RPC_URL) {
-    console.log('Running ./scripts/exploit.ts')
-    childProcess.execSync('hardhat run ./scripts/exploit.ts', { cwd: resolve(__dirname, '..'), stdio: 'inherit' })
-  } else {
-    console.log('Skipping examples/hardhat test because process.env.ARCHIVE_NODE_RPC_URL is not set')
-    if (process.env.CI) {
-      process.exit(1)
-    }
-  }
+  console.log('Running ./scripts/exploit.ts')
+  childProcess.execSync('hardhat run ./scripts/exploit.ts', { cwd: resolve(__dirname, '..'), stdio: 'inherit' })
 
   node.kill()
 }
