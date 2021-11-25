@@ -290,7 +290,7 @@ it's better to use TypeChain directly (especially via HardHat integration).
 
 # Contributing
 
-Check out our [contributing guidelines](./CONTRIBUTING.md)
+Check out our [contributing guidelines](./CONTRIBUTING.md).
 
 # License
 
