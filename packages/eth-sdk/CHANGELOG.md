@@ -1,5 +1,11 @@
 # @dethcrypto/eth-sdk
 
+## 0.2.4
+
+### Patch Changes
+
+- 6d9d72e: Allow duplicate contract names in different subtrees of a config
+
 ## 0.2.3
 
 ### Patch Changes
