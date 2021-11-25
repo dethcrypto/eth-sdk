@@ -1,5 +1,11 @@
 # @dethcrypto/eth-sdk
 
+## 0.2.3
+
+### Patch Changes
+
+- 32ad0b4: Fix Proxy handling for USDC and other Openzeppelin proxy contracts
+
 ## 0.2.2
 
 ### Patch Changes
