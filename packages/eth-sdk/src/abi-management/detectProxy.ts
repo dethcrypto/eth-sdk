@@ -65,6 +65,7 @@ async function lookForImplementationAddr(address: Address, abi: Abi, provider: R
 /** @internal */
 export const EIP1967_IMPLEMENTATION_STORAGE_SLOT = '0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc'
 export const ZEPPELIN_IMPLEMENTATION_STORAGE_SLOT = '0x7050c9e0f4ca769c69bd3a8ef740bc37934f8e2c036e5a723fd8ee048ed3f8c3'
+export const NUMBER_OF_KNOWN_STORAGE_SLOTS = 2
 
 const isPossibleImplementationGetter = (frag: JsonFragment): frag is JsonFragment & { name: string } => {
   if (
