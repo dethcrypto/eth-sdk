@@ -39,8 +39,8 @@ export function getContract(address: string, abi: object, defaultSigner: Signer)
   await fs.write(indexPath, index)
 }
 
-function importedAbiIdentifier(keys: string[]): string {
-  const name = normalizeName(keys[keys.length - 1]) + 'Abi'
+export function importedAbiIdentifier(keys: string[]): string {
+  const name = normalizeName([...keys, 'abi'].join('_'))
   return name[0].toLowerCase() + name.slice(1)
 }
 
@@ -75,7 +75,7 @@ function generateBody(nestedAddresses: NestedAddresses, keys: string[], topLevel
   for (const [key, addressOrNested] of Object.entries(nestedAddresses)) {
     if (typeof addressOrNested === 'string') {
       const address = addressOrNested
-      const abi = importedAbiIdentifier([key])
+      const abi = importedAbiIdentifier([...keys, key])
 
       body.push(`"${key}": getContract('${address}', ${abi}, defaultSigner) as types.${normalizeName(key)},`)
     } else {
