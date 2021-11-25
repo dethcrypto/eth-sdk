@@ -24,8 +24,8 @@ for (const dir of readdirSync(examplesDir)) {
     ],
     dir,
   )
-  runProcess([yarn, 'typecheck'], dir)
   runProcess([yarn, 'test'], dir)
+  runProcess([yarn, 'typecheck'], dir)
 }
 
 if (failures.size > 0) {
