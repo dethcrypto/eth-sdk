@@ -36,7 +36,9 @@ async function main() {
   console.log('Running ./scripts/exploit.ts')
   childProcess.execSync('hardhat run ./scripts/exploit.ts', { cwd: resolve(__dirname, '..'), stdio: 'inherit' })
 
+  console.log('Done. Exiting...')
   node.kill()
+  process.exit(0)
 }
 
 void main()
