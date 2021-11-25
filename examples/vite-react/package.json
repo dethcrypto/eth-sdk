@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently --names \"hhat\",\"vite\" --c \"magenta,cyan\" \"hardhat node\" \"vite\"",
+    "dev": "concurrently --names \"hhat\",\"vite\" --c \"magenta,cyan\" \"hardhat node\" \"vite --force\"",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "generate-types": "eth-sdk",
