@@ -8,8 +8,8 @@ import { Abi } from '../types'
 import {
   detectProxy,
   EIP1967_IMPLEMENTATION_STORAGE_SLOT,
-  ZEPPELIN_IMPLEMENTATION_STORAGE_SLOT,
   NUMBER_OF_KNOWN_STORAGE_SLOTS,
+  ZEPPELIN_IMPLEMENTATION_STORAGE_SLOT,
 } from './detectProxy'
 import type { RpcProvider } from './getRpcProvider'
 
