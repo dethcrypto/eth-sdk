@@ -1,9 +1,9 @@
-import { ethers, Signer, BigNumber, BigNumberish, PopulatedTransaction, BaseContract, ContractTransaction, Overrides, CallOverrides } from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
+import { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
-export interface ProxyCustomImplementationInterface extends ethers.utils.Interface {
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export interface ProxyCustomImplementationInterface extends utils.Interface {
+    contractName: "ProxyCustomImplementation";
     functions: {
         "_become(address)": FunctionFragment;
         "_borrowGuardianPaused()": FunctionFragment;
@@ -469,6 +469,7 @@ export declare type NewPriceOracleEvent = TypedEvent<[
 }>;
 export declare type NewPriceOracleEventFilter = TypedEventFilter<NewPriceOracleEvent>;
 export interface ProxyCustomImplementation extends BaseContract {
+    contractName: "ProxyCustomImplementation";
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
