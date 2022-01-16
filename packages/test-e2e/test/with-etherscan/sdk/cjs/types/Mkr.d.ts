@@ -1,9 +1,9 @@
-import { ethers, Signer, BigNumber, BigNumberish, PopulatedTransaction, BaseContract, ContractTransaction, Overrides, CallOverrides } from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
+import { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
-export interface MkrInterface extends ethers.utils.Interface {
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export interface MkrInterface extends utils.Interface {
+    contractName: "Mkr";
     functions: {
         "name()": FunctionFragment;
         "stop()": FunctionFragment;
@@ -150,6 +150,7 @@ export declare type ApprovalEvent = TypedEvent<[
 }>;
 export declare type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 export interface Mkr extends BaseContract {
+    contractName: "Mkr";
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
