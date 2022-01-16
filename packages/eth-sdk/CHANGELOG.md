@@ -1,5 +1,11 @@
 # @dethcrypto/eth-sdk
 
+## 0.3.0
+
+### Minor Changes
+
+- 56283f4: Update TypeChain to v7
+
 ## 0.2.4
 
 ### Patch Changes
