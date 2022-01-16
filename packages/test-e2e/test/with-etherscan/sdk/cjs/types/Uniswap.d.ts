@@ -1,9 +1,9 @@
-import { ethers, Signer, BigNumber, BigNumberish, PopulatedTransaction, BaseContract, ContractTransaction, Overrides, CallOverrides } from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
+import { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
-export interface UniswapInterface extends ethers.utils.Interface {
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export interface UniswapInterface extends utils.Interface {
+    contractName: "Uniswap";
     functions: {
         "createPool(address,address,uint24)": FunctionFragment;
         "enableFeeAmount(uint24,int24)": FunctionFragment;
@@ -67,6 +67,7 @@ export declare type PoolCreatedEvent = TypedEvent<[
 }>;
 export declare type PoolCreatedEventFilter = TypedEventFilter<PoolCreatedEvent>;
 export interface Uniswap extends BaseContract {
+    contractName: "Uniswap";
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
