@@ -1,4 +1,4 @@
-name: Submodule update on new version
+name: Dependencies update on new version
 
 on:
   schedule:
@@ -23,8 +23,8 @@ jobs:
       - name: Find version difference
         run: |
           cd ./packages/eth-sdk
-          npx -p npm-check-updates ncu --filter "@typechain/ethers-v5, typechain"
-          npm install
+          yarn upgrade typechain @typechain/ethers-v5 --latest
+          yarn
 
       - uses: peter-evans/create-pull-request@v3
         with:
