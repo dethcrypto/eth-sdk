@@ -29,8 +29,8 @@ jobs:
       - uses: peter-evans/create-pull-request@v3
         with:
           base: master
-          branch: bump-submodules
-          title: Bump submodules
+          branch: bump-typechain
+          title: Bump typechain
           body: |
             - Dependency updates
 
