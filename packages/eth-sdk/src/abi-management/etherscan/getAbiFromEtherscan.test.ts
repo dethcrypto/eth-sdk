@@ -11,7 +11,12 @@ describe(getAbiFromEtherscan.name, () => {
   it('fetches from predefined etherscan URL', async () => {
     const apiKey = '{{ API_KEY }}'
     const fetch = mockEndpoint()
-    const actual = await getAbiFromEtherscan('mainnet', DAI_ADDRESS, apiKey, {}, fetch)
+    const actual = await getAbiFromEtherscan(
+      'mainnet',
+      DAI_ADDRESS,
+      { etherscanKey: apiKey, etherscanKeys: {}, etherscanURLs: {} },
+      fetch,
+    )
 
     expect(actual).toEqual(RETURNED_ABI)
     expect(fetch).toHaveBeenCalledWith([
@@ -23,17 +28,59 @@ describe(getAbiFromEtherscan.name, () => {
     const symbol = UserProvidedNetworkSymbol('dethcryptoscan')
     const apiKey = 'woop'
 
-    const userNetworks: UserEtherscanURLs = {
+    const etherscanURLs: UserEtherscanURLs = {
       [symbol]: 'https://dethcryptoscan.test/api/v1',
     }
 
     const fetch = mockEndpoint()
 
-    const actual = await getAbiFromEtherscan(symbol, ADDRESS_ZERO, apiKey, userNetworks, fetch)
+    const actual = await getAbiFromEtherscan(
+      symbol,
+      ADDRESS_ZERO,
+      {
+        etherscanKey: apiKey,
+        etherscanURLs,
+        etherscanKeys: { [symbol]: 'This should not be used if config.etherscanKey is specified.' },
+      },
+      fetch,
+    )
 
     expect(actual).toEqual(RETURNED_ABI)
     expect(fetch).toHaveBeenCalledWith([
       `https://dethcryptoscan.test/api/v1?module=contract&action=getabi&address=${ADDRESS_ZERO}&apikey=${apiKey}`,
+    ])
+  })
+
+  it('uses user-defined API keys', async () => {
+    const fetch = mockEndpoint()
+
+    const config = {
+      etherscanURLs: {},
+      etherscanKeys: { mainnet: 'one-mainnet-key', polygon: 'two-polygon-key' },
+    }
+
+    await getAbiFromEtherscan('mainnet', ADDRESS_ZERO, config, fetch)
+
+    expect(fetch).toHaveBeenCalledWith([
+      `https://api.etherscan.io/api?module=contract&action=getabi&address=${ADDRESS_ZERO}&apikey=one-mainnet-key`,
+    ])
+
+    await getAbiFromEtherscan('polygon', ADDRESS_ZERO, config, fetch)
+
+    expect(fetch).toHaveBeenCalledWith([
+      `https://api.polygonscan.com/api?module=contract&action=getabi&address=${ADDRESS_ZERO}&apikey=two-polygon-key`,
+    ])
+  })
+
+  it('uses predefined API key', async () => {
+    const fetch = mockEndpoint()
+
+    const config = { etherscanURLs: {}, etherscanKeys: {} }
+
+    await getAbiFromEtherscan('avalanche', ADDRESS_ZERO, config, fetch)
+
+    expect(fetch).toHaveBeenCalledWith([
+      `https://api.snowtrace.io/api?module=contract&action=getabi&address=${ADDRESS_ZERO}&apikey=IQEHAJ43W674REN5XV79WF47X37VEB8PIC`,
     ])
   })
 })
