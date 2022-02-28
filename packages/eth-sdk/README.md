@@ -26,7 +26,7 @@
   - [Configuration](#configuration)
     - [`contracts`](#contracts)
     - [`outputPath`](#outputpath)
-    - [`etherscanKey`](#etherscankey)
+    - [`etherscanKeys`](#etherscankeys)
     - [`etherscanURLs`](#etherscanurls)
     - [`rpc`](#rpc)
     - [`noFollowProxies`](#nofollowproxies)
@@ -185,15 +185,20 @@ Output directory for generated SDK.
 }
 ```
 
-### `etherscanKey`
+### `etherscanKeys`
 
-Etherscan API key.
+Etherscan API keys
 
-**Defaults to eth-sdk's own key.**
+**Defaults to eth-sdk's own keys.**
 
 ```json
 {
-  "etherscanKey": "ZWD4W1GTHISTFYJWONTPWTNXAFWORKB2WW"
+  "etherscanKeys": {
+    // API key for https://etherscan.io
+    "mainnet": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    // API key for https://polygonscan.com
+    "polygon": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+  }
 }
 ```
 
