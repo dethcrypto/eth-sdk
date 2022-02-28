@@ -22,7 +22,7 @@ export async function getAbiFromEtherscan(
   const response = await fetch(url)
 
   if (response.status !== '1') {
-    throw new Error(`Can't find mainnet abi for ${address}. Msg: ${JSON.stringify(response, null, 2)}`)
+    throw new Error(`Can't find ${networkSymbol} ABI for ${address}. Msg: ${JSON.stringify(response, null, 2)}`)
   }
 
   const abi = JSON.parse(response.result) as Abi
