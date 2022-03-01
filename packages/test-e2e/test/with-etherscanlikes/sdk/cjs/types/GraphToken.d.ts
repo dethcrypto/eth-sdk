@@ -1,11 +1,13 @@
-import { ethers, Signer, BaseContract } from "ethers";
+import { BaseContract, Signer, utils } from "ethers";
 import { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
-export interface GraphTokenInterface extends ethers.utils.Interface {
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export interface GraphTokenInterface extends utils.Interface {
+    contractName: "GraphToken";
     functions: {};
     events: {};
 }
 export interface GraphToken extends BaseContract {
+    contractName: "GraphToken";
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;

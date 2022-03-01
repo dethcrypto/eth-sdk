@@ -1,9 +1,9 @@
-import { ethers, Signer, BigNumber, BigNumberish, PopulatedTransaction, BaseContract, ContractTransaction, Overrides, PayableOverrides, CallOverrides } from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
+import { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
-export interface WethInterface extends ethers.utils.Interface {
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export interface WethInterface extends utils.Interface {
+    contractName: "Weth";
     functions: {
         "CHILD_CHAIN_ID()": FunctionFragment;
         "CHILD_CHAIN_ID_BYTES()": FunctionFragment;
@@ -175,6 +175,7 @@ export declare type TransferEvent = TypedEvent<[
 }>;
 export declare type TransferEventFilter = TypedEventFilter<TransferEvent>;
 export interface Weth extends BaseContract {
+    contractName: "Weth";
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
