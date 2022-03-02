@@ -1,4 +1,4 @@
-import { defineConfig } from '../../../../eth-sdk/dist'
+import { defineConfig } from '../../../eth-sdk'
 
 export default defineConfig({
   noFollowProxies: true,
@@ -25,5 +25,5 @@ export default defineConfig({
       GraphToken: '0x23a941036ae778ac51ab04cea08ed6e2fe103614',
     },
   },
-  outputPath: 'sdk',
+  outputPath: 'outDir',
 })
