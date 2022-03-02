@@ -2,14 +2,17 @@ import type { Opaque } from 'ts-essentials'
 import type { ZodTypeDef } from 'zod'
 import { z } from 'zod'
 
-import type { UserEtherscanURLs, UserEtherscanURLsInput } from '../abi-management/etherscan/urls'
+import type {
+  UserEtherscanKeys,
+  UserEtherscanURLs,
+  UserEtherscanURLsInput,
+} from '../abi-management/etherscan/explorerEndpoints'
 import { networkIDtoSymbol, NetworkSymbol, symbolToNetworkId } from '../abi-management/networks'
 import { NestedDict } from '../utils/utility-types'
 
 export type { UserEtherscanURLs, UserEtherscanURLsInput }
 
 const DEFAULT_OUTPUT_PATH = './node_modules/.dethcrypto/eth-sdk-client'
-const DEFAULT_ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
 const DEFAULT_ABI_SOURCE: AbiSource = 'etherscan'
 
 export type AddressInput = `0x${string}`
@@ -56,6 +59,8 @@ const etherscanURLsSchema: z.ZodSchema<UserEtherscanURLs, ZodTypeDef, UserEthers
   z.string(),
 ) as any
 
+const etherscanKeysSchema: z.ZodSchema<UserEtherscanKeys> = z.record(z.string())
+
 export type RpcURLs = { [key in NetworkSymbol | (string & {})]?: string }
 
 const rpcUrlsSchema: z.ZodSchema<RpcURLs> = z.record(z.string())
@@ -71,7 +76,8 @@ const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
     outputPath: z.string().default(DEFAULT_OUTPUT_PATH),
-    etherscanKey: z.string().default(DEFAULT_ETHERSCAN_KEY),
+    etherscanKey: z.string().optional(),
+    etherscanKeys: etherscanKeysSchema.default({}),
     etherscanURLs: etherscanURLsSchema.default({}),
     rpc: rpcUrlsSchema.default({}),
     noFollowProxies: z.boolean().optional(),

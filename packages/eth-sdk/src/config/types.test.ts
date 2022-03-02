@@ -67,7 +67,7 @@ describe('config types', () => {
       expect(parseEthSdkConfig(input)).toEqual({
         contracts: input.contracts as any,
         outputPath: expect.stringMatching(''),
-        etherscanKey: expect.stringMatching(''),
+        etherscanKeys: {},
         etherscanURLs: {},
         rpc: {
           mainnet: 'https://cloudflare-eth.com',
