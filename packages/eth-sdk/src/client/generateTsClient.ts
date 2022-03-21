@@ -15,9 +15,8 @@ export async function generateTsClient(
   fs: Fs = realFs,
 ) {
   d(`Generating ts client to ${outputRoot}`)
-  const abisGlob = `${abisRoot}/**/*.json`
   const typesOutputPath = join(outputRoot, './types')
-  await generateTypes(abisGlob, typesOutputPath)
+  await generateTypes(abisRoot, typesOutputPath)
 
   const abisRootOut = join(outputRoot, 'abis')
   await fs.copy(abisRoot, abisRootOut)

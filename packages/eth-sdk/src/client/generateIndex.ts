@@ -77,7 +77,8 @@ function generateBody(nestedAddresses: NestedAddresses, keys: string[], topLevel
       const address = addressOrNested
       const abi = importedAbiIdentifier([...keys, key])
 
-      body.push(`"${key}": getContract('${address}', ${abi}, defaultSigner) as types.${normalizeName(key)},`)
+      const path = [...keys.map(camelCase), normalizeName(key)].join('.')
+      body.push(`"${key}": getContract('${address}', ${abi}, defaultSigner) as types.${path},`)
     } else {
       body.push(`"${key}":`)
       body.push(generateBody(addressOrNested, [...keys, key]))

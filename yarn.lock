@@ -726,10 +726,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
-"@typechain/ethers-v5@npm:@hasparus/typechain__ethers-v5@10.0.0-rc-eth-sdk.0":
-  version "10.0.0-rc-eth-sdk.0"
-  resolved "https://registry.yarnpkg.com/@hasparus/typechain__ethers-v5/-/typechain__ethers-v5-10.0.0-rc-eth-sdk.0.tgz#f752991350c5471ed8666d526feda2b213849ebd"
-  integrity sha512-v5nxNxqMn1lGuKj/DvXsm2v+mQ77nSC0/6UKO89rxZFPT6kZtYpmM0fExDrnqbVRLBCGYs+PEBIGk7tF3bL8bA==
+"@typechain/ethers-v5@npm:@hasparus/typechain__ethers-v5@10.0.0-rc-eth-sdk.1":
+  version "10.0.0-rc-eth-sdk.1"
+  resolved "https://registry.yarnpkg.com/@hasparus/typechain__ethers-v5/-/typechain__ethers-v5-10.0.0-rc-eth-sdk.1.tgz#4a921856d5e0f287c2046c9764d54a37e5cdf189"
+  integrity sha512-qbOHPkh6fp5P8ql7o0riJw+EpvywhfWYU78UtDDVn2dIce96UyZnMfC5AqzkZKNaQXXk+2MMexmIt7NC1o1DtQ==
   dependencies:
     lodash "^4.17.15"
     ts-essentials "^7.0.1"
@@ -4969,10 +4969,10 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-"typechain@npm:@hasparus/typechain@^8.0.0-rc-eth-sdk.0":
-  version "8.0.0-rc-eth-sdk.0"
-  resolved "https://registry.yarnpkg.com/@hasparus/typechain/-/typechain-8.0.0-rc-eth-sdk.0.tgz#df1cae80cc468326a14517c3256189d4478163c1"
-  integrity sha512-JWMgzEA1xLOwc6wfritzHACN7Wa9Y1UgL8j+VD/KN0wsouSxoRltXSYhuMr+k6vrF3HZ74DnMOdzdj7LsI9A+Q==
+"typechain@npm:@hasparus/typechain@8.0.0-rc-eth-sdk.1":
+  version "8.0.0-rc-eth-sdk.1"
+  resolved "https://registry.yarnpkg.com/@hasparus/typechain/-/typechain-8.0.0-rc-eth-sdk.1.tgz#810deb31fc523dd1c6394c84138a8b6bdfb7d135"
+  integrity sha512-4h7nzhgJlJcJmFd6w9p5Obg+46q9G1jXxXL4T1t34C6O9EaJsT6hITrYzHvvrUzP5FAlNFoTAyZnzgSUmoJ2Zg==
   dependencies:
     "@types/prettier" "^2.1.1"
     debug "^4.3.1"
