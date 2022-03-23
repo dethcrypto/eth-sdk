@@ -38,18 +38,18 @@
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   },
   "dependencies": {
-    "@typechain/ethers-v5": "^9.0.0",
+    "@typechain/ethers-v5": "npm:@hasparus/typechain__ethers-v5@10.0.0-rc-eth-sdk.1",
     "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "debug": "^4.3.2",
     "fs-extra": "^10.0.0",
-    "glob": "^7.2.0",
+    "glob": "7.1.7",
     "got": "^11.8.2",
     "lodash": "^4.17.21",
     "mkdirp": "^1.0.4",
     "ora": "^5.4.1",
     "tmp-promise": "^3.0.3",
-    "typechain": "^7.0.0",
+    "typechain": "npm:@hasparus/typechain@8.0.0-rc-eth-sdk.1",
     "zod": "^3.11.5"
   },
   "peerDependencies": {

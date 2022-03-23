@@ -3,8 +3,16 @@ import { defineConfig } from '../../../eth-sdk'
 export default defineConfig({
   noFollowProxies: true,
   contracts: {
+    mainnet: {
+      'DAI Bridge': {
+        'DAI Bridge Contract': '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+      },
+    },
     optimism: {
       weth: '0x4200000000000000000000000000000000000006',
+      'DAI Bridge': {
+        'DAI Bridge Contract': '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
+      },
     },
     polygon: {
       weth: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',

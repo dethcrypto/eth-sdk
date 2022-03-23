@@ -4,12 +4,12 @@ export declare function getContract(address: string, abi: object, defaultSigner:
 export declare type MainnetSdk = ReturnType<typeof getMainnetSdk>;
 export declare function getMainnetSdk(defaultSigner: Signer): {
     tokens: {
-        dai: types.Dai;
-        mkr: types.Mkr;
+        dai: types.mainnet.tokens.Dai;
+        mkr: types.mainnet.tokens.Mkr;
     };
-    uniswap: types.Uniswap;
+    uniswap: types.mainnet.Uniswap;
     proxies: {
-        proxyStandardStorageSlot: types.ProxyStandardStorageSlot;
-        proxyCustomImplementation: types.ProxyCustomImplementation;
+        proxyStandardStorageSlot: types.mainnet.proxies.ProxyStandardStorageSlot;
+        proxyCustomImplementation: types.mainnet.proxies.ProxyCustomImplementation;
     };
 };

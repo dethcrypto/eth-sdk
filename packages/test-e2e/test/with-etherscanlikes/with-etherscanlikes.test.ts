@@ -13,13 +13,18 @@ describe('with other Etherscan-like explorers', () => {
   const signer = ethers.Wallet.createRandom().connect(provider)
 
   it('has fetched all ABIs', () => {
-    const abis = glob(__dirname, ['abis/**/*.json']).map((path) => path.split('/').slice(-2).join('/'))
+    const abis = glob(__dirname, ['abis/**/*.json'])
+      .map((path) => path.replace(/[\s\S]*with-etherscanlikes\/abis\//, ''))
+      .sort()
+
     expect(abis).toEqual([
       'arbitrumOne/GraphToken.json',
       'avalanche/WAVAX.json',
       'bsc/WBNB.json',
       'heco/HBTC.json',
+      'mainnet/DAI Bridge/DAI Bridge Contract.json',
       'opera/chainLink.json',
+      'optimism/DAI Bridge/DAI Bridge Contract.json',
       'optimism/weth.json',
       'polygon/weth.json',
     ])
@@ -30,9 +35,9 @@ describe('with other Etherscan-like explorers', () => {
       Extends<
         typeof sdk,
         {
-          getOptimismSdk: (signer: ethers.Signer) => { weth: types.Weth }
-          getPolygonSdk: (signer: ethers.Signer) => { weth: types.Weth }
-          getBscSdk: (signer: ethers.Signer) => { WBNB: types.WBNB }
+          getOptimismSdk: (signer: ethers.Signer) => { weth: types.optimism.Weth }
+          getPolygonSdk: (signer: ethers.Signer) => { weth: types.polygon.Weth }
+          getBscSdk: (signer: ethers.Signer) => { WBNB: types.bsc.WBNB }
           getOperaSdk: (signer: ethers.Signer) => { chainLink: types.ChainLink }
           getHecoSdk: (signer: ethers.Signer) => { HBTC: types.HBTC }
           getAvalancheSdk: (signer: ethers.Signer) => { WAVAX: types.WAVAX }
