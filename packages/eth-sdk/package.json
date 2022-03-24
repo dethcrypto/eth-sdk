@@ -38,7 +38,7 @@
     "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
   },
   "dependencies": {
-    "@typechain/ethers-v5": "npm:@hasparus/typechain__ethers-v5@10.0.0-rc-eth-sdk.1",
+    "@typechain/ethers-v5": "^10.0.0",
     "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "debug": "^4.3.2",
@@ -49,7 +49,7 @@
     "mkdirp": "^1.0.4",
     "ora": "^5.4.1",
     "tmp-promise": "^3.0.3",
-    "typechain": "npm:@hasparus/typechain@8.0.0-rc-eth-sdk.1",
+    "typechain": "8.0.0",
     "zod": "^3.11.5"
   },
   "peerDependencies": {
