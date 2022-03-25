@@ -18,4 +18,7 @@ async function main() {
   }
 }
 
-void main().catch(console.error)
+void main().catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
