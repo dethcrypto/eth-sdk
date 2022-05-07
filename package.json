@@ -9,7 +9,7 @@
     "format": "wsrun -c format",
     "format:fix": "wsrun -c format:fix",
     "lint": "wsrun -c lint",
-  "lint:fix": "wsrun -c lint:fix",
+    "lint:fix": "wsrun -c lint:fix",
     "typecheck": "wsrun -c typecheck",
     "build": "tsc --build ./tsconfig.prod.json",
     "watch": "yarn build --watch",
