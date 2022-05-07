@@ -10,20 +10,20 @@ const mkr_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/tokens/mk
 const uniswap_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/uniswap.json"));
 const proxyStandardStorageSlot_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/proxies/proxyStandardStorageSlot.json"));
 const proxyCustomImplementation_json_1 = __importDefault(require("../../eth-sdk/abis/mainnet/proxies/proxyCustomImplementation.json"));
-function getContract(address, abi, defaultSigner) {
-    return new ethers_1.Contract(address, abi, defaultSigner);
+function getContract(address, abi, defaultSignerOrProvider) {
+    return new ethers_1.Contract(address, abi, defaultSignerOrProvider);
 }
 exports.getContract = getContract;
-function getMainnetSdk(defaultSigner) {
+function getMainnetSdk(defaultSignerOrProvider) {
     return {
         "tokens": {
-            "dai": getContract('0x6B175474E89094C44Da98b954EedeAC495271d0F', dai_json_1.default, defaultSigner),
-            "mkr": getContract('0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2', mkr_json_1.default, defaultSigner),
+            "dai": getContract('0x6B175474E89094C44Da98b954EedeAC495271d0F', dai_json_1.default, defaultSignerOrProvider),
+            "mkr": getContract('0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2', mkr_json_1.default, defaultSignerOrProvider),
         },
-        "uniswap": getContract('0x1F98431c8aD98523631AE4a59f267346ea31F984', uniswap_json_1.default, defaultSigner),
+        "uniswap": getContract('0x1F98431c8aD98523631AE4a59f267346ea31F984', uniswap_json_1.default, defaultSignerOrProvider),
         "proxies": {
-            "proxyStandardStorageSlot": getContract('0x1c5a768bdb10750f9007e33243fef5f3e094ad3a', proxyStandardStorageSlot_json_1.default, defaultSigner),
-            "proxyCustomImplementation": getContract('0x3d9819210a31b4961b30ef54be2aed79b9c9cd3b', proxyCustomImplementation_json_1.default, defaultSigner),
+            "proxyStandardStorageSlot": getContract('0x1c5a768bdb10750f9007e33243fef5f3e094ad3a', proxyStandardStorageSlot_json_1.default, defaultSignerOrProvider),
+            "proxyCustomImplementation": getContract('0x3d9819210a31b4961b30ef54be2aed79b9c9cd3b', proxyCustomImplementation_json_1.default, defaultSignerOrProvider),
         },
     };
 }

@@ -8,9 +8,7 @@ import type { Dai, Mkr, ProxyCustomImplementation, ProxyStandardStorageSlot, Uni
 
 describe('with ABIs from Etherscan', () => {
   const provider = new ethers.providers.JsonRpcProvider(env.E2E_RPC)
-  const signer = ethers.Wallet.createRandom().connect(provider)
-
-  const sdk = getMainnetSdk(signer)
+  const sdk = getMainnetSdk(provider)
 
   it('sdk works', async () => {
     expect((await sdk.tokens.dai.totalSupply()).toString()).not.toEqual('0')

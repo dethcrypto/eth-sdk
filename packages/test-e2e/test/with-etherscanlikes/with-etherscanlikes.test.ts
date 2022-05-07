@@ -10,7 +10,6 @@ type Extends<T, U> = T extends U ? true : false
 
 describe('with other Etherscan-like explorers', () => {
   const provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com')
-  const signer = ethers.Wallet.createRandom().connect(provider)
 
   it('has fetched all ABIs', () => {
     const abis = glob(__dirname, ['abis/**/*.json'])
@@ -35,18 +34,18 @@ describe('with other Etherscan-like explorers', () => {
       Extends<
         typeof sdk,
         {
-          getOptimismSdk: (signer: ethers.Signer) => { weth: types.optimism.Weth }
-          getPolygonSdk: (signer: ethers.Signer) => { weth: types.polygon.Weth }
-          getBscSdk: (signer: ethers.Signer) => { WBNB: types.bsc.WBNB }
-          getOperaSdk: (signer: ethers.Signer) => { chainLink: types.ChainLink }
-          getHecoSdk: (signer: ethers.Signer) => { HBTC: types.HBTC }
-          getAvalancheSdk: (signer: ethers.Signer) => { WAVAX: types.WAVAX }
-          getArbitrumOneSdk: (signer: ethers.Signer) => { GraphToken: types.GraphToken }
+          getOptimismSdk: (signer: ethers.Signer | ethers.providers.Provider) => { weth: types.optimism.Weth }
+          getPolygonSdk: (signer: ethers.Signer | ethers.providers.Provider) => { weth: types.polygon.Weth }
+          getBscSdk: (signer: ethers.Signer | ethers.providers.Provider) => { WBNB: types.bsc.WBNB }
+          getOperaSdk: (signer: ethers.Signer | ethers.providers.Provider) => { chainLink: types.ChainLink }
+          getHecoSdk: (signer: ethers.Signer | ethers.providers.Provider) => { HBTC: types.HBTC }
+          getAvalancheSdk: (signer: ethers.Signer | ethers.providers.Provider) => { WAVAX: types.WAVAX }
+          getArbitrumOneSdk: (signer: ethers.Signer | ethers.providers.Provider) => { GraphToken: types.GraphToken }
         }
       >
     >(true)
 
-    const polygon = sdk.getPolygonSdk(signer)
+    const polygon = sdk.getPolygonSdk(provider)
     expect(polygon.weth.address).toEqual('0x7ceb23fd6bc0add59e62ac25578270cff1b9f619')
     expect(await polygon.weth.ERC712_VERSION()).toEqual('1')
   })
