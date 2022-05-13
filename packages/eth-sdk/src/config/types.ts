@@ -1,5 +1,4 @@
 import type { Opaque } from 'ts-essentials'
-import { CodegenConfig } from 'typechain'
 import type { ZodTypeDef } from 'zod'
 import { z } from 'zod'
 
@@ -73,11 +72,6 @@ export type NetworkIds = { [key in NetworkSymbol | (string & {})]?: number }
 
 export const networkIdsSchema: z.ZodSchema<NetworkIds> = z.record(z.number())
 
-const flags: Omit<CodegenConfig, 'environment'> = {
-  discriminateTypes: false,
-  alwaysGenerateOverloads: false,
-}
-
 export const flagsSchema = z.object({
   tsNocheck: z.optional(z.boolean()),
   discriminateTypes: z.boolean(),
@@ -95,7 +89,7 @@ const ethSdkConfigSchema = z
     noFollowProxies: z.boolean().optional(),
     abiSource: abiSourceSchema.default(DEFAULT_ABI_SOURCE),
     networkIds: networkIdsSchema.default({}),
-    flags: flagsSchema.default(flags),
+    flags: flagsSchema.optional(),
   })
   .strict()
 

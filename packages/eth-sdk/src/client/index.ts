@@ -20,12 +20,13 @@ export async function generateSdk(ctx: EthSdkCtx): Promise<void> {
   const outputToAbiRelativePath = relative(outputPath, abisRoot).replace(/\\/g, '/')
 
   const randomTmpDir = await fs.tmpDir('eth-sdk')
+
   const shapedFlag: CodegenConfig = {
-    discriminateTypes: flags.discriminateTypes,
-    alwaysGenerateOverloads: flags.alwaysGenerateOverloads,
+    discriminateTypes: flags?.discriminateTypes ?? false,
+    alwaysGenerateOverloads: flags?.alwaysGenerateOverloads ?? false,
     environment: undefined,
   }
-  if (flags.tsNocheck != null) {
+  if (flags?.tsNocheck != null) {
     shapedFlag.tsNocheck = flags.tsNocheck
   }
 
