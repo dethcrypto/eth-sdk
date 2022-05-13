@@ -21,9 +21,14 @@ export async function generateSdk(ctx: EthSdkCtx): Promise<void> {
 
   const randomTmpDir = await fs.tmpDir('eth-sdk')
   const shapedFlag: CodegenConfig = {
-    ...flags,
-    environment: flags.environment ?? undefined,
+    discriminateTypes: flags.discriminateTypes,
+    alwaysGenerateOverloads: flags.alwaysGenerateOverloads,
+    environment: undefined,
   }
+  if (flags.tsNocheck != null) {
+    shapedFlag.tsNocheck = flags.tsNocheck
+  }
+
   await generateTsClient(contracts, abisRoot, randomTmpDir, outputToAbiRelativePath, fs, shapedFlag)
   await transpileClient(randomTmpDir, outputPath, fs)
 }

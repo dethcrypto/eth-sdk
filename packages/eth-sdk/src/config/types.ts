@@ -73,14 +73,13 @@ export type NetworkIds = { [key in NetworkSymbol | (string & {})]?: number }
 
 export const networkIdsSchema: z.ZodSchema<NetworkIds> = z.record(z.number())
 
-const flags: CodegenConfig = {
-  environment: undefined,
+const flags: Omit<CodegenConfig, 'environment'> = {
   discriminateTypes: false,
   alwaysGenerateOverloads: false,
 }
+
 export const flagsSchema = z.object({
   tsNocheck: z.optional(z.boolean()),
-  environment: z.union([z.literal('hardhat'), z.undefined()]),
   discriminateTypes: z.boolean(),
   alwaysGenerateOverloads: z.boolean(),
 })
