@@ -14,7 +14,7 @@ export async function generateTsClient(
   outputRoot: string,
   outputToAbiRelativePath: string,
   fs: Fs = realFs,
-  flags: Partial<CodegenConfig>,
+  flags: CodegenConfig,
 ) {
   d(`Generating ts client to ${outputRoot}`)
   const typesOutputPath = join(outputRoot, './types')

@@ -73,10 +73,14 @@ export type NetworkIds = { [key in NetworkSymbol | (string & {})]?: number }
 
 export const networkIdsSchema: z.ZodSchema<NetworkIds> = z.record(z.number())
 
-type Flags = Partial<CodegenConfig>
-const flagsSchema: z.ZodType<Flags> = z.object({
-  tsNocheck: z.boolean(),
-  environment: z.literal('hardhat'),
+const flags: CodegenConfig = {
+  environment: undefined,
+  discriminateTypes: false,
+  alwaysGenerateOverloads: false,
+}
+export const flagsSchema = z.object({
+  tsNocheck: z.optional(z.boolean()),
+  environment: z.union([z.literal('hardhat'), z.undefined()]),
   discriminateTypes: z.boolean(),
   alwaysGenerateOverloads: z.boolean(),
 })
@@ -92,7 +96,7 @@ const ethSdkConfigSchema = z
     noFollowProxies: z.boolean().optional(),
     abiSource: abiSourceSchema.default(DEFAULT_ABI_SOURCE),
     networkIds: networkIdsSchema.default({}),
-    flags: flagsSchema.default({}).optional(),
+    flags: flagsSchema.default(flags),
   })
   .strict()
 
