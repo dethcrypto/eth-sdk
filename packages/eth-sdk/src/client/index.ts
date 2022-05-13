@@ -7,7 +7,7 @@ import { transpileClient } from './transpileClient'
 export async function generateSdk(ctx: EthSdkCtx): Promise<void> {
   const {
     cliArgs: { workingDirPath },
-    config: { contracts, outputPath },
+    config: { contracts, outputPath, flags },
     fs,
   } = ctx
 
@@ -19,7 +19,7 @@ export async function generateSdk(ctx: EthSdkCtx): Promise<void> {
   const outputToAbiRelativePath = relative(outputPath, abisRoot).replace(/\\/g, '/')
 
   const randomTmpDir = await fs.tmpDir('eth-sdk')
-  await generateTsClient(contracts, abisRoot, randomTmpDir, outputToAbiRelativePath, fs)
+  await generateTsClient(contracts, abisRoot, randomTmpDir, outputToAbiRelativePath, fs, flags ?? {})
   await transpileClient(randomTmpDir, outputPath, fs)
 }
 

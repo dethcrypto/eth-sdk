@@ -1,5 +1,6 @@
 import debug from 'debug'
 import { join } from 'path'
+import { CodegenConfig } from 'typechain'
 
 import { EthSdkContracts } from '../config'
 import { Fs, realFs } from '../peripherals/fs'
@@ -13,10 +14,11 @@ export async function generateTsClient(
   outputRoot: string,
   outputToAbiRelativePath: string,
   fs: Fs = realFs,
+  flags: Partial<CodegenConfig>,
 ) {
   d(`Generating ts client to ${outputRoot}`)
   const typesOutputPath = join(outputRoot, './types')
-  await generateTypes(abisRoot, typesOutputPath)
+  await generateTypes(abisRoot, typesOutputPath, flags)
 
   const abisRootOut = join(outputRoot, 'abis')
   await fs.copy(abisRoot, abisRootOut)
