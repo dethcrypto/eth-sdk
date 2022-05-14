@@ -21,14 +21,14 @@ export async function generateIndex(
   const indexPath = join(outputPath, './index.ts')
 
   const index = `
-import { Signer, Contract } from 'ethers'
+import { providers, Signer, Contract } from 'ethers'
 
 import * as types from './types'
 
 ${await getAbiImports(contracts, outputToAbiRelativePath)}
 
-export function getContract(address: string, abi: object, defaultSigner: Signer) {
-  return new Contract(address, abi, defaultSigner)
+export function getContract(address: string, abi: object, defaultSignerOrProvider: Signer | providers.Provider) {
+  return new Contract(address, abi, defaultSignerOrProvider)
 }
 
   ${unsafeKeys(contracts)
@@ -63,7 +63,7 @@ function generateNetworkSdk(networkSymbol: NetworkSymbol, sdkDef: EthSdkContract
 
   return `
 export type ${network}Sdk = ReturnType<typeof get${network}Sdk>
-export function get${network}Sdk(defaultSigner: Signer) {
+export function get${network}Sdk(defaultSignerOrProvider: Signer | providers.Provider) {
   return ${generateBody(nestedAddresses, [networkSymbol], true)}
 }
 `
@@ -78,7 +78,7 @@ function generateBody(nestedAddresses: NestedAddresses, keys: string[], topLevel
       const abi = importedAbiIdentifier([...keys, key])
 
       const path = [...keys.map(camelCase), normalizeName(key)].join('.')
-      body.push(`"${key}": getContract('${address}', ${abi}, defaultSigner) as types.${path},`)
+      body.push(`"${key}": getContract('${address}', ${abi}, defaultSignerOrProvider) as types.${path},`)
     } else {
       body.push(`"${key}":`)
       body.push(generateBody(addressOrNested, [...keys, key]))
