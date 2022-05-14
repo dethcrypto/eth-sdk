@@ -1,5 +1,5 @@
 ---
-'@dethcrypto/eth-sdk': minor
+'@dethcrypto/eth-sdk': patch
 ---
 
 Fixed name clashes within emitted types.
