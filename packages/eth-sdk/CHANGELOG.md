@@ -1,5 +1,16 @@
 # @dethcrypto/eth-sdk
 
+## 0.3.2
+
+### Patch Changes
+
+- bd0c2c6: Fixed name clashes within emitted types.
+
+  _eth-sdk now depends on `typechain` v8 and `@typechain/ethers-v5` v10._
+
+- 0ed5510: Allow using `Provider` alongside `Signer` for readonly queries
+- 10ebea1: eth-sdk will now retry up to 2 times on HTTP403 Forbidden when fetching ABI
+
 ## 0.3.1
 
 ### Patch Changes
