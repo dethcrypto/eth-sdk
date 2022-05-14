@@ -89,7 +89,7 @@ const ethSdkConfigSchema = z
     noFollowProxies: z.boolean().optional(),
     abiSource: abiSourceSchema.default(DEFAULT_ABI_SOURCE),
     networkIds: networkIdsSchema.default({}),
-    flags: flagsSchema.optional(),
+    typechainFlags: flagsSchema.optional(),
   })
   .strict()
 

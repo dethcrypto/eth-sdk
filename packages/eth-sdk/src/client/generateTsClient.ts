@@ -14,11 +14,11 @@ export async function generateTsClient(
   outputRoot: string,
   outputToAbiRelativePath: string,
   fs: Fs = realFs,
-  flags: CodegenConfig,
+  typechainFlags: CodegenConfig,
 ) {
   d(`Generating ts client to ${outputRoot}`)
   const typesOutputPath = join(outputRoot, './types')
-  await generateTypes(abisRoot, typesOutputPath, flags)
+  await generateTypes(abisRoot, typesOutputPath, typechainFlags)
 
   const abisRootOut = join(outputRoot, 'abis')
   await fs.copy(abisRoot, abisRootOut)
