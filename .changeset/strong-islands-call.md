@@ -1,5 +1,5 @@
 ---
-'@dethcrypto/eth-sdk': minor
+'@dethcrypto/eth-sdk': patch
 ---
 
-Added typechain flags as options for eth-sdk
+TypeChain flags can be via eth-sdk config.
