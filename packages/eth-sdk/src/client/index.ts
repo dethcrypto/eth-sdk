@@ -1,4 +1,5 @@
 import { join, relative } from 'path'
+import { CodegenConfig } from 'typechain'
 
 import { EthSdkCtx } from '../types'
 import { generateTsClient } from './generateTsClient'
@@ -7,7 +8,7 @@ import { transpileClient } from './transpileClient'
 export async function generateSdk(ctx: EthSdkCtx): Promise<void> {
   const {
     cliArgs: { workingDirPath },
-    config: { contracts, outputPath },
+    config: { contracts, outputPath, typechainFlags },
     fs,
   } = ctx
 
@@ -19,7 +20,17 @@ export async function generateSdk(ctx: EthSdkCtx): Promise<void> {
   const outputToAbiRelativePath = relative(outputPath, abisRoot).replace(/\\/g, '/')
 
   const randomTmpDir = await fs.tmpDir('eth-sdk')
-  await generateTsClient(contracts, abisRoot, randomTmpDir, outputToAbiRelativePath, fs)
+
+  const shapedFlag: CodegenConfig = {
+    discriminateTypes: typechainFlags?.discriminateTypes ?? false,
+    alwaysGenerateOverloads: typechainFlags?.alwaysGenerateOverloads ?? false,
+    environment: undefined,
+  }
+  if (typechainFlags?.tsNocheck != null) {
+    shapedFlag.tsNocheck = typechainFlags.tsNocheck
+  }
+
+  await generateTsClient(contracts, abisRoot, randomTmpDir, outputToAbiRelativePath, fs, shapedFlag)
   await transpileClient(randomTmpDir, outputPath, fs)
 }
 

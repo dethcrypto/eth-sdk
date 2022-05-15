@@ -72,6 +72,12 @@ export type NetworkIds = { [key in NetworkSymbol | (string & {})]?: number }
 
 export const networkIdsSchema: z.ZodSchema<NetworkIds> = z.record(z.number())
 
+export const flagsSchema = z.object({
+  tsNocheck: z.optional(z.boolean()),
+  discriminateTypes: z.boolean(),
+  alwaysGenerateOverloads: z.boolean(),
+})
+
 const ethSdkConfigSchema = z
   .object({
     contracts: ethSdKContractsSchema,
@@ -83,6 +89,7 @@ const ethSdkConfigSchema = z
     noFollowProxies: z.boolean().optional(),
     abiSource: abiSourceSchema.default(DEFAULT_ABI_SOURCE),
     networkIds: networkIdsSchema.default({}),
+    typechainFlags: flagsSchema.optional(),
   })
   .strict()
 

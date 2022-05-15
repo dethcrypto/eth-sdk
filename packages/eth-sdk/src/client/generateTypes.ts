@@ -1,7 +1,7 @@
 import { join } from 'path'
-import { glob, runTypeChain } from 'typechain'
+import { CodegenConfig, glob, runTypeChain } from 'typechain'
 
-export async function generateTypes(abisRoot: string, outputPath: string) {
+export async function generateTypes(abisRoot: string, outputPath: string, typechainFlags: CodegenConfig) {
   const cwd = process.cwd()
   const files = glob(cwd, [join(abisRoot, '/**/*.json')])
 
@@ -12,5 +12,6 @@ export async function generateTypes(abisRoot: string, outputPath: string) {
     target: 'ethers-v5',
     outDir: outputPath,
     inputDir: abisRoot,
+    flags: typechainFlags,
   })
 }
