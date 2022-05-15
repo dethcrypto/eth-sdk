@@ -12,6 +12,6 @@ export async function generateTypes(abisRoot: string, outputPath: string, typech
     target: 'ethers-v5',
     outDir: outputPath,
     inputDir: abisRoot,
-    typechainFlags,
+    flags: typechainFlags,
   })
 }
