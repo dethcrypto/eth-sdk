@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface DaiInterface extends utils.Interface {
     functions: {
         "DOMAIN_SEPARATOR()": FunctionFragment;
@@ -30,35 +30,43 @@ export interface DaiInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "DOMAIN_SEPARATOR" | "PERMIT_TYPEHASH" | "allowance" | "approve" | "balanceOf" | "burn" | "decimals" | "deny" | "mint" | "move" | "name" | "nonces" | "permit" | "pull" | "push" | "rely" | "symbol" | "totalSupply" | "transfer" | "transferFrom" | "version" | "wards"): FunctionFragment;
     encodeFunctionData(functionFragment: "DOMAIN_SEPARATOR", values?: undefined): string;
     encodeFunctionData(functionFragment: "PERMIT_TYPEHASH", values?: undefined): string;
-    encodeFunctionData(functionFragment: "allowance", values: [string, string]): string;
-    encodeFunctionData(functionFragment: "approve", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-    encodeFunctionData(functionFragment: "burn", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "allowance", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "approve", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "balanceOf", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "burn", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
-    encodeFunctionData(functionFragment: "deny", values: [string]): string;
-    encodeFunctionData(functionFragment: "mint", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "move", values: [string, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "name", values?: undefined): string;
-    encodeFunctionData(functionFragment: "nonces", values: [string]): string;
-    encodeFunctionData(functionFragment: "permit", values: [
-        string,
-        string,
-        BigNumberish,
-        BigNumberish,
-        boolean,
-        BigNumberish,
-        BytesLike,
-        BytesLike
+    encodeFunctionData(functionFragment: "deny", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "mint", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "move", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
     ]): string;
-    encodeFunctionData(functionFragment: "pull", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "push", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "rely", values: [string]): string;
+    encodeFunctionData(functionFragment: "name", values?: undefined): string;
+    encodeFunctionData(functionFragment: "nonces", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "permit", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<boolean>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "pull", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "push", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "rely", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
     encodeFunctionData(functionFragment: "totalSupply", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transfer", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "transferFrom", values: [string, string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "transfer", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "transferFrom", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "version", values?: undefined): string;
-    encodeFunctionData(functionFragment: "wards", values: [string]): string;
+    encodeFunctionData(functionFragment: "wards", values: [PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "DOMAIN_SEPARATOR", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "PERMIT_TYPEHASH", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -144,215 +152,215 @@ export interface Dai extends BaseContract {
     functions: {
         DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
         PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<[string]>;
-        allowance(arg0: string, arg1: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        approve(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        approve(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        balanceOf(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        burn(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        balanceOf(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        burn(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         decimals(overrides?: CallOverrides): Promise<[number]>;
-        deny(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deny(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        mint(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        move(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         name(overrides?: CallOverrides): Promise<[string]>;
-        nonces(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        permit(holder: string, spender: string, nonce: BigNumberish, expiry: BigNumberish, allowed: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        nonces(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        permit(holder: PromiseOrValue<string>, spender: PromiseOrValue<string>, nonce: PromiseOrValue<BigNumberish>, expiry: PromiseOrValue<BigNumberish>, allowed: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        pull(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        pull(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        push(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        push(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        rely(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        rely(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         symbol(overrides?: CallOverrides): Promise<[string]>;
         totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-        transfer(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         version(overrides?: CallOverrides): Promise<[string]>;
-        wards(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        wards(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
     };
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
     PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<string>;
-    allowance(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
-    approve(usr: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    allowance(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    approve(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-    burn(usr: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    balanceOf(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    burn(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     decimals(overrides?: CallOverrides): Promise<number>;
-    deny(guy: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    deny(guy: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    mint(usr: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    mint(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    move(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     name(overrides?: CallOverrides): Promise<string>;
-    nonces(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-    permit(holder: string, spender: string, nonce: BigNumberish, expiry: BigNumberish, allowed: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    nonces(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    permit(holder: PromiseOrValue<string>, spender: PromiseOrValue<string>, nonce: PromiseOrValue<BigNumberish>, expiry: PromiseOrValue<BigNumberish>, allowed: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    pull(usr: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    pull(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    push(usr: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    push(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    rely(guy: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    rely(guy: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     symbol(overrides?: CallOverrides): Promise<string>;
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-    transfer(dst: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     version(overrides?: CallOverrides): Promise<string>;
-    wards(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    wards(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
         DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
         PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<string>;
-        allowance(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
-        approve(usr: string, wad: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-        burn(usr: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        allowance(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        approve(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        balanceOf(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        burn(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         decimals(overrides?: CallOverrides): Promise<number>;
-        deny(guy: string, overrides?: CallOverrides): Promise<void>;
-        mint(usr: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        move(src: string, dst: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        deny(guy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        mint(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         name(overrides?: CallOverrides): Promise<string>;
-        nonces(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-        permit(holder: string, spender: string, nonce: BigNumberish, expiry: BigNumberish, allowed: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: CallOverrides): Promise<void>;
-        pull(usr: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        push(usr: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        rely(guy: string, overrides?: CallOverrides): Promise<void>;
+        nonces(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        permit(holder: PromiseOrValue<string>, spender: PromiseOrValue<string>, nonce: PromiseOrValue<BigNumberish>, expiry: PromiseOrValue<BigNumberish>, allowed: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        pull(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        push(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        rely(guy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         symbol(overrides?: CallOverrides): Promise<string>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(dst: string, wad: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
         version(overrides?: CallOverrides): Promise<string>;
-        wards(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        wards(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {
-        "Approval(address,address,uint256)"(src?: string | null, guy?: string | null, wad?: null): ApprovalEventFilter;
-        Approval(src?: string | null, guy?: string | null, wad?: null): ApprovalEventFilter;
-        "LogNote(bytes4,address,bytes32,bytes32,bytes)"(sig?: BytesLike | null, usr?: string | null, arg1?: BytesLike | null, arg2?: BytesLike | null, data?: null): LogNoteEventFilter;
-        LogNote(sig?: BytesLike | null, usr?: string | null, arg1?: BytesLike | null, arg2?: BytesLike | null, data?: null): LogNoteEventFilter;
-        "Transfer(address,address,uint256)"(src?: string | null, dst?: string | null, wad?: null): TransferEventFilter;
-        Transfer(src?: string | null, dst?: string | null, wad?: null): TransferEventFilter;
+        "Approval(address,address,uint256)"(src?: PromiseOrValue<string> | null, guy?: PromiseOrValue<string> | null, wad?: null): ApprovalEventFilter;
+        Approval(src?: PromiseOrValue<string> | null, guy?: PromiseOrValue<string> | null, wad?: null): ApprovalEventFilter;
+        "LogNote(bytes4,address,bytes32,bytes32,bytes)"(sig?: PromiseOrValue<BytesLike> | null, usr?: PromiseOrValue<string> | null, arg1?: PromiseOrValue<BytesLike> | null, arg2?: PromiseOrValue<BytesLike> | null, data?: null): LogNoteEventFilter;
+        LogNote(sig?: PromiseOrValue<BytesLike> | null, usr?: PromiseOrValue<string> | null, arg1?: PromiseOrValue<BytesLike> | null, arg2?: PromiseOrValue<BytesLike> | null, data?: null): LogNoteEventFilter;
+        "Transfer(address,address,uint256)"(src?: PromiseOrValue<string> | null, dst?: PromiseOrValue<string> | null, wad?: null): TransferEventFilter;
+        Transfer(src?: PromiseOrValue<string> | null, dst?: PromiseOrValue<string> | null, wad?: null): TransferEventFilter;
     };
     estimateGas: {
         DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
         PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<BigNumber>;
-        allowance(arg0: string, arg1: string, overrides?: CallOverrides): Promise<BigNumber>;
-        approve(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        approve(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-        burn(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        balanceOf(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        burn(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         decimals(overrides?: CallOverrides): Promise<BigNumber>;
-        deny(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deny(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        mint(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        move(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         name(overrides?: CallOverrides): Promise<BigNumber>;
-        nonces(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-        permit(holder: string, spender: string, nonce: BigNumberish, expiry: BigNumberish, allowed: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        nonces(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        permit(holder: PromiseOrValue<string>, spender: PromiseOrValue<string>, nonce: PromiseOrValue<BigNumberish>, expiry: PromiseOrValue<BigNumberish>, allowed: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        pull(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        pull(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        push(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        push(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        rely(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        rely(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         symbol(overrides?: CallOverrides): Promise<BigNumber>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         version(overrides?: CallOverrides): Promise<BigNumber>;
-        wards(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+        wards(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         PERMIT_TYPEHASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        allowance(arg0: string, arg1: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        approve(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(arg0: PromiseOrValue<string>, arg1: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        approve(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        balanceOf(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        burn(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        balanceOf(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        burn(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        deny(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deny(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        mint(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        mint(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        move(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        nonces(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        permit(holder: string, spender: string, nonce: BigNumberish, expiry: BigNumberish, allowed: boolean, v: BigNumberish, r: BytesLike, s: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        nonces(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        permit(holder: PromiseOrValue<string>, spender: PromiseOrValue<string>, nonce: PromiseOrValue<BigNumberish>, expiry: PromiseOrValue<BigNumberish>, allowed: PromiseOrValue<boolean>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        pull(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        pull(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        push(usr: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        push(usr: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        rely(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        rely(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        transfer(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         version(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        wards(arg0: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        wards(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

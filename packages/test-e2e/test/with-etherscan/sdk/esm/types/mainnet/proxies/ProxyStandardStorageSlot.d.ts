@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface ProxyStandardStorageSlotInterface extends utils.Interface {
     functions: {
         "advance()": FunctionFragment;
@@ -66,64 +66,73 @@ export interface ProxyStandardStorageSlotInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "advance" | "allowance" | "allowanceCoupons" | "approve" | "approveCoupons" | "approveFor" | "balanceOf" | "balanceOfBonded" | "balanceOfCoupons" | "balanceOfStaged" | "bond" | "bootstrappingAt" | "calculatePrice" | "calculateReward" | "commit" | "couponPremium" | "couponsExpiration" | "decimals" | "deposit" | "dollar" | "emergencyCommit" | "epoch" | "epochTime" | "expiringCoupons" | "expiringCouponsAtIndex" | "fluidUntil" | "implementation" | "initialize" | "isInitialized" | "isNominated" | "lockedUntil" | "name" | "oracle" | "outstandingCoupons" | "periodFor" | "pool" | "purchaseCoupons" | "recordedVote" | "redeemCoupons" | "rejectFor" | "startFor" | "statusOf" | "symbol" | "totalBonded" | "totalBondedAt" | "totalCoupons" | "totalDebt" | "totalNet" | "totalRedeemable" | "totalStaged" | "totalSupply" | "transfer" | "transferCoupons" | "transferFrom" | "unbond" | "unbondUnderlying" | "vote" | "votesFor" | "withdraw"): FunctionFragment;
     encodeFunctionData(functionFragment: "advance", values?: undefined): string;
-    encodeFunctionData(functionFragment: "allowance", values: [string, string]): string;
-    encodeFunctionData(functionFragment: "allowanceCoupons", values: [string, string]): string;
-    encodeFunctionData(functionFragment: "approve", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "approveCoupons", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "approveFor", values: [string]): string;
-    encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-    encodeFunctionData(functionFragment: "balanceOfBonded", values: [string]): string;
-    encodeFunctionData(functionFragment: "balanceOfCoupons", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "balanceOfStaged", values: [string]): string;
-    encodeFunctionData(functionFragment: "bond", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "bootstrappingAt", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "allowance", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "allowanceCoupons", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "approve", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "approveCoupons", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "approveFor", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "balanceOf", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "balanceOfBonded", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "balanceOfCoupons", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "balanceOfStaged", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "bond", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "bootstrappingAt", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "calculatePrice", values?: undefined): string;
     encodeFunctionData(functionFragment: "calculateReward", values?: undefined): string;
-    encodeFunctionData(functionFragment: "commit", values: [string]): string;
-    encodeFunctionData(functionFragment: "couponPremium", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "couponsExpiration", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "commit", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "couponPremium", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "couponsExpiration", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
-    encodeFunctionData(functionFragment: "deposit", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "deposit", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "dollar", values?: undefined): string;
-    encodeFunctionData(functionFragment: "emergencyCommit", values: [string]): string;
+    encodeFunctionData(functionFragment: "emergencyCommit", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "epoch", values?: undefined): string;
     encodeFunctionData(functionFragment: "epochTime", values?: undefined): string;
-    encodeFunctionData(functionFragment: "expiringCoupons", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "expiringCouponsAtIndex", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "fluidUntil", values: [string]): string;
+    encodeFunctionData(functionFragment: "expiringCoupons", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "expiringCouponsAtIndex", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "fluidUntil", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "implementation", values?: undefined): string;
     encodeFunctionData(functionFragment: "initialize", values?: undefined): string;
-    encodeFunctionData(functionFragment: "isInitialized", values: [string]): string;
-    encodeFunctionData(functionFragment: "isNominated", values: [string]): string;
-    encodeFunctionData(functionFragment: "lockedUntil", values: [string]): string;
+    encodeFunctionData(functionFragment: "isInitialized", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "isNominated", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "lockedUntil", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "name", values?: undefined): string;
     encodeFunctionData(functionFragment: "oracle", values?: undefined): string;
-    encodeFunctionData(functionFragment: "outstandingCoupons", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "periodFor", values: [string]): string;
+    encodeFunctionData(functionFragment: "outstandingCoupons", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "periodFor", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "pool", values?: undefined): string;
-    encodeFunctionData(functionFragment: "purchaseCoupons", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "recordedVote", values: [string, string]): string;
-    encodeFunctionData(functionFragment: "redeemCoupons", values: [BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "rejectFor", values: [string]): string;
-    encodeFunctionData(functionFragment: "startFor", values: [string]): string;
-    encodeFunctionData(functionFragment: "statusOf", values: [string]): string;
+    encodeFunctionData(functionFragment: "purchaseCoupons", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "recordedVote", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "redeemCoupons", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "rejectFor", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "startFor", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "statusOf", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
     encodeFunctionData(functionFragment: "totalBonded", values?: undefined): string;
-    encodeFunctionData(functionFragment: "totalBondedAt", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "totalBondedAt", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "totalCoupons", values?: undefined): string;
     encodeFunctionData(functionFragment: "totalDebt", values?: undefined): string;
     encodeFunctionData(functionFragment: "totalNet", values?: undefined): string;
     encodeFunctionData(functionFragment: "totalRedeemable", values?: undefined): string;
     encodeFunctionData(functionFragment: "totalStaged", values?: undefined): string;
     encodeFunctionData(functionFragment: "totalSupply", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transfer", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "transferCoupons", values: [string, string, BigNumberish, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "transferFrom", values: [string, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "unbond", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "unbondUnderlying", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "vote", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "votesFor", values: [string]): string;
-    encodeFunctionData(functionFragment: "withdraw", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "transfer", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "transferCoupons", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "transferFrom", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "unbond", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "unbondUnderlying", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "vote", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "votesFor", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "withdraw", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "advance", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "allowanceCoupons", data: BytesLike): Result;
@@ -445,483 +454,483 @@ export interface ProxyStandardStorageSlot extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         advance(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        allowanceCoupons(owner: string, spender: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        approve(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        allowanceCoupons(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        approveCoupons(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        approveCoupons(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        approveFor(candidate: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        balanceOf(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        balanceOfBonded(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        balanceOfCoupons(account: string, epoch: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        balanceOfStaged(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        bond(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        approveFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        balanceOfBonded(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        balanceOfCoupons(account: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        balanceOfStaged(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        bond(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        bootstrappingAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<[boolean]>;
+        bootstrappingAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[boolean]>;
         calculatePrice(overrides?: CallOverrides): Promise<[BigNumber]>;
         calculateReward(overrides?: CallOverrides): Promise<[BigNumber]>;
-        commit(candidate: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        commit(candidate: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        couponPremium(amount: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        couponsExpiration(epoch: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        couponPremium(amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        couponsExpiration(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
         decimals(overrides?: CallOverrides): Promise<[number]>;
-        deposit(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deposit(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         dollar(overrides?: CallOverrides): Promise<[string]>;
-        emergencyCommit(candidate: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        emergencyCommit(candidate: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         epoch(overrides?: CallOverrides): Promise<[BigNumber]>;
         epochTime(overrides?: CallOverrides): Promise<[BigNumber]>;
-        expiringCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        expiringCouponsAtIndex(epoch: BigNumberish, i: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        fluidUntil(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        expiringCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        expiringCouponsAtIndex(epoch: PromiseOrValue<BigNumberish>, i: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        fluidUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
         implementation(overrides?: CallOverrides): Promise<[string] & {
             impl: string;
         }>;
         initialize(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        isInitialized(candidate: string, overrides?: CallOverrides): Promise<[boolean]>;
-        isNominated(candidate: string, overrides?: CallOverrides): Promise<[boolean]>;
-        lockedUntil(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        isInitialized(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
+        isNominated(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
+        lockedUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
         name(overrides?: CallOverrides): Promise<[string]>;
         oracle(overrides?: CallOverrides): Promise<[string]>;
-        outstandingCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
-        periodFor(candidate: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        outstandingCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        periodFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
         pool(overrides?: CallOverrides): Promise<[string]>;
-        purchaseCoupons(dollarAmount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        purchaseCoupons(dollarAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        recordedVote(account: string, candidate: string, overrides?: CallOverrides): Promise<[number]>;
-        redeemCoupons(couponEpoch: BigNumberish, couponAmount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        recordedVote(account: PromiseOrValue<string>, candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[number]>;
+        redeemCoupons(couponEpoch: PromiseOrValue<BigNumberish>, couponAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        rejectFor(candidate: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        startFor(candidate: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        statusOf(account: string, overrides?: CallOverrides): Promise<[number]>;
+        rejectFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        startFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        statusOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[number]>;
         symbol(overrides?: CallOverrides): Promise<[string]>;
         totalBonded(overrides?: CallOverrides): Promise<[BigNumber]>;
-        totalBondedAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        totalBondedAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
         totalCoupons(overrides?: CallOverrides): Promise<[BigNumber]>;
         totalDebt(overrides?: CallOverrides): Promise<[BigNumber]>;
         totalNet(overrides?: CallOverrides): Promise<[BigNumber]>;
         totalRedeemable(overrides?: CallOverrides): Promise<[BigNumber]>;
         totalStaged(overrides?: CallOverrides): Promise<[BigNumber]>;
         totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-        transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        transferCoupons(sender: string, recipient: string, epoch: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferCoupons(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        unbond(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unbond(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        unbondUnderlying(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unbondUnderlying(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        vote(candidate: string, vote: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        vote(candidate: PromiseOrValue<string>, vote: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        votesFor(candidate: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        withdraw(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        votesFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        withdraw(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     advance(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-    allowanceCoupons(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-    approve(spender: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    allowanceCoupons(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    approveCoupons(spender: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    approveCoupons(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    approveFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-    balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-    balanceOfBonded(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-    balanceOfCoupons(account: string, epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    balanceOfStaged(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-    bond(value: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    approveFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOfBonded(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOfCoupons(account: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOfStaged(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    bond(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    bootstrappingAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+    bootstrappingAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
     calculatePrice(overrides?: CallOverrides): Promise<BigNumber>;
     calculateReward(overrides?: CallOverrides): Promise<BigNumber>;
-    commit(candidate: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    commit(candidate: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    couponPremium(amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    couponsExpiration(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    couponPremium(amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    couponsExpiration(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     decimals(overrides?: CallOverrides): Promise<number>;
-    deposit(value: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    deposit(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     dollar(overrides?: CallOverrides): Promise<string>;
-    emergencyCommit(candidate: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    emergencyCommit(candidate: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     epoch(overrides?: CallOverrides): Promise<BigNumber>;
     epochTime(overrides?: CallOverrides): Promise<BigNumber>;
-    expiringCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    expiringCouponsAtIndex(epoch: BigNumberish, i: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    fluidUntil(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    expiringCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    expiringCouponsAtIndex(epoch: PromiseOrValue<BigNumberish>, i: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    fluidUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     implementation(overrides?: CallOverrides): Promise<string>;
     initialize(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    isInitialized(candidate: string, overrides?: CallOverrides): Promise<boolean>;
-    isNominated(candidate: string, overrides?: CallOverrides): Promise<boolean>;
-    lockedUntil(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+    isInitialized(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+    isNominated(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+    lockedUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     name(overrides?: CallOverrides): Promise<string>;
     oracle(overrides?: CallOverrides): Promise<string>;
-    outstandingCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-    periodFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
+    outstandingCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    periodFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     pool(overrides?: CallOverrides): Promise<string>;
-    purchaseCoupons(dollarAmount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    purchaseCoupons(dollarAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    recordedVote(account: string, candidate: string, overrides?: CallOverrides): Promise<number>;
-    redeemCoupons(couponEpoch: BigNumberish, couponAmount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    recordedVote(account: PromiseOrValue<string>, candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<number>;
+    redeemCoupons(couponEpoch: PromiseOrValue<BigNumberish>, couponAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    rejectFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-    startFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-    statusOf(account: string, overrides?: CallOverrides): Promise<number>;
+    rejectFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    startFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    statusOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<number>;
     symbol(overrides?: CallOverrides): Promise<string>;
     totalBonded(overrides?: CallOverrides): Promise<BigNumber>;
-    totalBondedAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    totalBondedAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     totalCoupons(overrides?: CallOverrides): Promise<BigNumber>;
     totalDebt(overrides?: CallOverrides): Promise<BigNumber>;
     totalNet(overrides?: CallOverrides): Promise<BigNumber>;
     totalRedeemable(overrides?: CallOverrides): Promise<BigNumber>;
     totalStaged(overrides?: CallOverrides): Promise<BigNumber>;
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-    transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transfer(recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    transferCoupons(sender: string, recipient: string, epoch: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transferCoupons(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transferFrom(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    unbond(value: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    unbond(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    unbondUnderlying(value: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    unbondUnderlying(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    vote(candidate: string, vote: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    vote(candidate: PromiseOrValue<string>, vote: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    votesFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-    withdraw(value: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    votesFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    withdraw(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         advance(overrides?: CallOverrides): Promise<void>;
-        allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-        allowanceCoupons(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-        approve(spender: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        approveCoupons(spender: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        approveFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-        balanceOfBonded(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-        balanceOfCoupons(account: string, epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        balanceOfStaged(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-        bond(value: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        bootstrappingAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        allowanceCoupons(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        approveCoupons(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        approveFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOfBonded(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOfCoupons(account: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOfStaged(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        bond(value: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        bootstrappingAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
         calculatePrice(overrides?: CallOverrides): Promise<BigNumber>;
         calculateReward(overrides?: CallOverrides): Promise<BigNumber>;
-        commit(candidate: string, overrides?: CallOverrides): Promise<void>;
-        couponPremium(amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        couponsExpiration(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        commit(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        couponPremium(amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        couponsExpiration(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         decimals(overrides?: CallOverrides): Promise<number>;
-        deposit(value: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        deposit(value: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         dollar(overrides?: CallOverrides): Promise<string>;
-        emergencyCommit(candidate: string, overrides?: CallOverrides): Promise<void>;
+        emergencyCommit(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         epoch(overrides?: CallOverrides): Promise<BigNumber>;
         epochTime(overrides?: CallOverrides): Promise<BigNumber>;
-        expiringCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        expiringCouponsAtIndex(epoch: BigNumberish, i: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        fluidUntil(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+        expiringCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        expiringCouponsAtIndex(epoch: PromiseOrValue<BigNumberish>, i: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        fluidUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         implementation(overrides?: CallOverrides): Promise<string>;
         initialize(overrides?: CallOverrides): Promise<void>;
-        isInitialized(candidate: string, overrides?: CallOverrides): Promise<boolean>;
-        isNominated(candidate: string, overrides?: CallOverrides): Promise<boolean>;
-        lockedUntil(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+        isInitialized(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        isNominated(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        lockedUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         name(overrides?: CallOverrides): Promise<string>;
         oracle(overrides?: CallOverrides): Promise<string>;
-        outstandingCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        periodFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
+        outstandingCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        periodFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         pool(overrides?: CallOverrides): Promise<string>;
-        purchaseCoupons(dollarAmount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        recordedVote(account: string, candidate: string, overrides?: CallOverrides): Promise<number>;
-        redeemCoupons(couponEpoch: BigNumberish, couponAmount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        rejectFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        startFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        statusOf(account: string, overrides?: CallOverrides): Promise<number>;
+        purchaseCoupons(dollarAmount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        recordedVote(account: PromiseOrValue<string>, candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<number>;
+        redeemCoupons(couponEpoch: PromiseOrValue<BigNumberish>, couponAmount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        rejectFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        startFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        statusOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<number>;
         symbol(overrides?: CallOverrides): Promise<string>;
         totalBonded(overrides?: CallOverrides): Promise<BigNumber>;
-        totalBondedAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        totalBondedAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         totalCoupons(overrides?: CallOverrides): Promise<BigNumber>;
         totalDebt(overrides?: CallOverrides): Promise<BigNumber>;
         totalNet(overrides?: CallOverrides): Promise<BigNumber>;
         totalRedeemable(overrides?: CallOverrides): Promise<BigNumber>;
         totalStaged(overrides?: CallOverrides): Promise<BigNumber>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        transferCoupons(sender: string, recipient: string, epoch: BigNumberish, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        unbond(value: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        unbondUnderlying(value: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        vote(candidate: string, vote: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        votesFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        withdraw(value: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        transfer(recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        transferCoupons(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        transferFrom(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        unbond(value: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        unbondUnderlying(value: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        vote(candidate: PromiseOrValue<string>, vote: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        votesFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        withdraw(value: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "Advance(uint256,uint256,uint256)"(epoch?: BigNumberish | null, block?: null, timestamp?: null): AdvanceEventFilter;
-        Advance(epoch?: BigNumberish | null, block?: null, timestamp?: null): AdvanceEventFilter;
-        "Bond(address,uint256,uint256,uint256)"(account?: string | null, start?: null, value?: null, valueUnderlying?: null): BondEventFilter;
-        Bond(account?: string | null, start?: null, value?: null, valueUnderlying?: null): BondEventFilter;
-        "Commit(address,address)"(account?: string | null, candidate?: string | null): CommitEventFilter;
-        Commit(account?: string | null, candidate?: string | null): CommitEventFilter;
-        "CouponApproval(address,address,uint256)"(owner?: string | null, spender?: string | null, value?: null): CouponApprovalEventFilter;
-        CouponApproval(owner?: string | null, spender?: string | null, value?: null): CouponApprovalEventFilter;
-        "CouponExpiration(uint256,uint256,uint256,uint256,uint256)"(epoch?: BigNumberish | null, couponsExpired?: null, lessRedeemable?: null, lessDebt?: null, newBonded?: null): CouponExpirationEventFilter;
-        CouponExpiration(epoch?: BigNumberish | null, couponsExpired?: null, lessRedeemable?: null, lessDebt?: null, newBonded?: null): CouponExpirationEventFilter;
-        "CouponPurchase(address,uint256,uint256,uint256)"(account?: string | null, epoch?: BigNumberish | null, dollarAmount?: null, couponAmount?: null): CouponPurchaseEventFilter;
-        CouponPurchase(account?: string | null, epoch?: BigNumberish | null, dollarAmount?: null, couponAmount?: null): CouponPurchaseEventFilter;
-        "CouponRedemption(address,uint256,uint256)"(account?: string | null, epoch?: BigNumberish | null, couponAmount?: null): CouponRedemptionEventFilter;
-        CouponRedemption(account?: string | null, epoch?: BigNumberish | null, couponAmount?: null): CouponRedemptionEventFilter;
-        "CouponTransfer(address,address,uint256,uint256)"(from?: string | null, to?: string | null, epoch?: BigNumberish | null, value?: null): CouponTransferEventFilter;
-        CouponTransfer(from?: string | null, to?: string | null, epoch?: BigNumberish | null, value?: null): CouponTransferEventFilter;
-        "Deposit(address,uint256)"(account?: string | null, value?: null): DepositEventFilter;
-        Deposit(account?: string | null, value?: null): DepositEventFilter;
-        "Incentivization(address,uint256)"(account?: string | null, amount?: null): IncentivizationEventFilter;
-        Incentivization(account?: string | null, amount?: null): IncentivizationEventFilter;
-        "Proposal(address,address,uint256,uint256)"(candidate?: string | null, account?: string | null, start?: BigNumberish | null, period?: null): ProposalEventFilter;
-        Proposal(candidate?: string | null, account?: string | null, start?: BigNumberish | null, period?: null): ProposalEventFilter;
-        "SupplyDecrease(uint256,uint256,uint256)"(epoch?: BigNumberish | null, price?: null, newDebt?: null): SupplyDecreaseEventFilter;
-        SupplyDecrease(epoch?: BigNumberish | null, price?: null, newDebt?: null): SupplyDecreaseEventFilter;
-        "SupplyIncrease(uint256,uint256,uint256,uint256,uint256)"(epoch?: BigNumberish | null, price?: null, newRedeemable?: null, lessDebt?: null, newBonded?: null): SupplyIncreaseEventFilter;
-        SupplyIncrease(epoch?: BigNumberish | null, price?: null, newRedeemable?: null, lessDebt?: null, newBonded?: null): SupplyIncreaseEventFilter;
-        "SupplyNeutral(uint256)"(epoch?: BigNumberish | null): SupplyNeutralEventFilter;
-        SupplyNeutral(epoch?: BigNumberish | null): SupplyNeutralEventFilter;
-        "Transfer(address,address,uint256)"(from?: string | null, to?: string | null, value?: null): TransferEventFilter;
-        Transfer(from?: string | null, to?: string | null, value?: null): TransferEventFilter;
-        "Unbond(address,uint256,uint256,uint256)"(account?: string | null, start?: null, value?: null, valueUnderlying?: null): UnbondEventFilter;
-        Unbond(account?: string | null, start?: null, value?: null, valueUnderlying?: null): UnbondEventFilter;
-        "Upgraded(address)"(implementation?: string | null): UpgradedEventFilter;
-        Upgraded(implementation?: string | null): UpgradedEventFilter;
-        "Vote(address,address,uint8,uint256)"(account?: string | null, candidate?: string | null, vote?: null, bonded?: null): VoteEventFilter;
-        Vote(account?: string | null, candidate?: string | null, vote?: null, bonded?: null): VoteEventFilter;
-        "Withdraw(address,uint256)"(account?: string | null, value?: null): WithdrawEventFilter;
-        Withdraw(account?: string | null, value?: null): WithdrawEventFilter;
+        "Advance(uint256,uint256,uint256)"(epoch?: PromiseOrValue<BigNumberish> | null, block?: null, timestamp?: null): AdvanceEventFilter;
+        Advance(epoch?: PromiseOrValue<BigNumberish> | null, block?: null, timestamp?: null): AdvanceEventFilter;
+        "Bond(address,uint256,uint256,uint256)"(account?: PromiseOrValue<string> | null, start?: null, value?: null, valueUnderlying?: null): BondEventFilter;
+        Bond(account?: PromiseOrValue<string> | null, start?: null, value?: null, valueUnderlying?: null): BondEventFilter;
+        "Commit(address,address)"(account?: PromiseOrValue<string> | null, candidate?: PromiseOrValue<string> | null): CommitEventFilter;
+        Commit(account?: PromiseOrValue<string> | null, candidate?: PromiseOrValue<string> | null): CommitEventFilter;
+        "CouponApproval(address,address,uint256)"(owner?: PromiseOrValue<string> | null, spender?: PromiseOrValue<string> | null, value?: null): CouponApprovalEventFilter;
+        CouponApproval(owner?: PromiseOrValue<string> | null, spender?: PromiseOrValue<string> | null, value?: null): CouponApprovalEventFilter;
+        "CouponExpiration(uint256,uint256,uint256,uint256,uint256)"(epoch?: PromiseOrValue<BigNumberish> | null, couponsExpired?: null, lessRedeemable?: null, lessDebt?: null, newBonded?: null): CouponExpirationEventFilter;
+        CouponExpiration(epoch?: PromiseOrValue<BigNumberish> | null, couponsExpired?: null, lessRedeemable?: null, lessDebt?: null, newBonded?: null): CouponExpirationEventFilter;
+        "CouponPurchase(address,uint256,uint256,uint256)"(account?: PromiseOrValue<string> | null, epoch?: PromiseOrValue<BigNumberish> | null, dollarAmount?: null, couponAmount?: null): CouponPurchaseEventFilter;
+        CouponPurchase(account?: PromiseOrValue<string> | null, epoch?: PromiseOrValue<BigNumberish> | null, dollarAmount?: null, couponAmount?: null): CouponPurchaseEventFilter;
+        "CouponRedemption(address,uint256,uint256)"(account?: PromiseOrValue<string> | null, epoch?: PromiseOrValue<BigNumberish> | null, couponAmount?: null): CouponRedemptionEventFilter;
+        CouponRedemption(account?: PromiseOrValue<string> | null, epoch?: PromiseOrValue<BigNumberish> | null, couponAmount?: null): CouponRedemptionEventFilter;
+        "CouponTransfer(address,address,uint256,uint256)"(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, epoch?: PromiseOrValue<BigNumberish> | null, value?: null): CouponTransferEventFilter;
+        CouponTransfer(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, epoch?: PromiseOrValue<BigNumberish> | null, value?: null): CouponTransferEventFilter;
+        "Deposit(address,uint256)"(account?: PromiseOrValue<string> | null, value?: null): DepositEventFilter;
+        Deposit(account?: PromiseOrValue<string> | null, value?: null): DepositEventFilter;
+        "Incentivization(address,uint256)"(account?: PromiseOrValue<string> | null, amount?: null): IncentivizationEventFilter;
+        Incentivization(account?: PromiseOrValue<string> | null, amount?: null): IncentivizationEventFilter;
+        "Proposal(address,address,uint256,uint256)"(candidate?: PromiseOrValue<string> | null, account?: PromiseOrValue<string> | null, start?: PromiseOrValue<BigNumberish> | null, period?: null): ProposalEventFilter;
+        Proposal(candidate?: PromiseOrValue<string> | null, account?: PromiseOrValue<string> | null, start?: PromiseOrValue<BigNumberish> | null, period?: null): ProposalEventFilter;
+        "SupplyDecrease(uint256,uint256,uint256)"(epoch?: PromiseOrValue<BigNumberish> | null, price?: null, newDebt?: null): SupplyDecreaseEventFilter;
+        SupplyDecrease(epoch?: PromiseOrValue<BigNumberish> | null, price?: null, newDebt?: null): SupplyDecreaseEventFilter;
+        "SupplyIncrease(uint256,uint256,uint256,uint256,uint256)"(epoch?: PromiseOrValue<BigNumberish> | null, price?: null, newRedeemable?: null, lessDebt?: null, newBonded?: null): SupplyIncreaseEventFilter;
+        SupplyIncrease(epoch?: PromiseOrValue<BigNumberish> | null, price?: null, newRedeemable?: null, lessDebt?: null, newBonded?: null): SupplyIncreaseEventFilter;
+        "SupplyNeutral(uint256)"(epoch?: PromiseOrValue<BigNumberish> | null): SupplyNeutralEventFilter;
+        SupplyNeutral(epoch?: PromiseOrValue<BigNumberish> | null): SupplyNeutralEventFilter;
+        "Transfer(address,address,uint256)"(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, value?: null): TransferEventFilter;
+        Transfer(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, value?: null): TransferEventFilter;
+        "Unbond(address,uint256,uint256,uint256)"(account?: PromiseOrValue<string> | null, start?: null, value?: null, valueUnderlying?: null): UnbondEventFilter;
+        Unbond(account?: PromiseOrValue<string> | null, start?: null, value?: null, valueUnderlying?: null): UnbondEventFilter;
+        "Upgraded(address)"(implementation?: PromiseOrValue<string> | null): UpgradedEventFilter;
+        Upgraded(implementation?: PromiseOrValue<string> | null): UpgradedEventFilter;
+        "Vote(address,address,uint8,uint256)"(account?: PromiseOrValue<string> | null, candidate?: PromiseOrValue<string> | null, vote?: null, bonded?: null): VoteEventFilter;
+        Vote(account?: PromiseOrValue<string> | null, candidate?: PromiseOrValue<string> | null, vote?: null, bonded?: null): VoteEventFilter;
+        "Withdraw(address,uint256)"(account?: PromiseOrValue<string> | null, value?: null): WithdrawEventFilter;
+        Withdraw(account?: PromiseOrValue<string> | null, value?: null): WithdrawEventFilter;
     };
     estimateGas: {
         advance(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-        allowanceCoupons(owner: string, spender: string, overrides?: CallOverrides): Promise<BigNumber>;
-        approve(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        allowanceCoupons(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        approveCoupons(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        approveCoupons(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        approveFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-        balanceOfBonded(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-        balanceOfCoupons(account: string, epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        balanceOfStaged(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-        bond(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        approveFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOfBonded(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOfCoupons(account: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOfStaged(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        bond(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        bootstrappingAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        bootstrappingAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         calculatePrice(overrides?: CallOverrides): Promise<BigNumber>;
         calculateReward(overrides?: CallOverrides): Promise<BigNumber>;
-        commit(candidate: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        commit(candidate: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        couponPremium(amount: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        couponsExpiration(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        couponPremium(amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        couponsExpiration(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         decimals(overrides?: CallOverrides): Promise<BigNumber>;
-        deposit(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deposit(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         dollar(overrides?: CallOverrides): Promise<BigNumber>;
-        emergencyCommit(candidate: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        emergencyCommit(candidate: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         epoch(overrides?: CallOverrides): Promise<BigNumber>;
         epochTime(overrides?: CallOverrides): Promise<BigNumber>;
-        expiringCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        expiringCouponsAtIndex(epoch: BigNumberish, i: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        fluidUntil(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+        expiringCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        expiringCouponsAtIndex(epoch: PromiseOrValue<BigNumberish>, i: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        fluidUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         implementation(overrides?: CallOverrides): Promise<BigNumber>;
         initialize(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        isInitialized(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        isNominated(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        lockedUntil(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+        isInitialized(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        isNominated(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        lockedUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         name(overrides?: CallOverrides): Promise<BigNumber>;
         oracle(overrides?: CallOverrides): Promise<BigNumber>;
-        outstandingCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-        periodFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
+        outstandingCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        periodFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         pool(overrides?: CallOverrides): Promise<BigNumber>;
-        purchaseCoupons(dollarAmount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        purchaseCoupons(dollarAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        recordedVote(account: string, candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        redeemCoupons(couponEpoch: BigNumberish, couponAmount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        recordedVote(account: PromiseOrValue<string>, candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        redeemCoupons(couponEpoch: PromiseOrValue<BigNumberish>, couponAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        rejectFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        startFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        statusOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
+        rejectFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        startFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        statusOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         symbol(overrides?: CallOverrides): Promise<BigNumber>;
         totalBonded(overrides?: CallOverrides): Promise<BigNumber>;
-        totalBondedAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        totalBondedAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         totalCoupons(overrides?: CallOverrides): Promise<BigNumber>;
         totalDebt(overrides?: CallOverrides): Promise<BigNumber>;
         totalNet(overrides?: CallOverrides): Promise<BigNumber>;
         totalRedeemable(overrides?: CallOverrides): Promise<BigNumber>;
         totalStaged(overrides?: CallOverrides): Promise<BigNumber>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        transferCoupons(sender: string, recipient: string, epoch: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferCoupons(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        unbond(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unbond(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        unbondUnderlying(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unbondUnderlying(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        vote(candidate: string, vote: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        vote(candidate: PromiseOrValue<string>, vote: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        votesFor(candidate: string, overrides?: CallOverrides): Promise<BigNumber>;
-        withdraw(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        votesFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        withdraw(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         advance(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        allowance(owner: string, spender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        allowanceCoupons(owner: string, spender: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        approve(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        allowanceCoupons(owner: PromiseOrValue<string>, spender: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        approve(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        approveCoupons(spender: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        approveCoupons(spender: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        approveFor(candidate: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        balanceOf(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        balanceOfBonded(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        balanceOfCoupons(account: string, epoch: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        balanceOfStaged(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        bond(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        approveFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        balanceOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        balanceOfBonded(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        balanceOfCoupons(account: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        balanceOfStaged(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        bond(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        bootstrappingAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        bootstrappingAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         calculatePrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         calculateReward(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        commit(candidate: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        commit(candidate: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        couponPremium(amount: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        couponsExpiration(epoch: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        couponPremium(amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        couponsExpiration(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        deposit(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        deposit(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         dollar(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        emergencyCommit(candidate: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        emergencyCommit(candidate: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         epoch(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         epochTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        expiringCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        expiringCouponsAtIndex(epoch: BigNumberish, i: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        fluidUntil(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        expiringCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        expiringCouponsAtIndex(epoch: PromiseOrValue<BigNumberish>, i: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        fluidUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         implementation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         initialize(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        isInitialized(candidate: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        isNominated(candidate: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        lockedUntil(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        isInitialized(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        isNominated(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        lockedUntil(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         oracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        outstandingCoupons(epoch: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        periodFor(candidate: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        outstandingCoupons(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        periodFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         pool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        purchaseCoupons(dollarAmount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        purchaseCoupons(dollarAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        recordedVote(account: string, candidate: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        redeemCoupons(couponEpoch: BigNumberish, couponAmount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        recordedVote(account: PromiseOrValue<string>, candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        redeemCoupons(couponEpoch: PromiseOrValue<BigNumberish>, couponAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        rejectFor(candidate: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startFor(candidate: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        statusOf(account: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        rejectFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        startFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        statusOf(account: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalBonded(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        totalBondedAt(epoch: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        totalBondedAt(epoch: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalCoupons(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalDebt(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalNet(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalRedeemable(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalStaged(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        transferCoupons(sender: string, recipient: string, epoch: BigNumberish, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferCoupons(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, epoch: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(sender: PromiseOrValue<string>, recipient: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        unbond(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unbond(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        unbondUnderlying(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        unbondUnderlying(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        vote(candidate: string, vote: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        vote(candidate: PromiseOrValue<string>, vote: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        votesFor(candidate: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        withdraw(value: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        votesFor(candidate: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        withdraw(value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }
