@@ -1,5 +1,11 @@
 # @dethcrypto/eth-sdk
 
+## 0.3.3
+
+### Patch Changes
+
+- cd56037: TypeChain flags can be via eth-sdk config.
+
 ## 0.3.2
 
 ### Patch Changes
