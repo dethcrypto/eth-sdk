@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface MkrInterface extends utils.Interface {
     functions: {
         "name()": FunctionFragment;
@@ -33,29 +33,37 @@ export interface MkrInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "name" | "stop" | "approve(address,uint256)" | "approve(address)" | "setOwner" | "totalSupply" | "transferFrom" | "decimals" | "mint(address,uint256)" | "mint(uint256)" | "burn(uint256)" | "burn(address,uint256)" | "setName" | "balanceOf" | "stopped" | "setAuthority" | "owner" | "symbol" | "transfer" | "push" | "move" | "start" | "authority" | "allowance" | "pull"): FunctionFragment;
     encodeFunctionData(functionFragment: "name", values?: undefined): string;
     encodeFunctionData(functionFragment: "stop", values?: undefined): string;
-    encodeFunctionData(functionFragment: "approve(address,uint256)", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "approve(address)", values: [string]): string;
-    encodeFunctionData(functionFragment: "setOwner", values: [string]): string;
+    encodeFunctionData(functionFragment: "approve(address,uint256)", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "approve(address)", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setOwner", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "totalSupply", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transferFrom", values: [string, string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "transferFrom", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
-    encodeFunctionData(functionFragment: "mint(address,uint256)", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "mint(uint256)", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "burn(uint256)", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "burn(address,uint256)", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "setName", values: [BytesLike]): string;
-    encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+    encodeFunctionData(functionFragment: "mint(address,uint256)", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "mint(uint256)", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "burn(uint256)", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "burn(address,uint256)", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setName", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "balanceOf", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "stopped", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setAuthority", values: [string]): string;
+    encodeFunctionData(functionFragment: "setAuthority", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transfer", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "push", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "move", values: [string, string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "transfer", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "push", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "move", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "start", values?: undefined): string;
     encodeFunctionData(functionFragment: "authority", values?: undefined): string;
-    encodeFunctionData(functionFragment: "allowance", values: [string, string]): string;
-    encodeFunctionData(functionFragment: "pull", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "allowance", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "pull", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "stop", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "approve(address,uint256)", data: BytesLike): Result;
@@ -178,278 +186,278 @@ export interface Mkr extends BaseContract {
     functions: {
         name(overrides?: CallOverrides): Promise<[string]>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        "approve(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "approve(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        "approve(address)"(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "approve(address)"(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setOwner(owner_: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setOwner(owner_: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-        transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         decimals(overrides?: CallOverrides): Promise<[BigNumber]>;
-        "mint(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "mint(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        "mint(uint256)"(wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "mint(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        "burn(uint256)"(wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "burn(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        "burn(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "burn(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setName(name_: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setName(name_: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        balanceOf(src: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        balanceOf(src: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
         stopped(overrides?: CallOverrides): Promise<[boolean]>;
-        setAuthority(authority_: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setAuthority(authority_: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         owner(overrides?: CallOverrides): Promise<[string]>;
         symbol(overrides?: CallOverrides): Promise<[string]>;
-        transfer(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        push(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        push(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        move(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         start(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         authority(overrides?: CallOverrides): Promise<[string]>;
-        allowance(src: string, guy: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        pull(src: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(src: PromiseOrValue<string>, guy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        pull(src: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     name(overrides?: CallOverrides): Promise<string>;
     stop(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    "approve(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    "approve(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    "approve(address)"(guy: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    "approve(address)"(guy: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setOwner(owner_: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setOwner(owner_: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-    transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
-    "mint(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    "mint(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    "mint(uint256)"(wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    "mint(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    "burn(uint256)"(wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    "burn(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    "burn(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    "burn(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setName(name_: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setName(name_: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    balanceOf(src: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(src: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     stopped(overrides?: CallOverrides): Promise<boolean>;
-    setAuthority(authority_: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    setAuthority(authority_: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     owner(overrides?: CallOverrides): Promise<string>;
     symbol(overrides?: CallOverrides): Promise<string>;
-    transfer(dst: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    push(dst: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    push(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    move(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     start(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     authority(overrides?: CallOverrides): Promise<string>;
-    allowance(src: string, guy: string, overrides?: CallOverrides): Promise<BigNumber>;
-    pull(src: string, wad: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    allowance(src: PromiseOrValue<string>, guy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    pull(src: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         name(overrides?: CallOverrides): Promise<string>;
         stop(overrides?: CallOverrides): Promise<void>;
-        "approve(address,uint256)"(guy: string, wad: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        "approve(address)"(guy: string, overrides?: CallOverrides): Promise<boolean>;
-        setOwner(owner_: string, overrides?: CallOverrides): Promise<void>;
+        "approve(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        "approve(address)"(guy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        setOwner(owner_: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
         decimals(overrides?: CallOverrides): Promise<BigNumber>;
-        "mint(address,uint256)"(guy: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        "mint(uint256)"(wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        "burn(uint256)"(wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        "burn(address,uint256)"(guy: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        setName(name_: BytesLike, overrides?: CallOverrides): Promise<void>;
-        balanceOf(src: string, overrides?: CallOverrides): Promise<BigNumber>;
+        "mint(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        "mint(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        "burn(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        "burn(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setName(name_: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        balanceOf(src: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         stopped(overrides?: CallOverrides): Promise<boolean>;
-        setAuthority(authority_: string, overrides?: CallOverrides): Promise<void>;
+        setAuthority(authority_: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         owner(overrides?: CallOverrides): Promise<string>;
         symbol(overrides?: CallOverrides): Promise<string>;
-        transfer(dst: string, wad: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        push(dst: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        move(src: string, dst: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
+        push(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         start(overrides?: CallOverrides): Promise<void>;
         authority(overrides?: CallOverrides): Promise<string>;
-        allowance(src: string, guy: string, overrides?: CallOverrides): Promise<BigNumber>;
-        pull(src: string, wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        allowance(src: PromiseOrValue<string>, guy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        pull(src: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "Mint(address,uint256)"(guy?: string | null, wad?: null): MintEventFilter;
-        Mint(guy?: string | null, wad?: null): MintEventFilter;
-        "Burn(address,uint256)"(guy?: string | null, wad?: null): BurnEventFilter;
-        Burn(guy?: string | null, wad?: null): BurnEventFilter;
-        "LogSetAuthority(address)"(authority?: string | null): LogSetAuthorityEventFilter;
-        LogSetAuthority(authority?: string | null): LogSetAuthorityEventFilter;
-        "LogSetOwner(address)"(owner?: string | null): LogSetOwnerEventFilter;
-        LogSetOwner(owner?: string | null): LogSetOwnerEventFilter;
-        "LogNote(bytes4,address,bytes32,bytes32,uint256,bytes)"(sig?: BytesLike | null, guy?: string | null, foo?: BytesLike | null, bar?: BytesLike | null, wad?: null, fax?: null): LogNoteEventFilter;
-        LogNote(sig?: BytesLike | null, guy?: string | null, foo?: BytesLike | null, bar?: BytesLike | null, wad?: null, fax?: null): LogNoteEventFilter;
-        "Transfer(address,address,uint256)"(from?: string | null, to?: string | null, value?: null): TransferEventFilter;
-        Transfer(from?: string | null, to?: string | null, value?: null): TransferEventFilter;
-        "Approval(address,address,uint256)"(owner?: string | null, spender?: string | null, value?: null): ApprovalEventFilter;
-        Approval(owner?: string | null, spender?: string | null, value?: null): ApprovalEventFilter;
+        "Mint(address,uint256)"(guy?: PromiseOrValue<string> | null, wad?: null): MintEventFilter;
+        Mint(guy?: PromiseOrValue<string> | null, wad?: null): MintEventFilter;
+        "Burn(address,uint256)"(guy?: PromiseOrValue<string> | null, wad?: null): BurnEventFilter;
+        Burn(guy?: PromiseOrValue<string> | null, wad?: null): BurnEventFilter;
+        "LogSetAuthority(address)"(authority?: PromiseOrValue<string> | null): LogSetAuthorityEventFilter;
+        LogSetAuthority(authority?: PromiseOrValue<string> | null): LogSetAuthorityEventFilter;
+        "LogSetOwner(address)"(owner?: PromiseOrValue<string> | null): LogSetOwnerEventFilter;
+        LogSetOwner(owner?: PromiseOrValue<string> | null): LogSetOwnerEventFilter;
+        "LogNote(bytes4,address,bytes32,bytes32,uint256,bytes)"(sig?: PromiseOrValue<BytesLike> | null, guy?: PromiseOrValue<string> | null, foo?: PromiseOrValue<BytesLike> | null, bar?: PromiseOrValue<BytesLike> | null, wad?: null, fax?: null): LogNoteEventFilter;
+        LogNote(sig?: PromiseOrValue<BytesLike> | null, guy?: PromiseOrValue<string> | null, foo?: PromiseOrValue<BytesLike> | null, bar?: PromiseOrValue<BytesLike> | null, wad?: null, fax?: null): LogNoteEventFilter;
+        "Transfer(address,address,uint256)"(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, value?: null): TransferEventFilter;
+        Transfer(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, value?: null): TransferEventFilter;
+        "Approval(address,address,uint256)"(owner?: PromiseOrValue<string> | null, spender?: PromiseOrValue<string> | null, value?: null): ApprovalEventFilter;
+        Approval(owner?: PromiseOrValue<string> | null, spender?: PromiseOrValue<string> | null, value?: null): ApprovalEventFilter;
     };
     estimateGas: {
         name(overrides?: CallOverrides): Promise<BigNumber>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        "approve(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "approve(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        "approve(address)"(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "approve(address)"(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setOwner(owner_: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setOwner(owner_: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         decimals(overrides?: CallOverrides): Promise<BigNumber>;
-        "mint(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "mint(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        "mint(uint256)"(wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "mint(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        "burn(uint256)"(wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "burn(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        "burn(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "burn(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setName(name_: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setName(name_: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        balanceOf(src: string, overrides?: CallOverrides): Promise<BigNumber>;
+        balanceOf(src: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         stopped(overrides?: CallOverrides): Promise<BigNumber>;
-        setAuthority(authority_: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setAuthority(authority_: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         symbol(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        push(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        push(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        move(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         start(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         authority(overrides?: CallOverrides): Promise<BigNumber>;
-        allowance(src: string, guy: string, overrides?: CallOverrides): Promise<BigNumber>;
-        pull(src: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(src: PromiseOrValue<string>, guy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        pull(src: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         stop(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        "approve(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "approve(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        "approve(address)"(guy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "approve(address)"(guy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setOwner(owner_: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setOwner(owner_: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        transferFrom(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferFrom(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        "mint(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "mint(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        "mint(uint256)"(wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "mint(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        "burn(uint256)"(wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "burn(uint256)"(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        "burn(address,uint256)"(guy: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        "burn(address,uint256)"(guy: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setName(name_: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setName(name_: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        balanceOf(src: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        balanceOf(src: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         stopped(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setAuthority(authority_: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        setAuthority(authority_: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        transfer(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transfer(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        push(dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        push(dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        move(src: string, dst: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        move(src: PromiseOrValue<string>, dst: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         start(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         authority(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        allowance(src: string, guy: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        pull(src: string, wad: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        allowance(src: PromiseOrValue<string>, guy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        pull(src: PromiseOrValue<string>, wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

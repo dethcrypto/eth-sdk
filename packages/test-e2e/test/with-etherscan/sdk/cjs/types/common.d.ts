@@ -18,4 +18,5 @@ export declare type MinEthersFactory<C, ARGS> = {
 };
 export declare type GetContractTypeFromFactory<F> = F extends MinEthersFactory<infer C, any> ? C : never;
 export declare type GetARGsTypeFromFactory<F> = F extends MinEthersFactory<any, any> ? Parameters<F["deploy"]> : never;
+export declare type PromiseOrValue<T> = T | Promise<T>;
 export {};
