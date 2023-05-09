@@ -8,6 +8,7 @@ export enum NetworkID {
   RINKEBY = 4,
   GOERLI = 5,
   KOVAN = 42,
+  SEPOLIA = 11155111,
   // Binance Smart Chain
   BSC = 56,
   BSC_TESTNET = 97,
@@ -36,6 +37,7 @@ export const networkIDtoSymbol = {
   [NetworkID.ROPSTEN]: 'ropsten',
   [NetworkID.RINKEBY]: 'rinkeby',
   [NetworkID.GOERLI]: 'goerli',
+  [NetworkID.SEPOLIA]: 'sepolia',
   [NetworkID.KOVAN]: 'kovan',
   [NetworkID.BSC]: 'bsc',
   [NetworkID.BSC_TESTNET]: 'bscTestnet',
