@@ -7,7 +7,8 @@ describe('with ABIs from Sourcify', () => {
   const provider = new ethers.providers.JsonRpcProvider(env.ROPSTEN_RPC)
   const sdk = getNotRopstenAtAllSdk(provider)
 
-  it('generates instance for Storage.sol', async () => {
+  // skipping because infura doesnt support ropsten anymore
+  it.skip('generates instance for Storage.sol', async () => {
     const _stored = await sdk.storage.retreive()
   })
 })
