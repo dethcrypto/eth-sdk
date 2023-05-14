@@ -20,7 +20,7 @@ export async function getAbiFromEtherscan(
   // @todo error handling for incorrect api keys
   const response = await fetch(url)
 
-  if (response.status !== '1') {
+  if (response.status !== '1' && response.status !== 1) {
     throw new Error(`Can't find ${networkSymbol} ABI for ${address}. Msg: ${JSON.stringify(response, null, 2)}`)
   }
 
@@ -62,7 +62,7 @@ function getEtherscanLinkFromNetworkSymbol(
  * @see https://docs.etherscan.io/api-endpoints/contracts
  */
 export interface EtherscanResponse {
-  status: string
+  status: string | number // NOTE: sometimes it's a string, sometimes it's a number
   result: string
   message: 'OK' | 'NOTOK'
 }
