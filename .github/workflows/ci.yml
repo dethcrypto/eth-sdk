@@ -35,6 +35,8 @@ jobs:
         if: runner.os == 'Linux'
       - run: yarn build
       - run: yarn test
+        env:
+          E2E_RPC: ${{ secrets.E2E_RPC }}
       - run: yarn typecheck
       - run: yarn no-git-changes
         if: runner.os == 'Linux'
