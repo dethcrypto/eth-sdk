@@ -1,5 +1,11 @@
 # @dethcrypto/eth-sdk
 
+## 0.3.4
+
+### Patch Changes
+
+- d72e459: Add support for SEPOLIA network
+
 ## 0.3.3
 
 ### Patch Changes
