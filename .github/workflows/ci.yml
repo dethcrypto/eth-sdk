@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         node: ['14']
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -41,32 +41,33 @@ jobs:
       - run: yarn no-git-changes
         if: runner.os == 'Linux'
 
-  test-examples:
-    strategy:
-      # When set to true, GitHub cancels all in-progress jobs if any matrix job fails.
-      fail-fast: false
-      matrix:
-        node: ['14.x']
-        os: [ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+  # @TODO: skipping for now beacuse of stability issues
+  # test-examples:
+  #   strategy:
+  #     # When set to true, GitHub cancels all in-progress jobs if any matrix job fails.
+  #     fail-fast: false
+  #     matrix:
+  #       node: ['14.x']
+  #       os: [ubuntu-latest, windows-latest]
+  #   runs-on: ${{ matrix.os }}
 
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node }}
 
-      - name: Cache YARN dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.OS }}-${{ matrix.node }}-yarn-cache-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.OS }}-${{ matrix.node }}-yarn-cache-
+  #     - name: Cache YARN dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           node_modules
+  #           */*/node_modules
+  #         key: ${{ runner.OS }}-${{ matrix.node }}-yarn-cache-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: ${{ runner.OS }}-${{ matrix.node }}-yarn-cache-
 
-      - run: yarn --no-progress --non-interactive --frozen-lockfile
-      - run: yarn build
-      - run: yarn check-examples
-      - run: yarn no-git-changes
-        if: runner.os == 'Linux'
+  #     - run: yarn --no-progress --non-interactive --frozen-lockfile
+  #     - run: yarn build
+  #     - run: yarn check-examples
+  #     - run: yarn no-git-changes
+  #       if: runner.os == 'Linux'

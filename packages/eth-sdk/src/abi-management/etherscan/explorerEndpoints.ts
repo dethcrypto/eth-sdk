@@ -2,6 +2,7 @@ import type { URLString } from '../../utils/utility-types'
 import { NetworkSymbol, PredefinedNetworkSymbol, UserProvidedNetworkSymbol } from '../networks'
 
 const ETHERSCAN_KEY = 'WW2B6KB1FAXNTWP8EJQJYFTK1CMG1W4DWZ'
+const OPTIMISM_KEY = 'UF822UT1YY28J5EHFFIKI5SPN8752AC7VV'
 const BSCSCAN_KEY = 'HFUM7BBA5MRUQCN5UMEQPUZBUPPRHIQT3Y'
 const FTMSCAN_KEY = 'EH9NPZVF1HMNAQMAUZKA4VF7EC23X37DGS'
 const HECOINFO_KEY = 'XEUTJF2439EP4HHD23H2AFEFQJHFGSG57R'
@@ -36,11 +37,11 @@ export const predefinedExplorerEndpoints: PredefinedExplorerEndpoints = {
   },
   optimism: {
     url: 'https://api-optimistic.etherscan.io/api',
-    apiKey: ETHERSCAN_KEY,
+    apiKey: OPTIMISM_KEY,
   },
   optimismKovan: {
     url: 'https://api-kovan-optimistic.etherscan.io/api',
-    apiKey: ETHERSCAN_KEY,
+    apiKey: OPTIMISM_KEY,
   },
   arbitrumOne: {
     url: 'https://api.arbiscan.io/api',
