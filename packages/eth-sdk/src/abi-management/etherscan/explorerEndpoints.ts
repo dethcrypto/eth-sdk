@@ -31,6 +31,10 @@ export const predefinedExplorerEndpoints: PredefinedExplorerEndpoints = {
     url: 'https://api-goerli.etherscan.io/api',
     apiKey: ETHERSCAN_KEY,
   },
+  sepolia: {
+    url: 'https://api-sepolia.etherscan.io/api',
+    apiKey: ETHERSCAN_KEY,
+  },
   kovan: {
     url: 'https://api-kovan.etherscan.io/api',
     apiKey: ETHERSCAN_KEY,

@@ -167,7 +167,7 @@ Predefined network identifiers are:
 "bscTestnet"         "heco"               "hecoTestnet"
 "opera"              "ftmTestnet"         "optimism"
 "optimismKovan"      "polygon"            "polygonMumbai"
-"arbitrumOne"        "arbitrumTestnet"
+"arbitrumOne"        "arbitrumTestnet"    "sepolia"
 ```
 
 You can use other networks, but you will need to configure Etherscan URLs for them in [`etherscanURLs`](#etherscanurls)
